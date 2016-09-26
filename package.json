@@ -1,7 +1,7 @@
 {
   "name": "react-url-query",
   "version": "1.0.0",
-  "description": "A library for managing state through query parameters in the URL",
+  "description": "A library for managing state through query parameters in the URL in React",
   "main": "lib/index.js",
   "files": [
     "dist",
@@ -27,6 +27,7 @@
     "build:examples": "babel-node examples/buildAll.js",
     "build": "npm run build:commonjs && npm run build:es && npm run build:umd && npm run build:umd:min",
     "prepublish": "npm run clean && npm run check:src && npm run build",
+    "docs:clean": "rimraf _book",
     "docs:prepare": "gitbook install",
     "docs:build": "npm run docs:prepare && gitbook build -g pbeshai/react-url-query",
     "docs:watch": "npm run docs:prepare && gitbook serve",
