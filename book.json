@@ -1,0 +1,20 @@
+{
+  "gitbook": "3.x.x",
+  "title": "react-url-query",
+  "plugins": ["edit-link", "prism", "-highlight", "github", "anchorjs"],
+  "pluginsConfig": {
+    "edit-link": {
+      "base": "https://github.com/pbeshai/react-url-query/tree/master",
+      "label": "Edit This Page"
+    },
+    "github": {
+      "url": "https://github.com/pbeshai/react-url-query/"
+    },
+    "theme-default": {
+      "showLevel": true,
+      "styles": {
+        "website": "build/gitbook.css"
+      }
+    }
+  }
+}

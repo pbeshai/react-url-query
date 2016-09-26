@@ -1,0 +1,106 @@
+{
+  "name": "react-url-query",
+  "version": "1.0.0",
+  "description": "A library for managing state through query parameters in the URL",
+  "main": "lib/index.js",
+  "files": [
+    "dist",
+    "lib",
+    "es",
+    "src"
+  ],
+  "scripts": {
+    "clean": "rimraf lib dist es coverage",
+    "lint": "npm run lint:src && npm run lint:examples",
+    "lint:src": "eslint src test build",
+    "lint:examples": "eslint examples",
+    "test": "cross-env BABEL_ENV=commonjs jest",
+    "test:watch": "npm test -- --watch",
+    "test:cov": "npm test -- --coverage",
+    "test:examples": "babel-node examples/testAll.js",
+    "check:src": "npm run lint:src && npm run test",
+    "check:examples": "npm run build:examples && npm run lint:examples && npm run test:examples",
+    "build:commonjs": "cross-env BABEL_ENV=commonjs babel src --out-dir lib",
+    "build:es": "cross-env BABEL_ENV=es babel src --out-dir es",
+    "build:umd": "cross-env BABEL_ENV=commonjs NODE_ENV=development webpack src/index.js dist/react-url-query.js",
+    "build:umd:min": "cross-env BABEL_ENV=commonjs NODE_ENV=production webpack src/index.js dist/react-url-query.min.js",
+    "build:examples": "babel-node examples/buildAll.js",
+    "build": "npm run build:commonjs && npm run build:es && npm run build:umd && npm run build:umd:min",
+    "prepublish": "npm run clean && npm run check:src && npm run build",
+    "docs:prepare": "gitbook install",
+    "docs:build": "npm run docs:prepare && gitbook build -g pbeshai/react-url-query",
+    "docs:watch": "npm run docs:prepare && gitbook serve",
+    "docs:publish": "npm run docs:clean && npm run docs:build && cd _book && git init && git commit --allow-empty -m 'update book' && git checkout -b gh-pages && touch .nojekyll && git add . && git commit -am 'update book' && git push git@github.com:pbeshai/react-url-query gh-pages --force"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/pbeshai/react-url-query.git"
+  },
+  "keywords": [
+    "react",
+    "url",
+    "query",
+    "query parameter",
+    "url search",
+    "state",
+    "redux",
+    "url reducer",
+    "middleware"
+  ],
+  "author": "Peter Beshai <peter.beshai@gmail.com> (https://github.com/pbeshai)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/pbeshai/react-url-query/issues"
+  },
+  "homepage": "https://github.com/pbeshai/react-url-query",
+  "devDependencies": {
+    "babel-cli": "6.14.0",
+    "babel-core": "6.14.0",
+    "babel-eslint": "6.1.2",
+    "babel-jest": "15.0.0",
+    "babel-loader": "6.2.5",
+    "babel-plugin-transform-es2015-modules-commonjs": "6.14.0",
+    "babel-preset-es2015": "^6.14.0",
+    "babel-preset-react": "^6.11.1",
+    "babel-preset-stage-0": "^6.5.0",
+    "babel-register": "6.14.0",
+    "cross-env": "3.0.0",
+    "enzyme": "^2.4.1",
+    "eslint": "3.6.0",
+    "eslint-config-airbnb": "^12.0.0",
+    "eslint-plugin-import": "^1.16.0",
+    "eslint-plugin-jsx-a11y": "^2.2.2",
+    "eslint-plugin-react": "^6.3.0",
+    "gitbook-cli": "^2.3.0",
+    "jest": "15.1.1",
+    "react": "^15.0.0",
+    "rimraf": "2.5.4",
+    "webpack": "1.13.2"
+  },
+  "peerDependencies": {
+    "react": "^15.0.0"
+  },
+  "dependencies": {
+    "history": "^4.2.0",
+    "loose-envify": "^1.2.0",
+    "query-string": "^4.2.3"
+  },
+  "npmFileMap": [
+    {
+      "basePath": "/dist/",
+      "files": [
+        "*.js"
+      ]
+    }
+  ],
+  "browserify": {
+    "transform": [
+      "loose-envify"
+    ]
+  },
+  "jest": {
+    "testPathDirs": [
+      "src"
+    ]
+  }
+}
