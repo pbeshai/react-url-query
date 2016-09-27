@@ -18,12 +18,12 @@ const urlQueryMiddleware = (options = {}) => ({ getState }) => next => (action) 
 
   // if configured to read from the redux store (react-router-redux), do so and pass it to
   // the reducer
-  const readRoutingFromStore = options.readRoutingFromStore == null ?
-    urlQueryOptions.readRoutingFromStore : options.readRoutingFromStore;
+  const readLocationFromStore = options.readLocationFromStore == null ?
+    urlQueryOptions.readLocationFromStore : options.readLocationFromStore;
 
-  if (readRoutingFromStore) {
-    const { routing = {} } = getState();
-    return reducer(action, routing.locationBeforeTransitions);
+  if (readLocationFromStore) {
+    const location = readLocationFromStore(getState());
+    return reducer(action, location);
   }
 
   return reducer(action);

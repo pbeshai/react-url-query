@@ -11,7 +11,13 @@ function createUrlQueryOptions() {
 
     // reads in location from react-router-redux if available and passes it
     // to the reducer in the urlQueryMiddleware
-    readRoutingFromStore: true,
+    readLocationFromStore(state) {
+      if (state && state.routing) {
+        return state.routing.locationBeforeTransitions;
+      }
+
+      return undefined;
+    },
   };
 }
 
