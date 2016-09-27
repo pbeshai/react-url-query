@@ -20,6 +20,9 @@ import urlInAction, { urlReplaceInAction, urlPushInAction } from './redux/urlInA
 import urlQueryMiddleware from './redux/urlQueryMiddleware';
 import urlQueryReducer from './redux/urlQueryReducer';
 
+import subquery from './utils/subquery';
+import subqueryOmit from './utils/subqueryOmit';
+
 // for convenience export these two directly
 const decode = Serialize.decode;
 const encode = Serialize.encode;
@@ -39,6 +42,8 @@ export {
   replaceUrlQueryFromAction,
   Serialize,
   setUrlQueryOptions,
+  subquery,
+  subqueryOmit,
   urlAction,
   urlInAction,
   urlReplaceInAction,

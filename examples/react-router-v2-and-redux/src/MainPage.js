@@ -2,7 +2,7 @@ import React, { PureComponent, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router';
 
-import { addUrlProps, QueryParamTypes } from 'react-url-query';
+import { addUrlProps, QueryParamTypes, subquery } from 'react-url-query';
 import { changeArr, changeBaz, changeFoo, changeBar, changeCustom } from './state/actions';
 
 /**
@@ -109,6 +109,9 @@ class MainPage extends PureComponent {
                 {' '}
                 <Link to={`/${Math.random().toString(32).substring(8)}`} query={location.query}>
                   <button>Change word (maintain query)</button>
+                </Link>
+                <Link to={`/${Math.random().toString(32).substring(8)}`} query={subquery(location.query, 'arr', 'bar')}>
+                  <button>Change word (maintain partial query)</button>
                 </Link>
               </td>
             </tr>
