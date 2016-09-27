@@ -33,6 +33,19 @@ function mapStateToProps(state, props) {
 }
 
 /**
+ * Standard react-redux mapDispatchToProps
+ */
+function mapDispatchToProps(dispatch) {
+  return {
+    onChangeArr(arr) { dispatch(changeArr(arr)); },
+    onChangeFoo(foo) { dispatch(changeFoo(foo)); },
+    onChangeBar(bar) { dispatch(changeBar(bar)); },
+    onChangeBaz(baz) { dispatch(changeBaz(baz)); },
+    onChangeCustom(custom) { dispatch(changeCustom(custom)); },
+  };
+}
+
+/**
  * The MainPage container. Note that none of the code within this component
  * indicates which values are stored in the URL and which are stored in the Redux
  * store.
@@ -43,8 +56,12 @@ class MainPage extends PureComponent {
     bar: PropTypes.string,
     baz: PropTypes.string,
     custom: PropTypes.string,
-    dispatch: PropTypes.func,
     foo: PropTypes.number,
+    onChangeArr: PropTypes.func,
+    onChangeBar: PropTypes.func,
+    onChangeBaz: PropTypes.func,
+    onChangeCustom: PropTypes.func,
+    onChangeFoo: PropTypes.func,
     word: PropTypes.string,
   }
 
@@ -73,33 +90,9 @@ class MainPage extends PureComponent {
     }
   }
 
-  onChangeArr(arr) {
-    const { dispatch } = this.props;
-    dispatch(changeArr(arr));
-  }
-
-  onChangeFoo(foo) {
-    const { dispatch } = this.props;
-    dispatch(changeFoo(foo));
-  }
-
-  onChangeBar(bar) {
-    const { dispatch } = this.props;
-    dispatch(changeBar(bar));
-  }
-
-  onChangeCustom(custom) {
-    const { dispatch } = this.props;
-    dispatch(changeCustom(custom));
-  }
-
-  onChangeBaz(baz) {
-    const { dispatch } = this.props;
-    dispatch(changeBaz(baz));
-  }
-
   render() {
-    const { arr, foo, bar, baz, custom, word, location } = this.props;
+    const { arr, foo, bar, baz, custom, word, location, onChangeArr,
+      onChangeBar, onChangeBaz, onChangeFoo, onChangeCustom } = this.props;
 
     return (
       <div>
@@ -124,7 +117,7 @@ class MainPage extends PureComponent {
               <td>{JSON.stringify(arr)}</td>
               <td>(url query param)</td>
               <td>
-                <button onClick={() => this.onChangeArr([Math.round(Math.random() * 9), Math.round(Math.random() * 9)])}>
+                <button onClick={() => onChangeArr([Math.round(Math.random() * 9), Math.round(Math.random() * 9)])}>
                   Change arr
                 </button>
               </td>
@@ -134,7 +127,7 @@ class MainPage extends PureComponent {
               <td>{foo}</td>
               <td>(url query param)</td>
               <td>
-                <button onClick={() => this.onChangeFoo(Math.round(Math.random() * 1000))}>
+                <button onClick={() => onChangeFoo(Math.round(Math.random() * 1000))}>
                   Change foo
                 </button>
               </td>
@@ -144,7 +137,7 @@ class MainPage extends PureComponent {
               <td>{bar}</td>
               <td>(url query param)</td>
               <td>
-                <button onClick={() => this.onChangeBar(Math.random().toString(32).substring(8))}>
+                <button onClick={() => onChangeBar(Math.random().toString(32).substring(8))}>
                   Change bar
                 </button>
               </td>
@@ -154,7 +147,7 @@ class MainPage extends PureComponent {
               <td>{custom}</td>
               <td>(url query param)</td>
               <td>
-                <button onClick={() => this.onChangeCustom(Math.random().toString(32).substring(9))}>
+                <button onClick={() => onChangeCustom(Math.random().toString(32).substring(9))}>
                   Change custom
                 </button>
               </td>
@@ -164,7 +157,7 @@ class MainPage extends PureComponent {
               <td>{baz}</td>
               <td>(redux state)</td>
               <td>
-                <button onClick={() => this.onChangeBaz(Math.random().toString(32).substring(10))}>
+                <button onClick={() => onChangeBaz(Math.random().toString(32).substring(10))}>
                   Change baz
                 </button>
               </td>
@@ -181,4 +174,4 @@ class MainPage extends PureComponent {
  * to props for MainPage. In this case the mapping happens automatically by
  * first decoding the URL query parameters based on the urlPropsQueryConfig.
  */
-export default addUrlProps({ urlPropsQueryConfig })(connect(mapStateToProps)(MainPage));
+export default addUrlProps({ urlPropsQueryConfig })(connect(mapStateToProps, mapDispatchToProps)(MainPage));
