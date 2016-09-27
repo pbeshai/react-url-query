@@ -1,5 +1,10 @@
 import { CHANGE_FOO, CHANGE_BAR, CHANGE_ARR } from './actions';
-import { replaceInUrlQueryFromAction, pushUrlQuery, pushInUrlQueryFromAction } from 'react-url-query';
+import {
+  replaceInUrlQueryFromAction,
+  pushUrlQuery,
+  pushInUrlQueryFromAction,
+  urlQueryReducer as defaultUrlQueryReducer
+} from 'react-url-query';
 
 /**
  * Reducer that handles actions that modify the URL query parameters.
@@ -29,6 +34,8 @@ export default function urlQueryReducer(action) {
       replaceInUrlQueryFromAction(action);
       break;
     default:
+      // This will be used for CHANGE_MANY since it is not handled above.
+      defaultUrlQueryReducer(action);
       break;
   }
 }

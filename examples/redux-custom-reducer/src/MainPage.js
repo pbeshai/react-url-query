@@ -2,7 +2,7 @@ import React, { PureComponent, PropTypes } from 'react';
 import { connect } from 'react-redux';
 
 import { addUrlProps, QueryParamTypes } from 'react-url-query';
-import { changeArr, changeBaz, changeFoo, changeBar } from './state/actions';
+import { changeArr, changeBaz, changeFoo, changeBar, changeMany } from './state/actions';
 
 /**
  * Specify how the URL gets decoded here. This is an object that takes the prop
@@ -39,6 +39,7 @@ function mapDispatchToProps(dispatch) {
     onChangeFoo(foo) { dispatch(changeFoo(foo)); },
     onChangeBar(bar) { dispatch(changeBar(bar)); },
     onChangeBaz(baz) { dispatch(changeBaz(baz)); },
+    onChangeMany(foo) { dispatch(changeMany({ foo })); },
   };
 }
 
@@ -57,6 +58,7 @@ class MainPage extends PureComponent {
     onChangeBar: PropTypes.func,
     onChangeBaz: PropTypes.func,
     onChangeFoo: PropTypes.func,
+    onChangeMany: PropTypes.func,
   }
 
   static defaultProps = {
@@ -84,7 +86,8 @@ class MainPage extends PureComponent {
   }
 
   render() {
-    const { arr, foo, bar, baz, onChangeArr, onChangeBar, onChangeBaz, onChangeFoo } = this.props;
+    const { arr, foo, bar, baz, onChangeArr, onChangeBar, onChangeBaz,
+      onChangeFoo, onChangeMany } = this.props;
 
     return (
       <div>
@@ -127,6 +130,16 @@ class MainPage extends PureComponent {
               <td>
                 <button onClick={() => onChangeBaz(Math.random().toString(32).substring(10))}>
                   Change baz
+                </button>
+              </td>
+            </tr>
+            <tr>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td>
+                <button onClick={() => onChangeMany(Math.round(Math.random() * 2000))}>
+                  Change many
                 </button>
               </td>
             </tr>
