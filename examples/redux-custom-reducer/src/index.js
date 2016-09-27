@@ -6,6 +6,7 @@ import { createStore, applyMiddleware } from 'redux';
 import { setUrlQueryOptions, urlQueryMiddleware } from 'react-url-query';
 
 import rootReducer from './state/rootReducer';
+import urlQueryReducer from './state/urlQueryReducer';
 import App from './App';
 import history from './history';
 
@@ -15,7 +16,7 @@ setUrlQueryOptions({ history });
 
 // Initialize Redux
 // apply middleware to the store creator
-const createStoreWithMiddleware = applyMiddleware(urlQueryMiddleware())(createStore);
+const createStoreWithMiddleware = applyMiddleware(urlQueryMiddleware({ reducer: urlQueryReducer }))(createStore);
 
 // create the store
 const store = createStoreWithMiddleware(rootReducer);

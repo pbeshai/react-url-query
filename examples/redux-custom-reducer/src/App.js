@@ -11,7 +11,7 @@ class App extends Component {
   render() {
     return (
       <div>
-        <h3>react-url-query example: basic-mapUrlToProps</h3>
+        <h3>react-url-query example: redux-urlPropsQueryConfig</h3>
         <MainPage />
       </div>
     );

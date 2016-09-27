@@ -3,6 +3,7 @@ import { urlReplaceInAction, QueryParamTypes } from 'react-url-query';
 export const CHANGE_BAZ = 'CHANGE_BAZ';
 export const CHANGE_FOO = 'CHANGE_FOO';
 export const CHANGE_BAR = 'CHANGE_BAR';
+export const CHANGE_CUSTOM = 'CHANGE_CUSTOM';
 export const CHANGE_ARR = 'CHANGE_ARR';
 
 /**
@@ -27,3 +28,5 @@ export function changeBaz(baz) {
 export const changeFoo = urlReplaceInAction(CHANGE_FOO, 'fooInUrl', QueryParamTypes.number);
 export const changeBar = urlReplaceInAction(CHANGE_BAR, 'bar', QueryParamTypes.string);
 export const changeArr = urlReplaceInAction(CHANGE_ARR, 'arr', QueryParamTypes.array);
+export const changeCustom = urlReplaceInAction(CHANGE_CUSTOM, 'custom',
+  (decoded) => (decoded ? `custom${decoded}` : undefined));

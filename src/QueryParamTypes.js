@@ -6,6 +6,7 @@ const QueryParamTypes = {
   json: 'json',
   date: 'date',
   boolean: 'boolean',
+  custom: 'custom',
 };
 
 export default QueryParamTypes;

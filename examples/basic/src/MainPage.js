@@ -1,24 +1,25 @@
 import React, { PureComponent, PropTypes } from 'react';
 import { stringify, parse as parseQueryString } from 'query-string'
-import { addUrlProps, decode, QueryParamTypes } from 'react-url-query';
+import { addUrlProps, QueryParamTypes } from 'react-url-query';
 
 import history from './history';
 
 /**
- * Map from url query params to props. The values in `url` will still be encoded
- * as strings since we did not pass a `urlPropsQueryConfig` to addUrlProps.
+ * Specify how the URL gets decoded here. This is an object that takes the prop
+ * name as a key, and a query param specifier as the value. The query param
+ * specifier can have a `type`, indicating how to decode the value from the
+ * URL, and a `queryParam` field that indicates which key in the query
+ * parameters should be read (this defaults to the prop name if not provided).
  */
-function mapUrlToProps(url, props) {
-  return {
-    foo: decode(QueryParamTypes.number, url.foo),
-    bar: decode(QueryParamTypes.string, url.bar),
-  };
+const urlPropsQueryConfig = {
+  bar: { type: QueryParamTypes.string },
+  foo: { type: QueryParamTypes.number, queryParam: 'fooInUrl' },
 }
 
 class MainPage extends PureComponent {
   static propTypes = {
-    foo: PropTypes.number,
     bar: PropTypes.string,
+    foo: PropTypes.number,
   }
 
   static defaultProps = {
@@ -29,7 +30,7 @@ class MainPage extends PureComponent {
   onChangeFoo(foo) {
     // get the current query and update the value of foo
     const query = parseQueryString(history.location.search);
-    query.foo = foo;
+    query.fooInUrl = foo;
     const queryStr = stringify(query);
 
     // update the URL with the new encoded value
@@ -88,6 +89,7 @@ class MainPage extends PureComponent {
 
 /**
  * We use the addUrlProps higher-order component to map URL query parameters
- * to props for MainPage.
+ * to props for MainPage. In this case the mapping happens automatically by
+ * first decoding the URL query parameters based on the urlPropsQueryConfig.
  */
-export default addUrlProps({ mapUrlToProps, history })(MainPage);
+export default addUrlProps({ urlPropsQueryConfig, history })(MainPage);

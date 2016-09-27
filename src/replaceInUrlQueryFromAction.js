@@ -1,6 +1,6 @@
 import replaceInUrlQuery from './replaceInUrlQuery';
 
-export default function replaceInUrlQueryFromAction(action) {
+export default function replaceInUrlQueryFromAction(action, location, history) {
   const { queryParam, encodedValue } = action.payload;
-  replaceInUrlQuery(queryParam, encodedValue);
+  replaceInUrlQuery(queryParam, encodedValue, location, history);
 }

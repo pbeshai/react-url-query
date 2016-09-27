@@ -1,19 +1,23 @@
 import React, { PureComponent, PropTypes } from 'react';
 import { connect } from 'react-redux';
 
-import { addUrlProps, decode, QueryParamTypes } from 'react-url-query';
+import { addUrlProps, QueryParamTypes } from 'react-url-query';
 import { changeArr, changeBaz, changeFoo, changeBar } from './state/actions';
 
 /**
- * Map from url query params to props. The values in `url` will still be encoded
- * as strings since we did not pass a `urlPropsQueryConfig` to addUrlProps.
+ * Specify how the URL gets decoded here. This is an object that takes the prop
+ * name as a key, and a query param specifier as the value. The query param
+ * specifier can have a `type`, indicating how to decode the value from the
+ * URL, and a `queryParam` field that indicates which key in the query
+ * parameters should be read (this defaults to the prop name if not provided).
+ *
+ * The queryParam value for `foo` here matches the one used in the changeFoo
+ * action.
  */
-function mapUrlToProps(url, props) {
-  return {
-    arr: decode(QueryParamTypes.array, url.arr),
-    bar: decode(QueryParamTypes.string, url.bar),
-    foo: decode(QueryParamTypes.number, url.fooInUrl),
-  };
+const urlPropsQueryConfig = {
+  arr: { type: QueryParamTypes.array },
+  bar: { type: QueryParamTypes.string },
+  foo: { type: QueryParamTypes.number, queryParam: 'fooInUrl' },
 }
 
 /**
@@ -51,13 +55,9 @@ class MainPage extends PureComponent {
    * Log whether or not we are getting a new array decoded for `arr` each time
    * we receive props. Ideally, this only happens when `arr` changes.
    *
-   * We are using mapUrlToProps without a urlPropsQueryConfig, so the decoding
-   * is done by mapUrlToProps itself. Every time the component receives props,
-   * it will re-decode the URL and since we haven't done any caching in our
-   * mapUrlToProps function, it will create a new array. This can be a
-   * performance issue in more complex cases as it breaks shallow compares in
-   * shouldComponentUpdate. One solution is to use something like reselect to
-   * do the decoding with some caching. Another is to use urlPropsQueryConfig.
+   * We are using urlPropsQueryConfig, so the decoding is handled by addUrlProps
+   * as opposed to mapUrlToProps. The decoding within addUrlProps only re-decodes
+   * a value if it has changed, so we get the desired behavior.
    */
   componentWillReceiveProps(nextProps) {
     const { arr } = this.props;
@@ -147,4 +147,4 @@ class MainPage extends PureComponent {
  * to props for MainPage. In this case the mapping happens automatically by
  * first decoding the URL query parameters based on the urlPropsQueryConfig.
  */
-export default addUrlProps({ mapUrlToProps })(connect(mapStateToProps)(MainPage));
+export default addUrlProps({ urlPropsQueryConfig })(connect(mapStateToProps)(MainPage));

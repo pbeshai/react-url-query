@@ -26,6 +26,7 @@
     "build:umd:min": "cross-env BABEL_ENV=commonjs NODE_ENV=production webpack src/index.js dist/react-url-query.min.js",
     "build:examples": "babel-node examples/buildAll.js",
     "build": "npm run build:commonjs && npm run build:es && npm run build:umd && npm run build:umd:min",
+    "dev": "cross-env BABEL_ENV=commonjs babel src --watch --out-dir lib",
     "prepublish": "npm run clean && npm run check:src && npm run build",
     "docs:clean": "rimraf _book",
     "docs:prepare": "gitbook install",
@@ -82,7 +83,6 @@
     "react": "^15.0.0"
   },
   "dependencies": {
-    "history": "^4.2.0",
     "loose-envify": "^1.2.0",
     "query-string": "^4.2.3"
   },
