@@ -1,6 +1,6 @@
-import urlHandlerOptions from './urlQueryOptions';
+import urlQueryOptions from './urlQueryOptions';
 
-export default function setUrlHandlerOptions(options) {
-  const { history } = options;
-  urlHandlerOptions.history = history;
+export default function setUrlQueryOptions(options) {
+  // update the url options singleton
+  Object.assign(urlQueryOptions, options);
 }

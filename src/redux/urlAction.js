@@ -1,4 +1,4 @@
-import UrlUpdateTypes from './UrlUpdateTypes';
+import UrlUpdateTypes from '../url-io/UrlUpdateTypes';
 
 /**
  * Helper function for creating URL action creators

@@ -1,5 +1,5 @@
-import { encode } from './serialize';
-import UrlUpdateTypes from './UrlUpdateTypes';
+import { encode } from '../url-io/serialize';
+import UrlUpdateTypes from '../url-io/UrlUpdateTypes';
 
 /**
  * Helper function for creating URL action creators

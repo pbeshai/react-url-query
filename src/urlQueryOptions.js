@@ -1,3 +1,5 @@
+// function to create the singleton options object that can be shared
+// throughout an application
 function createUrlQueryOptions() {
   // default options
   return {

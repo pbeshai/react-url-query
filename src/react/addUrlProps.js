@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { parse as parseQueryString } from 'query-string';
-import urlQueryDecoder from './urlQueryDecoder';
-import urlQueryOptions from './urlQueryOptions';
+
+import urlQueryDecoder from '../url-io/urlQueryDecoder';
+import urlQueryOptions from '../urlQueryOptions';
 
 /**
  * Higher order component (HOC) that injects URL query parameters as props.
@@ -18,7 +19,6 @@ export default function addUrlProps(options) {
   } = options;
 
   return function addPropsWrapper(WrappedComponent) {
-    const displayName = WrappedComponent.displayName || WrappedComponent.name || 'Component';
     let decodeQuery;
 
     // initialize decode query (with cache) if a config is provided
@@ -64,6 +64,7 @@ export default function addUrlProps(options) {
       return result;
     }
 
+    const displayName = WrappedComponent.displayName || WrappedComponent.name || 'Component';
     class AddUrlProps extends Component {
       static displayName = `AddUrlProps(${displayName})`
       static WrappedComponent = WrappedComponent

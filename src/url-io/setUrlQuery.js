@@ -1,5 +1,6 @@
 import { stringify } from 'query-string';
-import urlQueryOptions from './urlQueryOptions';
+
+import urlQueryOptions from '../urlQueryOptions';
 import UrlUpdateTypes from './UrlUpdateTypes';
 
 export default function setUrlQuery(updateType, newQuery, location, history) {

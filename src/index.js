@@ -1,22 +1,24 @@
-import addUrlProps from './addUrlProps';
-import * as Serialize from './serialize';
-import pushUrlQuery from './pushUrlQuery';
-import pushUrlQueryFromAction from './pushUrlQueryFromAction';
-import pushInUrlQuery from './pushInUrlQuery';
-import pushInUrlQueryFromAction from './pushInUrlQueryFromAction';
-import replaceUrlQuery from './replaceUrlQuery';
-import replaceUrlQueryFromAction from './replaceUrlQueryFromAction';
-import replaceInUrlQuery from './replaceInUrlQuery';
-import replaceInUrlQueryFromAction from './replaceInUrlQueryFromAction';
 import setUrlQueryOptions from './setUrlQueryOptions';
-import urlAction, { urlReplaceAction, urlPushAction } from './urlAction';
-import urlInAction, { urlReplaceInAction, urlPushInAction } from './urlInAction';
-import * as UrlProps from './urlProps';
-import urlQueryDecoder from './urlQueryDecoder';
-import urlQueryMiddleware from './urlQueryMiddleware';
-import urlQueryReducer from './urlQueryReducer';
-import QueryParamTypes from './QueryParamTypes';
-import UrlUpdateTypes from './UrlUpdateTypes';
+
+import * as Serialize from './url-io/serialize';
+import pushUrlQuery from './url-io/pushUrlQuery';
+import pushInUrlQuery from './url-io/pushInUrlQuery';
+import replaceUrlQuery from './url-io/replaceUrlQuery';
+import replaceInUrlQuery from './url-io/replaceInUrlQuery';
+import urlQueryDecoder from './url-io/urlQueryDecoder';
+import QueryParamTypes from './url-io/QueryParamTypes';
+import UrlUpdateTypes from './url-io/UrlUpdateTypes';
+
+import addUrlProps from './react/addUrlProps';
+
+import pushUrlQueryFromAction from './redux/pushUrlQueryFromAction';
+import pushInUrlQueryFromAction from './redux/pushInUrlQueryFromAction';
+import replaceUrlQueryFromAction from './redux/replaceUrlQueryFromAction';
+import replaceInUrlQueryFromAction from './redux/replaceInUrlQueryFromAction';
+import urlAction, { urlReplaceAction, urlPushAction } from './redux/urlAction';
+import urlInAction, { urlReplaceInAction, urlPushInAction } from './redux/urlInAction';
+import urlQueryMiddleware from './redux/urlQueryMiddleware';
+import urlQueryReducer from './redux/urlQueryReducer';
 
 // for convenience export these two directly
 const decode = Serialize.decode;
@@ -43,7 +45,6 @@ export {
   urlReplaceAction,
   urlPushInAction,
   urlPushAction,
-  UrlProps,
   urlQueryDecoder,
   urlQueryMiddleware,
   urlQueryReducer,

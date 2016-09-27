@@ -1,5 +1,6 @@
 import { stringify, parse as parseQueryString } from 'query-string';
-import urlQueryOptions from './urlQueryOptions';
+
+import urlQueryOptions from '../urlQueryOptions';
 import UrlUpdateTypes from './UrlUpdateTypes';
 
 

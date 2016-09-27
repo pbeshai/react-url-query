@@ -1,5 +1,5 @@
 import urlQueryReducer from './urlQueryReducer';
-import urlQueryOptions from './urlQueryOptions';
+import urlQueryOptions from '../urlQueryOptions';
 
 /**
  * Middleware to handle updating the URL query params

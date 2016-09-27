@@ -2,7 +2,7 @@ import replaceInUrlQueryFromAction from './replaceInUrlQueryFromAction';
 import replaceUrlQueryFromAction from './replaceUrlQueryFromAction';
 import pushInUrlQueryFromAction from './pushInUrlQueryFromAction';
 import pushUrlQueryFromAction from './pushUrlQueryFromAction';
-import UrlUpdateTypes from './UrlUpdateTypes';
+import UrlUpdateTypes from '../url-io/UrlUpdateTypes';
 
 /**
  * Reducer that handles actions that modify the URL query parameters.
