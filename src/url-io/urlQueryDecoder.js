@@ -26,11 +26,12 @@ export default function urlQueryDecoder(config) {
         decodedValue = cachedDecodedQuery[key];
 
       // not cached, decode now
-      } else {
+      // only decode if no validate provided or validate is provided and the encoded value is valid
+      } else if (!keyConfig.validate || (keyConfig.validate && keyConfig.validate(encodedValue))) {
         decodedValue = decode(keyConfig.type, encodedValue, keyConfig.defaultValue);
       }
 
-      decoded[key] = decodedValue; // eslint-disable-line
+      decoded[key] = decodedValue;
       return decoded;
     }, {});
 

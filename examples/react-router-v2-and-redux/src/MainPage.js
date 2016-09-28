@@ -17,7 +17,7 @@ import { changeArr, changeBaz, changeFoo, changeBar, changeCustom } from './stat
  */
 const urlPropsQueryConfig = {
   arr: { type: QueryParamTypes.array },
-  bar: { type: QueryParamTypes.string },
+  bar: { type: QueryParamTypes.string, validate: bar => bar && bar.length < 6 },
   foo: { type: QueryParamTypes.number, queryParam: 'fooInUrl' },
   custom: { type: (encoded) => (encoded ? encoded.substring(6) : 'mystery') }
 }
