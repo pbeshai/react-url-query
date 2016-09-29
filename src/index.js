@@ -10,6 +10,7 @@ import QueryParamTypes from './url-io/QueryParamTypes';
 import UrlUpdateTypes from './url-io/UrlUpdateTypes';
 
 import addUrlProps from './react/addUrlProps';
+import RouterToUrlQuery from './react/RouterToUrlQuery';
 
 import pushUrlQueryFromAction from './redux/pushUrlQueryFromAction';
 import pushInUrlQueryFromAction from './redux/pushInUrlQueryFromAction';
@@ -31,6 +32,7 @@ export {
   addUrlProps,
   decode,
   encode,
+  RouterToUrlQuery,
   QueryParamTypes,
   pushInUrlQuery,
   pushInUrlQueryFromAction,

@@ -13,13 +13,9 @@ export default function setUrlQuery(updateType, newQuery, location, history) {
     location = history.location;
   }
 
-  if (process.env.NODE_ENV === 'development') {
-    if (!location) {
-      console.warn(`No location found when trying to ${updateType} query.`, // eslint-disable-line no-console
-        'newQuery =', newQuery, 'history =', history);
-    }
+  if (!location) {
+    location = window.location;
   }
-
 
   // remove query params that are nully or an empty string when encoded
   Object.keys(newQuery).forEach((queryParam) => {

@@ -13,11 +13,9 @@ export default function setInUrlQuery(updateType, queryParam, encodedValue, loca
   if (!location) {
     location = history.location;
   }
-  if (process.env.NODE_ENV === 'development') {
-    if (!location) {
-      console.warn(`No location found when trying to ${updateType} query.`, // eslint-disable-line no-console
-        `queryParam = ${queryParam}, encodedValue = ${encodedValue}, history =`, history);
-    }
+
+  if (!location) {
+    location = window.location;
   }
 
   // if a query is there, use it, otherwise parse the search string
