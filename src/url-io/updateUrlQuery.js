@@ -8,7 +8,7 @@ function getLocation(location) {
   }
 
   // if no location provided, check history
-  const { history } = urlQueryOptions.history;
+  const { history } = urlQueryOptions;
 
   // if not in history, use window
   return history.location ? history.location : window.location;
