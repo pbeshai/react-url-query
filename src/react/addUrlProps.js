@@ -13,7 +13,6 @@ import urlQueryOptions from '../urlQueryOptions';
 export default function addUrlProps(options) {
   const {
     mapUrlToProps = d => d,
-    history,
     urlPropsQueryConfig,
     addRouterParams,
   } = options;
@@ -33,12 +32,8 @@ export default function addUrlProps(options) {
       if (props.location && props.location.query) {
         location = props.location;
 
-      // history provided explicitly
-      } else if (history && history.location) {
-        location = history.location;
-
-      // check for default history setting
-      } else if (urlQueryOptions.history && urlQueryOptions.history.location) {
+      // check in history
+      } else if (urlQueryOptions.history.location) {
         location = urlQueryOptions.history.location;
 
       // not found. just use location from window
