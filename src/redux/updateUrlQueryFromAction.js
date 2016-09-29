@@ -5,22 +5,22 @@ import {
   pushUrlQuery,
 } from '../url-io/updateUrlQuery';
 
-export function replaceUrlQueryFromAction(action, location, history) {
+export function replaceUrlQueryFromAction(action, location) {
   const { encodedQuery } = action.payload;
-  replaceUrlQuery(encodedQuery, location, history);
+  replaceUrlQuery(encodedQuery, location);
 }
 
-export function pushUrlQueryFromAction(action, location, history) {
+export function pushUrlQueryFromAction(action, location) {
   const { encodedQuery } = action.payload;
-  pushUrlQuery(encodedQuery, location, history);
+  pushUrlQuery(encodedQuery, location);
 }
 
-export function replaceInUrlQueryFromAction(action, location, history) {
+export function replaceInUrlQueryFromAction(action, location) {
   const { queryParam, encodedValue } = action.payload;
-  replaceInUrlQuery(queryParam, encodedValue, location, history);
+  replaceInUrlQuery(queryParam, encodedValue, location);
 }
 
-export function pushInUrlQueryFromAction(action, location, history) {
+export function pushInUrlQueryFromAction(action, location) {
   const { queryParam, encodedValue } = action.payload;
-  pushInUrlQuery(queryParam, encodedValue, location, history);
+  pushInUrlQuery(queryParam, encodedValue, location);
 }
