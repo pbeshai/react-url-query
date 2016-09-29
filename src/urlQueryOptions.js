@@ -7,7 +7,16 @@ function createUrlQueryOptions() {
     addRouterParams: true,
 
     // use this history if no history is specified
-    history: undefined,
+    history: {
+      push() {
+        // eslint-disable-next-line
+        console.error('No history provided to react-url-query. Please provide one via setUrlQueryOptions.');
+      },
+      replace() {
+        // eslint-disable-next-line
+        console.error('No history provided to react-url-query. Please provide one via setUrlQueryOptions.');
+      },
+    },
 
     // reads in location from react-router-redux if available and passes it
     // to the reducer in the urlQueryMiddleware
