@@ -26,8 +26,6 @@ export function encodeDate(date) {
  * as necessary (aka, '2015', '2015-10', '2015-10-01').
  * It will not work for dates that have times included in them.
  *
- * @TODO replace with proper date library at some point.
- *
  * @param  {String} dateString String date form like '2015-10-01'
  * @return {Date} parsed date
  */
