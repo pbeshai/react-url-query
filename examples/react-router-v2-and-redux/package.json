@@ -6,8 +6,6 @@
     "react-scripts": "^0.6.0"
   },
   "dependencies": {
-    "history": "^2.1.2",
-    "query-string": "^4.2.3",
     "react": "^15.3.2",
     "react-dom": "^15.3.2",
     "react-redux": "^4.4.5",
