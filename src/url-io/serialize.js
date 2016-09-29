@@ -178,33 +178,13 @@ export function decodeObject(objStr, keyValSeparator = '-', entrySeparator = '_'
  * Collection of Decoders by type
  */
 export const Decoders = {
-  number(d) {
-    return parseFloat(d, 10);
-  },
-
-  string(d) {
-    return d;
-  },
-
-  object(d) {
-    return decodeObject(d);
-  },
-
-  array(d) {
-    return decodeArray(d);
-  },
-
-  json(d) {
-    return decodeJson(d);
-  },
-
-  date(d) {
-    return decodeDate(d);
-  },
-
-  boolean(d) {
-    return decodeBoolean(d);
-  },
+  number: parseFloat,
+  string: d => d,
+  object: decodeObject,
+  array: decodeArray,
+  json: decodeJson,
+  date: decodeDate,
+  boolean: decodeBoolean,
 };
 
 
@@ -237,33 +217,13 @@ export function decode(type, encodedValue, defaultValue) {
  * Collection of Decoders by type
  */
 export const Encoders = {
-  number(d) {
-    return String(d);
-  },
-
-  string(d) {
-    return d;
-  },
-
-  object(d) {
-    return encodeObject(d);
-  },
-
-  array(d) {
-    return encodeArray(d);
-  },
-
-  json(d) {
-    return encodeJson(d);
-  },
-
-  date(d) {
-    return encodeDate(d);
-  },
-
-  boolean(d) {
-    return encodeBoolean(d);
-  },
+  number: String,
+  string: d => d,
+  object: encodeObject,
+  array: encodeArray,
+  json: encodeJson,
+  date: encodeDate,
+  boolean: encodeBoolean,
 };
 
 /**
