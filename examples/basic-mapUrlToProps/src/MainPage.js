@@ -1,8 +1,5 @@
 import React, { PureComponent, PropTypes } from 'react';
-import { stringify, parse as parseQueryString } from 'query-string'
-import { addUrlProps, decode, UrlQueryParamTypes } from 'react-url-query';
-
-import history from './history';
+import { decode, encode, addUrlProps, UrlQueryParamTypes, replaceInUrlQuery } from 'react-url-query';
 
 /**
  * Map from url query params to props. The values in `url` will still be encoded
@@ -27,29 +24,13 @@ class MainPage extends PureComponent {
   }
 
   onChangeFoo(foo) {
-    // get the current query and update the value of foo
-    const query = parseQueryString(history.location.search);
-    query.foo = foo;
-    const queryStr = stringify(query);
-
     // update the URL with the new encoded value
-    history.replace({
-      pathname: history.location.pathname,
-      search: `?${queryStr}`,
-    });
+    replaceInUrlQuery('fooInUrl', encode(UrlQueryParamTypes.number, foo));
   }
 
   onChangeBar(bar) {
-    // get the current query and update the value of bar
-    const query = parseQueryString(history.location.search);
-    query.bar = bar;
-    const queryStr = stringify(query);
-
     // update the URL with the new encoded value
-    history.replace({
-      pathname: history.location.pathname,
-      search: `?${queryStr}`,
-    });
+    replaceInUrlQuery('bar', bar);
   }
 
   render() {
