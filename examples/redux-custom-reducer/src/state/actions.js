@@ -1,4 +1,4 @@
-import { urlInAction, urlPushAction, QueryParamTypes, encode } from 'react-url-query';
+import { urlInAction, urlPushAction, UrlQueryParamTypes, encode } from 'react-url-query';
 
 export const CHANGE_BAZ = 'CHANGE_BAZ';
 export const CHANGE_FOO = 'CHANGE_FOO';
@@ -25,9 +25,9 @@ export function changeBaz(baz) {
  * Application code uses these the same way standard redux action creators
  * are used. (e.g., `dispatch(changeFoo(94))`)
  */
-export const changeFoo = urlInAction(CHANGE_FOO, 'fooInUrl', QueryParamTypes.number);
-export const changeBar = urlInAction(CHANGE_BAR, 'bar', QueryParamTypes.string);
-export const changeArr = urlInAction(CHANGE_ARR, 'arr', QueryParamTypes.array);
+export const changeFoo = urlInAction(CHANGE_FOO, 'fooInUrl', UrlQueryParamTypes.number);
+export const changeBar = urlInAction(CHANGE_BAR, 'bar', UrlQueryParamTypes.string);
+export const changeArr = urlInAction(CHANGE_ARR, 'arr', UrlQueryParamTypes.array);
 
 /**
  * Example of pushing a whole new query. The second argument specifies how to
@@ -35,7 +35,7 @@ export const changeArr = urlInAction(CHANGE_ARR, 'arr', QueryParamTypes.array);
  */
 export const changeMany = urlPushAction(CHANGE_MANY,
   (newQuery) => ({
-    fooInUrl: encode(QueryParamTypes.number, newQuery.foo),
+    fooInUrl: encode(UrlQueryParamTypes.number, newQuery.foo),
     bar: 'par',
     arr: 'T_Y'
   }));

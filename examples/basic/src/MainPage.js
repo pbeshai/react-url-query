@@ -1,6 +1,6 @@
 import React, { PureComponent, PropTypes } from 'react';
 import { stringify, parse as parseQueryString } from 'query-string'
-import { addUrlProps, QueryParamTypes } from 'react-url-query';
+import { addUrlProps, UrlQueryParamTypes } from 'react-url-query';
 
 import history from './history';
 
@@ -12,8 +12,8 @@ import history from './history';
  * parameters should be read (this defaults to the prop name if not provided).
  */
 const urlPropsQueryConfig = {
-  bar: { type: QueryParamTypes.string },
-  foo: { type: QueryParamTypes.number, queryParam: 'fooInUrl' },
+  bar: { type: UrlQueryParamTypes.string },
+  foo: { type: UrlQueryParamTypes.number, queryParam: 'fooInUrl' },
 }
 
 class MainPage extends PureComponent {
@@ -92,4 +92,4 @@ class MainPage extends PureComponent {
  * to props for MainPage. In this case the mapping happens automatically by
  * first decoding the URL query parameters based on the urlPropsQueryConfig.
  */
-export default addUrlProps({ urlPropsQueryConfig, history })(MainPage);
+export default addUrlProps({ urlPropsQueryConfig })(MainPage);

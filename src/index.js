@@ -1,26 +1,38 @@
 import setUrlQueryOptions from './setUrlQueryOptions';
 
+/** URL input/output */
 import * as Serialize from './url-io/serialize';
-import pushUrlQuery from './url-io/pushUrlQuery';
-import pushInUrlQuery from './url-io/pushInUrlQuery';
-import replaceUrlQuery from './url-io/replaceUrlQuery';
-import replaceInUrlQuery from './url-io/replaceInUrlQuery';
+import {
+  replaceInUrlQuery,
+  replaceUrlQuery,
+  pushInUrlQuery,
+  pushUrlQuery,
+} from './url-io/updateUrlQuery';
 import urlQueryDecoder from './url-io/urlQueryDecoder';
-import QueryParamTypes from './url-io/QueryParamTypes';
+import UrlQueryParamTypes from './url-io/UrlQueryParamTypes';
 import UrlUpdateTypes from './url-io/UrlUpdateTypes';
 
+/** React */
 import addUrlProps from './react/addUrlProps';
 import RouterToUrlQuery from './react/RouterToUrlQuery';
 
-import pushUrlQueryFromAction from './redux/pushUrlQueryFromAction';
-import pushInUrlQueryFromAction from './redux/pushInUrlQueryFromAction';
-import replaceUrlQueryFromAction from './redux/replaceUrlQueryFromAction';
-import replaceInUrlQueryFromAction from './redux/replaceInUrlQueryFromAction';
-import urlAction, { urlReplaceAction, urlPushAction } from './redux/urlAction';
-import urlInAction, { urlReplaceInAction, urlPushInAction } from './redux/urlInAction';
+/** Redux */
+import {
+  replaceInUrlQueryFromAction,
+  replaceUrlQueryFromAction,
+  pushInUrlQueryFromAction,
+  pushUrlQueryFromAction,
+} from './redux/updateUrlQueryFromAction';
+import urlAction, {
+  urlReplaceAction,
+  urlPushAction,
+  urlReplaceInAction,
+  urlPushInAction,
+} from './redux/urlAction';
 import urlQueryMiddleware from './redux/urlQueryMiddleware';
 import urlQueryReducer from './redux/urlQueryReducer';
 
+/** Utils */
 import subquery from './utils/subquery';
 import subqueryOmit from './utils/subqueryOmit';
 
@@ -29,31 +41,34 @@ const decode = Serialize.decode;
 const encode = Serialize.encode;
 
 export {
-  addUrlProps,
+  setUrlQueryOptions,
+
+  Serialize,
   decode,
   encode,
-  RouterToUrlQuery,
-  QueryParamTypes,
   pushInUrlQuery,
-  pushInUrlQueryFromAction,
   pushUrlQuery,
-  pushUrlQueryFromAction,
   replaceInUrlQuery,
-  replaceInUrlQueryFromAction,
   replaceUrlQuery,
-  replaceUrlQueryFromAction,
-  Serialize,
-  setUrlQueryOptions,
-  subquery,
-  subqueryOmit,
+  urlQueryDecoder,
+  UrlQueryParamTypes,
+  UrlUpdateTypes,
+
+  addUrlProps,
+  RouterToUrlQuery,
+
   urlAction,
-  urlInAction,
   urlReplaceInAction,
   urlReplaceAction,
   urlPushInAction,
   urlPushAction,
-  urlQueryDecoder,
+  pushInUrlQueryFromAction,
+  pushUrlQueryFromAction,
+  replaceInUrlQueryFromAction,
+  replaceUrlQueryFromAction,
   urlQueryMiddleware,
   urlQueryReducer,
-  UrlUpdateTypes,
+
+  subquery,
+  subqueryOmit,
 };

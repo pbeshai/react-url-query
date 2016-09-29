@@ -1,7 +1,9 @@
-import replaceInUrlQueryFromAction from './replaceInUrlQueryFromAction';
-import replaceUrlQueryFromAction from './replaceUrlQueryFromAction';
-import pushInUrlQueryFromAction from './pushInUrlQueryFromAction';
-import pushUrlQueryFromAction from './pushUrlQueryFromAction';
+import {
+  replaceInUrlQueryFromAction,
+  replaceUrlQueryFromAction,
+  pushInUrlQueryFromAction,
+  pushUrlQueryFromAction,
+} from './updateUrlQueryFromAction';
 import UrlUpdateTypes from '../url-io/UrlUpdateTypes';
 
 /**

@@ -1,6 +1,6 @@
 import React, { PureComponent, PropTypes } from 'react';
 import { stringify, parse as parseQueryString } from 'query-string'
-import { addUrlProps, decode, QueryParamTypes } from 'react-url-query';
+import { addUrlProps, decode, UrlQueryParamTypes } from 'react-url-query';
 
 import history from './history';
 
@@ -10,8 +10,8 @@ import history from './history';
  */
 function mapUrlToProps(url, props) {
   return {
-    foo: decode(QueryParamTypes.number, url.foo),
-    bar: decode(QueryParamTypes.string, url.bar),
+    foo: decode(UrlQueryParamTypes.number, url.foo),
+    bar: decode(UrlQueryParamTypes.string, url.bar),
   };
 }
 
@@ -90,4 +90,4 @@ class MainPage extends PureComponent {
  * We use the addUrlProps higher-order component to map URL query parameters
  * to props for MainPage.
  */
-export default addUrlProps({ mapUrlToProps, history })(MainPage);
+export default addUrlProps({ mapUrlToProps })(MainPage);

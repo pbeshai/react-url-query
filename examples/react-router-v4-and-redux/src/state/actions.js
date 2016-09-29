@@ -1,4 +1,4 @@
-import { urlReplaceInAction, QueryParamTypes } from 'react-url-query';
+import { urlReplaceInAction, UrlQueryParamTypes } from 'react-url-query';
 
 export const CHANGE_BAZ = 'CHANGE_BAZ';
 export const CHANGE_FOO = 'CHANGE_FOO';
@@ -25,8 +25,8 @@ export function changeBaz(baz) {
  * Application code uses these the same way standard redux action creators
  * are used. (e.g., `dispatch(changeFoo(94))`)
  */
-export const changeFoo = urlReplaceInAction(CHANGE_FOO, 'fooInUrl', QueryParamTypes.number);
-export const changeBar = urlReplaceInAction(CHANGE_BAR, 'bar', QueryParamTypes.string);
-export const changeArr = urlReplaceInAction(CHANGE_ARR, 'arr', QueryParamTypes.array);
+export const changeFoo = urlReplaceInAction(CHANGE_FOO, 'fooInUrl', UrlQueryParamTypes.number);
+export const changeBar = urlReplaceInAction(CHANGE_BAR, 'bar', UrlQueryParamTypes.string);
+export const changeArr = urlReplaceInAction(CHANGE_ARR, 'arr', UrlQueryParamTypes.array);
 export const changeCustom = urlReplaceInAction(CHANGE_CUSTOM, 'custom',
   (decoded) => (decoded ? `custom${decoded}` : undefined));

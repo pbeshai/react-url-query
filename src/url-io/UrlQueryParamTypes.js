@@ -1,4 +1,4 @@
-const QueryParamTypes = {
+const UrlQueryParamTypes = {
   number: 'number',
   string: 'string',
   object: 'object',
@@ -9,4 +9,4 @@ const QueryParamTypes = {
   custom: 'custom',
 };
 
-export default QueryParamTypes;
+export default UrlQueryParamTypes;

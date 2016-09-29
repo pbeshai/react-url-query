@@ -1,7 +1,7 @@
 import React, { PureComponent, PropTypes } from 'react';
 import { connect } from 'react-redux';
 
-import { addUrlProps, decode, QueryParamTypes } from 'react-url-query';
+import { addUrlProps, decode, UrlQueryParamTypes } from 'react-url-query';
 import { changeArr, changeBaz, changeFoo, changeBar } from './state/actions';
 
 /**
@@ -10,9 +10,9 @@ import { changeArr, changeBaz, changeFoo, changeBar } from './state/actions';
  */
 function mapUrlToProps(url, props) {
   return {
-    arr: decode(QueryParamTypes.array, url.arr),
-    bar: decode(QueryParamTypes.string, url.bar),
-    foo: decode(QueryParamTypes.number, url.fooInUrl),
+    arr: decode(UrlQueryParamTypes.array, url.arr),
+    bar: decode(UrlQueryParamTypes.string, url.bar),
+    foo: decode(UrlQueryParamTypes.number, url.fooInUrl),
   };
 }
 

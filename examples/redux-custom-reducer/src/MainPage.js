@@ -1,7 +1,7 @@
 import React, { PureComponent, PropTypes } from 'react';
 import { connect } from 'react-redux';
 
-import { addUrlProps, QueryParamTypes } from 'react-url-query';
+import { addUrlProps, UrlQueryParamTypes } from 'react-url-query';
 import { changeArr, changeBaz, changeFoo, changeBar, changeMany } from './state/actions';
 
 /**
@@ -15,9 +15,9 @@ import { changeArr, changeBaz, changeFoo, changeBar, changeMany } from './state/
  * action.
  */
 const urlPropsQueryConfig = {
-  arr: { type: QueryParamTypes.array },
-  bar: { type: QueryParamTypes.string },
-  foo: { type: QueryParamTypes.number, queryParam: 'fooInUrl' },
+  arr: { type: UrlQueryParamTypes.array },
+  bar: { type: UrlQueryParamTypes.string },
+  foo: { type: UrlQueryParamTypes.number, queryParam: 'fooInUrl' },
 }
 
 /**
