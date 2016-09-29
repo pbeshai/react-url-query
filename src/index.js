@@ -8,7 +8,6 @@ import {
   pushInUrlQuery,
   pushUrlQuery,
 } from './url-io/updateUrlQuery';
-import urlQueryDecoder from './url-io/urlQueryDecoder';
 import UrlQueryParamTypes from './url-io/UrlQueryParamTypes';
 import UrlUpdateTypes from './url-io/UrlUpdateTypes';
 
@@ -50,7 +49,6 @@ export {
   pushUrlQuery,
   replaceInUrlQuery,
   replaceUrlQuery,
-  urlQueryDecoder,
   UrlQueryParamTypes,
   UrlUpdateTypes,
 
