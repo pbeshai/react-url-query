@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import { parse as parseQueryString } from 'query-string';
 
 import urlQueryDecoder from '../urlQueryDecoder';
@@ -71,61 +71,63 @@ export default function addUrlProps(options) {
       return result;
     }
 
-    /**
-     * Create URL change handlers based on props, the urlPropsQueryConfig (if provided),
-     * and mapUrlChangeHandlersToProps (if provided).
-     */
-    function getUrlChangeHandlerProps(props) {
-      // read in location from props if available
-      const { location } = props;
-
-      let handlers;
-
-      if (urlPropsQueryConfig) {
-        // if we have a props->query config, generate the change handler props unless
-        // addUrlChangeHandlers is false
-        if (addUrlChangeHandlers || (addUrlChangeHandlers == null && urlQueryConfig.addUrlChangeHandlers)) {
-          // use cache if available. Have to do this since urlQueryConfig can change between
-          // renders (although that is unusual).
-          if (cachedHandlers) {
-            handlers = cachedHandlers;
-          } else {
-            // for each URL config prop, create a handler
-            handlers = Object.keys(urlPropsQueryConfig).reduce((handlersAccum, propName) => {
-              const { updateType, queryParam = propName, type } = urlPropsQueryConfig[propName];
-
-              // name handler for `foo` => `onChangeFoo`
-              const handlerName = `onChange${propName[0].toUpperCase()}${propName.substring(1)}`;
-
-              // handler encodes the value and updates the URL with the encoded value
-              // based on the `updateType` in the config. Default is `replaceIn`
-              handlersAccum[handlerName] = function generatedUrlChangeHandler(value) {
-                const encodedValue = encode(type, value);
-                updateUrlQuerySingle(updateType, queryParam, encodedValue, location);
-              };
-
-              return handlersAccum;
-            }, {});
-
-            // cache these so we don't regenerate new functions every render
-            cachedHandlers = handlers;
-          }
-        }
-      }
-
-      // if a manual mapping function is provided, use it, passing in the auto-generated
-      // handlers as an optional secondary argument.
-      if (mapUrlChangeHandlersToProps) {
-        handlers = mapUrlChangeHandlersToProps(props, handlers);
-      }
-
-      return handlers;
-    }
-
     const displayName = WrappedComponent.displayName || WrappedComponent.name || 'Component';
     class AddUrlProps extends Component {
       static displayName = `AddUrlProps(${displayName})`
       static WrappedComponent = WrappedComponent
+      static propTypes = {
+        location: PropTypes.object, // eslint-disable-line react/forbid-prop-types
+      }
+
+      /**
+       * Create URL change handlers based on props, the urlPropsQueryConfig (if provided),
+       * and mapUrlChangeHandlersToProps (if provided).
+       * As a member function so we can read `this.props` in generated handlers dynamically.
+       */
+      getUrlChangeHandlerProps(propsWithUrl) {
+        let handlers;
+
+        if (urlPropsQueryConfig) {
+          // if we have a props->query config, generate the change handler props unless
+          // addUrlChangeHandlers is false
+          if (addUrlChangeHandlers || (addUrlChangeHandlers == null && urlQueryConfig.addUrlChangeHandlers)) {
+            // use cache if available. Have to do this since urlQueryConfig can change between
+            // renders (although that is unusual).
+            if (cachedHandlers) {
+              handlers = cachedHandlers;
+            } else {
+              // for each URL config prop, create a handler
+              handlers = Object.keys(urlPropsQueryConfig).reduce((handlersAccum, propName) => {
+                const { updateType, queryParam = propName, type } = urlPropsQueryConfig[propName];
+
+                // name handler for `foo` => `onChangeFoo`
+                const handlerName = `onChange${propName[0].toUpperCase()}${propName.substring(1)}`;
+
+                // handler encodes the value and updates the URL with the encoded value
+                // based on the `updateType` in the config. Default is `replaceIn`
+                handlersAccum[handlerName] = function generatedUrlChangeHandler(value) {
+                  const encodedValue = encode(type, value);
+                  updateUrlQuerySingle(updateType, queryParam, encodedValue, this.props.location);
+                }.bind(this); // bind this so we can access props dynamically
+
+                return handlersAccum;
+              }, {});
+
+              // cache these so we don't regenerate new functions every render
+              cachedHandlers = handlers;
+            }
+          }
+        }
+
+        // if a manual mapping function is provided, use it, passing in the auto-generated
+        // handlers as an optional secondary argument.
+        if (mapUrlChangeHandlersToProps) {
+          handlers = mapUrlChangeHandlersToProps(propsWithUrl, handlers);
+        }
+
+        return handlers;
+      }
+
 
       render() {
         // get the url query parameters as an object mapping name to value.
@@ -140,7 +142,7 @@ export default function addUrlProps(options) {
 
         // add in the URL change handlers - either auto-generated based on config
         // or from mapUrlChangeHandlersToProps.
-        Object.assign(propsWithUrl, getUrlChangeHandlerProps(propsWithUrl));
+        Object.assign(propsWithUrl, this.getUrlChangeHandlerProps(propsWithUrl));
 
         // render the wrapped component with the URL props added in.
         return <WrappedComponent {...propsWithUrl} />;
