@@ -122,8 +122,16 @@ export default function addUrlProps(options) {
                 // handler encodes the value and updates the URL with the encoded value
                 // based on the `updateType` in the config. Default is `replaceIn`
                 handlersAccum[handlerName] = function generatedUrlChangeHandler(value) {
+                  const { location } = this.props;
                   const encodedValue = encode(type, value);
-                  updateUrlQuerySingle(updateType, queryParam, encodedValue, this.props.location);
+
+                  // add a simple check when we have props.location.query to see if
+                  // we even need to update.
+                  if (location && location.query && location.query[queryParam] === encodedValue) {
+                    return; // skip udpating
+                  }
+
+                  updateUrlQuerySingle(updateType, queryParam, encodedValue, location);
                 }.bind(this); // bind this so we can access props dynamically
 
                 return handlersAccum;
