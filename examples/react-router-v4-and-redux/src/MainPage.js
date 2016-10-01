@@ -1,10 +1,17 @@
 import React, { PureComponent, PropTypes } from 'react';
 import { connect } from 'react-redux';
-import * as test from 'react-router';
 import { Link } from 'react-router';
 
 import { addUrlProps, UrlQueryParamTypes, subquery } from 'react-url-query';
-import { changeArr, changeBaz, changeFoo, changeBar, changeCustom } from './state/actions';
+import { changeBaz } from './state/actions';
+
+/**
+ * To specify a custom type, pass a decode and an encode function
+ */
+const customType = {
+  decode: (encoded) => (encoded ? encoded.substring(6) : 'mystery'),
+  encode: (decoded) => (decoded ? `custom${decoded}` : undefined),
+};
 
 /**
  * Specify how the URL gets decoded here. This is an object that takes the prop
@@ -20,7 +27,7 @@ const urlPropsQueryConfig = {
   arr: { type: UrlQueryParamTypes.array },
   bar: { type: UrlQueryParamTypes.string, validate: bar => bar && bar.length < 6 },
   foo: { type: UrlQueryParamTypes.number, queryParam: 'fooInUrl' },
-  custom: { type: (encoded) => (encoded ? encoded.substring(6) : 'mystery') }
+  custom: { type: customType }
 }
 
 /**
@@ -38,11 +45,7 @@ function mapStateToProps(state, props) {
  */
 function mapDispatchToProps(dispatch) {
   return {
-    onChangeArr(arr) { dispatch(changeArr(arr)); },
-    onChangeFoo(foo) { dispatch(changeFoo(foo)); },
-    onChangeBar(bar) { dispatch(changeBar(bar)); },
     onChangeBaz(baz) { dispatch(changeBaz(baz)); },
-    onChangeCustom(custom) { dispatch(changeCustom(custom)); },
   };
 }
 
@@ -100,9 +103,6 @@ class MainPage extends PureComponent {
     const { arr, foo, bar, baz, custom, word, location, onChangeArr,
       onChangeBar, onChangeBaz, onChangeFoo, onChangeCustom } = this.props;
 
-    console.log('got props = ', this.props);
-    console.log('got context =', this.context);
-    console.log(test);
     return (
       <div>
         <table>

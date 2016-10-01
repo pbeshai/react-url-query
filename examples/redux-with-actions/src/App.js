@@ -11,7 +11,7 @@ class App extends Component {
   render() {
     return (
       <div>
-        <h3>react-url-query example: redux-custom-reducer</h3>
+        <h3>react-url-query example: redux-with-action</h3>
         <MainPage />
       </div>
     );

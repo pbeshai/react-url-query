@@ -1,8 +1,8 @@
-# Redux with custom urlQueryReducer Example
+# Redux with actions Example
 
 Example of using react-url-query. Start it with `npm start`.
 
-This example demonstrates usage with Redux and a custom urlQueryReducer.
+This example demonstrates usage with Redux and having url changes controlled through actions
 
 
 ---

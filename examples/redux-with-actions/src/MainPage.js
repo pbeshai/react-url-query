@@ -35,11 +35,11 @@ function mapStateToProps(state, props) {
  */
 function mapDispatchToProps(dispatch) {
   return {
-    onChangeArr(arr) { dispatch(changeArr(arr)); },
-    onChangeFoo(foo) { dispatch(changeFoo(foo)); },
-    onChangeBar(bar) { dispatch(changeBar(bar)); },
-    onChangeBaz(baz) { dispatch(changeBaz(baz)); },
-    onChangeMany(foo) { dispatch(changeMany({ foo })); },
+    onChangeArr: (arr) => dispatch(changeArr(arr)),
+    onChangeFoo: (foo) => dispatch(changeFoo(foo)),
+    onChangeBar: (bar) => dispatch(changeBar(bar)),
+    onChangeBaz: (baz) => dispatch(changeBaz(baz)),
+    onChangeMany: (foo) => dispatch(changeMany({ foo })),
   };
 }
 

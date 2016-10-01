@@ -1,4 +1,4 @@
-import { CHANGE_FOO, CHANGE_BAR, CHANGE_ARR } from './actions';
+import { CHANGE_FOO } from './actions';
 import {
   replaceInUrlQueryFromAction,
   pushUrlQuery,
@@ -29,12 +29,9 @@ export default function urlQueryReducer(action) {
       }
       break;
     }
-    case CHANGE_BAR:
-    case CHANGE_ARR:
-      replaceInUrlQueryFromAction(action);
-      break;
     default:
-      // This will be used for CHANGE_MANY since it is not handled above.
+      // This will be used for CHANGE_MANY, CHANGE_BAR, and CHANGE_ARR since they
+      // are not handled above.
       defaultUrlQueryReducer(action);
       break;
   }

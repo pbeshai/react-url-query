@@ -2,7 +2,7 @@ import React, { PureComponent, PropTypes } from 'react';
 import { connect } from 'react-redux';
 
 import { addUrlProps, UrlQueryParamTypes } from 'react-url-query';
-import { changeArr, changeBaz, changeFoo, changeBar } from './state/actions';
+import { changeBaz } from './state/actions';
 
 /**
  * Specify how the URL gets decoded here. This is an object that takes the prop
@@ -35,10 +35,7 @@ function mapStateToProps(state, props) {
  */
 function mapDispatchToProps(dispatch) {
   return {
-    onChangeArr(arr) { dispatch(changeArr(arr)); },
-    onChangeFoo(foo) { dispatch(changeFoo(foo)); },
-    onChangeBar(bar) { dispatch(changeBar(bar)); },
-    onChangeBaz(baz) { dispatch(changeBaz(baz)); },
+    onChangeBaz: (baz) => dispatch(changeBaz(baz)),
   };
 }
 
@@ -53,9 +50,13 @@ class MainPage extends PureComponent {
     bar: PropTypes.string,
     baz: PropTypes.string,
     foo: PropTypes.number,
+    onChangeBaz: PropTypes.func,
+
+    // change handlers are automatically generated and passed if a config is provided
+    // and `addChangeHandlers` isn't false. They use `replaceIn` by default, just
+    // updating that single query parameter and keeping the other existing ones.
     onChangeArr: PropTypes.func,
     onChangeBar: PropTypes.func,
-    onChangeBaz: PropTypes.func,
     onChangeFoo: PropTypes.func,
   }
 

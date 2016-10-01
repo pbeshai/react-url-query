@@ -1,5 +1,5 @@
 {
-  "name": "example-redux-mapUrlToProps",
+  "name": "example-redux-with-actions",
   "version": "0.1.0",
   "private": true,
   "devDependencies": {
