@@ -3,7 +3,7 @@ import {
   replaceUrlQuery,
   pushInUrlQuery,
   pushUrlQuery,
-} from '../url-io/updateUrlQuery';
+} from '../updateUrlQuery';
 
 export function replaceUrlQueryFromAction(action, location) {
   const { encodedQuery } = action.payload;

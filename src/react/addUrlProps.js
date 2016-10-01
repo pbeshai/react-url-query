@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { parse as parseQueryString } from 'query-string';
 
-import urlQueryDecoder from '../url-io/urlQueryDecoder';
+import urlQueryDecoder from '../urlQueryDecoder';
 import urlQueryConfig from '../urlQueryConfig';
 
 /**

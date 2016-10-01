@@ -1,5 +1,5 @@
-import { encode } from '../url-io/serialize';
-import UrlUpdateTypes from '../url-io/UrlUpdateTypes';
+import { encode } from '../serialize';
+import UrlUpdateTypes from '../UrlUpdateTypes';
 
 
 export default function urlAction(actionType, payload = d => d, meta = () => {}) {

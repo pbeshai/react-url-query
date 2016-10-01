@@ -4,7 +4,7 @@ import {
   pushInUrlQueryFromAction,
   pushUrlQueryFromAction,
 } from './updateUrlQueryFromAction';
-import UrlUpdateTypes from '../url-io/UrlUpdateTypes';
+import UrlUpdateTypes from '../UrlUpdateTypes';
 
 /**
  * Reducer that handles actions that modify the URL query parameters.
