@@ -23,10 +23,18 @@ const urlQueryMiddleware = (options = {}) => ({ getState }) => next => (action) 
 
   if (readLocationFromStore) {
     const location = readLocationFromStore(getState());
-    return reducer(action, location);
+    reducer(action, location);
+  } else {
+    reducer(action);
   }
 
-  return reducer(action);
+  // shortcircuit by default (don't pass to redux store), unless explicitly set
+  // to false.
+  if (options.shortcircuit === false) {
+    return next(action);
+  }
+
+  return undefined;
 };
 
 export default urlQueryMiddleware;
