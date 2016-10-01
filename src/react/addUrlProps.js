@@ -3,6 +3,8 @@ import { parse as parseQueryString } from 'query-string';
 
 import urlQueryDecoder from '../urlQueryDecoder';
 import urlQueryConfig from '../urlQueryConfig';
+import { updateUrlQuerySingle } from '../updateUrlQuery';
+import { encode } from '../serialize';
 
 /**
  * Higher order component (HOC) that injects URL query parameters as props.
@@ -13,11 +15,17 @@ import urlQueryConfig from '../urlQueryConfig';
 export default function addUrlProps(options) {
   const {
     mapUrlToProps = d => d,
+    mapUrlChangeHandlersToProps,
     urlPropsQueryConfig,
     addRouterParams,
+    addUrlChangeHandlers,
   } = options;
 
+
   return function addPropsWrapper(WrappedComponent) {
+    // caching to prevent unnecessary generation of new onChange functions
+    let cachedHandlers;
+
     let decodeQuery;
 
     // initialize decode query (with cache) if a config is provided
@@ -25,6 +33,10 @@ export default function addUrlProps(options) {
       decodeQuery = urlQueryDecoder(urlPropsQueryConfig);
     }
 
+    /**
+     * Parse the URL query into an object. If a urlPropsQueryConfig is provided
+     * the values are decoded based on type.
+     */
     function getUrlObject(props) {
       let location;
 
@@ -59,16 +71,79 @@ export default function addUrlProps(options) {
       return result;
     }
 
+    /**
+     * Create URL change handlers based on props, the urlPropsQueryConfig (if provided),
+     * and mapUrlChangeHandlersToProps (if provided).
+     */
+    function getUrlChangeHandlerProps(props) {
+      // read in location from props if available
+      const { location } = props;
+
+      let handlers;
+
+      if (urlPropsQueryConfig) {
+        // if we have a props->query config, generate the change handler props unless
+        // addUrlChangeHandlers is false
+        if (addUrlChangeHandlers || (addUrlChangeHandlers == null && urlQueryConfig.addUrlChangeHandlers)) {
+          // use cache if available. Have to do this since urlQueryConfig can change between
+          // renders (although that is unusual).
+          if (cachedHandlers) {
+            handlers = cachedHandlers;
+          } else {
+            // for each URL config prop, create a handler
+            handlers = Object.keys(urlPropsQueryConfig).reduce((handlersAccum, propName) => {
+              const { updateType, queryParam = propName, type } = urlPropsQueryConfig[propName];
+
+              // name handler for `foo` => `onChangeFoo`
+              const handlerName = `onChange${propName[0].toUpperCase()}${propName.substring(1)}`;
+
+              // handler encodes the value and updates the URL with the encoded value
+              // based on the `updateType` in the config. Default is `replaceIn`
+              handlersAccum[handlerName] = function generatedUrlChangeHandler(value) {
+                const encodedValue = encode(type, value);
+                updateUrlQuerySingle(updateType, queryParam, encodedValue, location);
+              };
+
+              return handlersAccum;
+            }, {});
+
+            // cache these so we don't regenerate new functions every render
+            cachedHandlers = handlers;
+          }
+        }
+      }
+
+      // if a manual mapping function is provided, use it, passing in the auto-generated
+      // handlers as an optional secondary argument.
+      if (mapUrlChangeHandlersToProps) {
+        handlers = mapUrlChangeHandlersToProps(props, handlers);
+      }
+
+      return handlers;
+    }
+
     const displayName = WrappedComponent.displayName || WrappedComponent.name || 'Component';
     class AddUrlProps extends Component {
       static displayName = `AddUrlProps(${displayName})`
       static WrappedComponent = WrappedComponent
 
       render() {
+        // get the url query parameters as an object mapping name to value.
+        // if a config is provided, these are decoded based on their `type` and their
+        // name will match the prop name.
+        // if no config is provided, they are not decoded and their names are whatever
+        // they were in the URL.
         const url = getUrlObject(this.props);
-        const urlProps = mapUrlToProps(url, this.props) || {};
 
-        return <WrappedComponent {...this.props} {...urlProps} />;
+        // pass to mapUrlToProps for further decoding if provided
+        const propsWithUrl = Object.assign({}, this.props, mapUrlToProps(url, this.props));
+
+        // add in the URL change handlers - either auto-generated based on config
+        // or from mapUrlChangeHandlersToProps.
+        Object.assign(propsWithUrl, getUrlChangeHandlerProps(propsWithUrl));
+
+        // render the wrapped component with the URL props added in.
+        return <WrappedComponent {...propsWithUrl} />;
       }
     }
 

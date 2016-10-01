@@ -1,5 +1,5 @@
 import React, { PureComponent, PropTypes } from 'react';
-import { encode, addUrlProps, UrlQueryParamTypes, replaceInUrlQuery } from 'react-url-query';
+import { addUrlProps, UrlQueryParamTypes } from 'react-url-query';
 
 /**
  * Specify how the URL gets decoded here. This is an object that takes the prop
@@ -11,12 +11,17 @@ import { encode, addUrlProps, UrlQueryParamTypes, replaceInUrlQuery } from 'reac
 const urlPropsQueryConfig = {
   bar: { type: UrlQueryParamTypes.string },
   foo: { type: UrlQueryParamTypes.number, queryParam: 'fooInUrl' },
-}
+};
 
 class MainPage extends PureComponent {
   static propTypes = {
     bar: PropTypes.string,
     foo: PropTypes.number,
+    // change handlers are automatically generated and passed if a config is provided
+    // and `addChangeHandlers` isn't false. They use `replaceIn` by default, just
+    // updating that single query parameter and keeping the other existing ones.
+    onChangeFoo: PropTypes.func,
+    onChangeBar: PropTypes.func,
   }
 
   static defaultProps = {
@@ -24,18 +29,8 @@ class MainPage extends PureComponent {
     bar: 'bar',
   }
 
-  onChangeFoo(foo) {
-    // update the URL with the new encoded value
-    replaceInUrlQuery('fooInUrl', encode(UrlQueryParamTypes.number, foo));
-  }
-
-  onChangeBar(bar) {
-    // update the URL with the new encoded value
-    replaceInUrlQuery('bar', bar);
-  }
-
   render() {
-    const { foo, bar } = this.props;
+    const { foo, bar, onChangeFoo, onChangeBar } = this.props;
 
     return (
       <div>
@@ -46,7 +41,7 @@ class MainPage extends PureComponent {
               <td>{foo}</td>
               <td>(url query param)</td>
               <td>
-                <button onClick={() => this.onChangeFoo(Math.round(Math.random() * 1000))}>
+                <button onClick={() => onChangeFoo(Math.round(Math.random() * 1000))}>
                   Change foo
                 </button>
               </td>
@@ -56,7 +51,7 @@ class MainPage extends PureComponent {
               <td>{bar}</td>
               <td>(url query param)</td>
               <td>
-                <button onClick={() => this.onChangeBar(Math.random().toString(32).substring(8))}>
+                <button onClick={() => onChangeBar(Math.random().toString(32).substring(8))}>
                   Change bar
                 </button>
               </td>

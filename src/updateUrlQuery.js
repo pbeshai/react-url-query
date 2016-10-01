@@ -1,6 +1,7 @@
 import { stringify, parse as parseQueryString } from 'query-string';
 
 import urlQueryConfig from './urlQueryConfig';
+import UrlUpdateTypes from './UrlUpdateTypes';
 
 function getLocation(location) {
   if (location) {
@@ -96,4 +97,28 @@ export function replaceInUrlQuery(queryParam, encodedValue, location) {
 export function pushInUrlQuery(queryParam, encodedValue, location) {
   const newLocation = updateInLocation(queryParam, encodedValue, location);
   return urlQueryConfig.history.push(newLocation);
+}
+
+/**
+ * Updates a single value in a query based on the type
+ */
+export function updateUrlQuerySingle(updateType = UrlUpdateTypes.replaceIn,
+    queryParam, encodedValue, location) {
+  if (updateType === UrlUpdateTypes.replaceIn) {
+    return replaceInUrlQuery(queryParam, encodedValue, location);
+  }
+  if (updateType === UrlUpdateTypes.pushIn) {
+    return pushInUrlQuery(queryParam, encodedValue, location);
+  }
+
+  // for these, wrap it in a whole new query object
+  const newQuery = { [queryParam]: encodedValue };
+  if (updateType === UrlUpdateTypes.replace) {
+    return replaceUrlQuery(newQuery, location);
+  }
+  if (updateType === UrlUpdateTypes.push) {
+    return pushUrlQuery(newQuery, location);
+  }
+
+  return undefined;
 }

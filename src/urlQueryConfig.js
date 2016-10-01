@@ -3,6 +3,9 @@
 function createurlQueryConfig() {
   // default options
   return {
+    // add in generated URL change handlers based on a urlPropsQueryConfig if provided
+    addUrlChangeHandlers: true,
+
     // add in `props.params` from react-router to the url object
     addRouterParams: true,
 
