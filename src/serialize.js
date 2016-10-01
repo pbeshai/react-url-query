@@ -202,6 +202,8 @@ export function decode(type, encodedValue, defaultValue) {
 
   if (typeof type === 'function') {
     decodedValue = type(encodedValue, defaultValue);
+  } else if (typeof type === 'object' && type.decode) {
+    decodedValue = type.decode(encodedValue);
   } else if (encodedValue === undefined) {
     decodedValue = defaultValue;
   } else if (Decoders[type]) {
@@ -238,6 +240,8 @@ export function encode(type, decodedValue) {
   let encodedValue;
   if (typeof type === 'function') {
     encodedValue = type(decodedValue);
+  } else if (typeof type === 'object' && type.encode) {
+    encodedValue = type.encode(decodedValue);
   } else if (Encoders[type]) {
     encodedValue = Encoders[type](decodedValue);
   } else {
