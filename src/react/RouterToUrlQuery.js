@@ -16,10 +16,11 @@ export default class RouterToUrlQuery extends Component {
 
   componentWillMount() {
     const { router } = this.context;
+
     configureUrlQuery({
       history: {
-        push: router.transitionTo,
-        replace: router.replaceWith,
+        push: router.push || router.transitionTo,
+        replace: router.replace || router.replaceWith,
       },
     });
   }
