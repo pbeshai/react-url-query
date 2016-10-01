@@ -44,7 +44,13 @@ export function decodeDate(dateString) {
     parts[2] = 1;
   }
 
-  return new Date(...parts);
+  const decoded = new Date(...parts);
+
+  if (isNaN(decoded.getTime())) {
+    return undefined;
+  }
+
+  return decoded;
 }
 
 /**
@@ -99,7 +105,12 @@ export function decodeJson(jsonStr) {
     return undefined;
   }
 
-  return JSON.parse(jsonStr);
+  let result;
+  try {
+    result = JSON.parse(jsonStr);
+  } catch (e) { /* ignore errors, returning undefined */ }
+
+  return result;
 }
 
 /**
@@ -127,7 +138,7 @@ export function decodeArray(arrayStr, entrySeparator = '_') {
     return undefined;
   }
 
-  return arrayStr.split(entrySeparator);
+  return arrayStr.split(entrySeparator).map(item => (item === '' ? undefined : item));
 }
 
 /**

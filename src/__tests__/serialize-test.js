@@ -47,6 +47,11 @@ describe('utils', () => {
         const result = decodeDate(null);
         expect(result).toBeNull();
       });
+
+      it('handles malformed input', () => {
+        const result = decodeDate('foo-one-two');
+        expect(result).not.toBeDefined();
+      });
     });
 
     describe('encodeBoolean', () => {
@@ -60,6 +65,10 @@ describe('utils', () => {
       it('produces the correct value', () => {
         expect(decodeBoolean('1')).toBe(true);
         expect(decodeBoolean('0')).toBe(false);
+      });
+
+      it('handles malformed input', () => {
+        expect(decodeBoolean('foo')).not.toBeDefined();
       });
     });
 
@@ -79,6 +88,10 @@ describe('utils', () => {
         };
         expect(output).toEqual(expectedOutput);
       });
+
+      it('handles malformed input', () => {
+        expect(decodeJson('foo')).not.toBeDefined();
+      });
     });
 
     describe('encodeArray', () => {
@@ -94,6 +107,10 @@ describe('utils', () => {
         const expectedOutput = ['a', 'b', 'c'];
 
         expect(output).toEqual(expectedOutput);
+      });
+
+      it('handles empty values', () => {
+        expect(decodeArray('__')).toEqual([undefined, undefined, undefined]);
       });
     });
 
@@ -114,6 +131,11 @@ describe('utils', () => {
           iros: '91',
         };
         expect(output).toEqual(expectedOutput);
+      });
+
+      it('handles malformed input', () => {
+        expect(decodeJson('foo-bar-jim-grill')).not.toBeDefined();
+        expect(decodeJson('foo_bar_jim_grill')).not.toBeDefined();
       });
     });
 
