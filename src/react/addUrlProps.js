@@ -7,6 +7,14 @@ import { updateUrlQuerySingle } from '../updateUrlQuery';
 import { encode } from '../serialize';
 
 /**
+ * Creates a change handler name for a given prop name.
+ * foo => onChangeFoo
+ */
+function defaultChangeHandlerName(propName) {
+  return `onChange${propName[0].toUpperCase()}${propName.substring(1)}`;
+}
+
+/**
  * Higher order component (HOC) that injects URL query parameters as props.
  *
  * @param {Function} mapUrlToProps `function(url, props) -> {Object}` returns props to inject
@@ -21,6 +29,9 @@ export default function addUrlProps(options) {
     addUrlChangeHandlers,
   } = options;
 
+  let {
+    changeHandlerName,
+  } = options;
 
   return function addPropsWrapper(WrappedComponent) {
     // caching to prevent unnecessary generation of new onChange functions
@@ -96,12 +107,17 @@ export default function addUrlProps(options) {
             if (cachedHandlers) {
               handlers = cachedHandlers;
             } else {
+              // read in function from options for how to generate a name from a prop
+              if (!changeHandlerName) {
+                changeHandlerName = urlQueryConfig.changeHandlerName || defaultChangeHandlerName;
+              }
+
               // for each URL config prop, create a handler
               handlers = Object.keys(urlPropsQueryConfig).reduce((handlersAccum, propName) => {
                 const { updateType, queryParam = propName, type } = urlPropsQueryConfig[propName];
 
                 // name handler for `foo` => `onChangeFoo`
-                const handlerName = `onChange${propName[0].toUpperCase()}${propName.substring(1)}`;
+                const handlerName = changeHandlerName(propName);
 
                 // handler encodes the value and updates the URL with the encoded value
                 // based on the `updateType` in the config. Default is `replaceIn`
