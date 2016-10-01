@@ -1,11 +1,6 @@
 import urlQueryDecoder from '../urlQueryDecoder';
 import UrlQueryParamTypes from '../UrlQueryParamTypes';
 
-/*
-- test cached arrays
-
-*/
-
 it('works with basic configuration', () => {
   const urlPropsQueryConfig = {
     foo: { type: UrlQueryParamTypes.number },
