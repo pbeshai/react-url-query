@@ -7,15 +7,28 @@ import { decode, encode, addUrlProps, UrlQueryParamTypes, replaceInUrlQuery } fr
  */
 function mapUrlToProps(url, props) {
   return {
-    foo: decode(UrlQueryParamTypes.number, url.foo),
-    bar: decode(UrlQueryParamTypes.string, url.bar),
+    foo: decode(UrlQueryParamTypes.number, url.fooInUrl),
+    bar: url.bar,
   };
+}
+
+/**
+ * Manually specify how to deal with changes to URL query param props.
+ * We do this since we are not using a urlPropsQueryConfig.
+ */
+function mapUrlChangeHandlersToProps(props) {
+  return {
+    onChangeFoo: (value) => replaceInUrlQuery('fooInUrl', encode(UrlQueryParamTypes.number, value)),
+    onChangeBar: (value) => replaceInUrlQuery('bar', value),
+  }
 }
 
 class MainPage extends PureComponent {
   static propTypes = {
     foo: PropTypes.number,
     bar: PropTypes.string,
+    onChangeFoo: PropTypes.func,
+    onChangeBar: PropTypes.func,
   }
 
   static defaultProps = {
@@ -23,18 +36,8 @@ class MainPage extends PureComponent {
     bar: 'bar',
   }
 
-  onChangeFoo(foo) {
-    // update the URL with the new encoded value
-    replaceInUrlQuery('fooInUrl', encode(UrlQueryParamTypes.number, foo));
-  }
-
-  onChangeBar(bar) {
-    // update the URL with the new encoded value
-    replaceInUrlQuery('bar', bar);
-  }
-
   render() {
-    const { foo, bar } = this.props;
+    const { foo, bar, onChangeFoo, onChangeBar } = this.props;
 
     return (
       <div>
@@ -45,7 +48,7 @@ class MainPage extends PureComponent {
               <td>{foo}</td>
               <td>(url query param)</td>
               <td>
-                <button onClick={() => this.onChangeFoo(Math.round(Math.random() * 1000))}>
+                <button onClick={() => onChangeFoo(Math.round(Math.random() * 1000))}>
                   Change foo
                 </button>
               </td>
@@ -55,7 +58,7 @@ class MainPage extends PureComponent {
               <td>{bar}</td>
               <td>(url query param)</td>
               <td>
-                <button onClick={() => this.onChangeBar(Math.random().toString(32).substring(8))}>
+                <button onClick={() => onChangeBar(Math.random().toString(32).substring(8))}>
                   Change bar
                 </button>
               </td>
@@ -71,4 +74,4 @@ class MainPage extends PureComponent {
  * We use the addUrlProps higher-order component to map URL query parameters
  * to props for MainPage.
  */
-export default addUrlProps({ mapUrlToProps })(MainPage);
+export default addUrlProps({ mapUrlToProps, mapUrlChangeHandlersToProps })(MainPage);
