@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { parse as parseQueryString } from 'query-string';
 
 import urlQueryDecoder from '../url-io/urlQueryDecoder';
-import urlQueryOptions from '../urlQueryOptions';
+import urlQueryConfig from '../urlQueryConfig';
 
 /**
  * Higher order component (HOC) that injects URL query parameters as props.
@@ -33,8 +33,8 @@ export default function addUrlProps(options) {
         location = props.location;
 
       // check in history
-      } else if (urlQueryOptions.history.location) {
-        location = urlQueryOptions.history.location;
+      } else if (urlQueryConfig.history.location) {
+        location = urlQueryConfig.history.location;
 
       // not found. just use location from window
       } else {
@@ -52,7 +52,7 @@ export default function addUrlProps(options) {
       }
 
       // add in react-router params if requested
-      if (addRouterParams || (addRouterParams !== false && urlQueryOptions.addRouterParams)) {
+      if (addRouterParams || (addRouterParams !== false && urlQueryConfig.addRouterParams)) {
         Object.assign(result, props.params);
       }
 

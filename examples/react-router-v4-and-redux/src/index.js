@@ -16,8 +16,8 @@ const createStoreWithMiddleware = applyMiddleware(urlQueryMiddleware())(createSt
 // create the store
 const store = createStoreWithMiddleware(rootReducer);
 
-// instead of using setUrlQueryOptions to set the history, we use <RouterToUrlQuery>
-// as a child of <Router>. We can still use setUrlQueryOptions to set other options.
+// instead of using configureUrlQuery to set the history, we use <RouterToUrlQuery>
+// as a child of <Router>. We can still use configureUrlQuery to set other options.
 
 ReactDOM.render(
   <Provider store={store}>

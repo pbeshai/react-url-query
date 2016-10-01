@@ -1,5 +1,5 @@
 import urlQueryReducer from './urlQueryReducer';
-import urlQueryOptions from '../urlQueryOptions';
+import urlQueryConfig from '../urlQueryConfig';
 
 /**
  * Middleware to handle updating the URL query params
@@ -14,12 +14,12 @@ const urlQueryMiddleware = (options = {}) => ({ getState }) => next => (action) 
   // update the URL
 
   // use the default reducer if none provided
-  const reducer = options.reducer || urlQueryOptions.reducer || urlQueryReducer;
+  const reducer = options.reducer || urlQueryConfig.reducer || urlQueryReducer;
 
   // if configured to read from the redux store (react-router-redux), do so and pass it to
   // the reducer
   const readLocationFromStore = options.readLocationFromStore == null ?
-    urlQueryOptions.readLocationFromStore : options.readLocationFromStore;
+    urlQueryConfig.readLocationFromStore : options.readLocationFromStore;
 
   if (readLocationFromStore) {
     const location = readLocationFromStore(getState());

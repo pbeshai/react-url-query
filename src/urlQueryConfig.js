@@ -1,6 +1,6 @@
 // function to create the singleton options object that can be shared
 // throughout an application
-function createUrlQueryOptions() {
+function createurlQueryConfig() {
   // default options
   return {
     // add in `props.params` from react-router to the url object
@@ -10,11 +10,11 @@ function createUrlQueryOptions() {
     history: {
       push() {
         // eslint-disable-next-line
-        console.error('No history provided to react-url-query. Please provide one via setUrlQueryOptions.');
+        console.error('No history provided to react-url-query. Please provide one via configureUrlQuery.');
       },
       replace() {
         // eslint-disable-next-line
-        console.error('No history provided to react-url-query. Please provide one via setUrlQueryOptions.');
+        console.error('No history provided to react-url-query. Please provide one via configureUrlQuery.');
       },
     },
 
@@ -30,4 +30,4 @@ function createUrlQueryOptions() {
   };
 }
 
-export default createUrlQueryOptions();
+export default createurlQueryConfig();

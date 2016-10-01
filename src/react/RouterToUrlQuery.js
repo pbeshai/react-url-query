@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react';
-import setUrlQueryOptions from '../setUrlQueryOptions';
+import configureUrlQuery from '../configureUrlQuery';
 
 /**
  * This class exists to read in the router from context (useful in react-router v4)
@@ -16,7 +16,7 @@ export default class RouterToUrlQuery extends Component {
 
   componentWillMount() {
     const { router } = this.context;
-    setUrlQueryOptions({
+    configureUrlQuery({
       history: {
         push: router.transitionTo,
         replace: router.replaceWith,

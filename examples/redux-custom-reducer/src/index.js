@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
 
-import { setUrlQueryOptions, urlQueryMiddleware } from 'react-url-query';
+import { configureUrlQuery, urlQueryMiddleware } from 'react-url-query';
 
 import rootReducer from './state/rootReducer';
 import urlQueryReducer from './state/urlQueryReducer';
@@ -12,7 +12,7 @@ import history from './history';
 
 // set the default history in url-query - this is a convenience that makes it
 // so we don't have to pass history to it all the time.
-setUrlQueryOptions({ history });
+configureUrlQuery({ history });
 
 // Initialize Redux
 // apply middleware to the store creator

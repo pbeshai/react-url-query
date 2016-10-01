@@ -1,6 +1,6 @@
 import { stringify, parse as parseQueryString } from 'query-string';
 
-import urlQueryOptions from '../urlQueryOptions';
+import urlQueryConfig from './urlQueryConfig';
 
 function getLocation(location) {
   if (location) {
@@ -8,7 +8,7 @@ function getLocation(location) {
   }
 
   // if no location provided, check history
-  const { history } = urlQueryOptions;
+  const { history } = urlQueryConfig;
 
   // if not in history, use window
   return history.location ? history.location : window.location;
@@ -80,20 +80,20 @@ function updateInLocation(queryParam, encodedValue, location) {
 
 export function replaceUrlQuery(newQuery, location) {
   const newLocation = updateLocation(newQuery, location);
-  return urlQueryOptions.history.replace(newLocation);
+  return urlQueryConfig.history.replace(newLocation);
 }
 
 export function pushUrlQuery(newQuery, location) {
   const newLocation = updateLocation(newQuery, location);
-  return urlQueryOptions.history.push(newLocation);
+  return urlQueryConfig.history.push(newLocation);
 }
 
 export function replaceInUrlQuery(queryParam, encodedValue, location) {
   const newLocation = updateInLocation(queryParam, encodedValue, location);
-  return urlQueryOptions.history.replace(newLocation);
+  return urlQueryConfig.history.replace(newLocation);
 }
 
 export function pushInUrlQuery(queryParam, encodedValue, location) {
   const newLocation = updateInLocation(queryParam, encodedValue, location);
-  return urlQueryOptions.history.push(newLocation);
+  return urlQueryConfig.history.push(newLocation);
 }

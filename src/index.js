@@ -1,15 +1,14 @@
-import setUrlQueryOptions from './setUrlQueryOptions';
+import configureUrlQuery from './configureUrlQuery';
 
-/** URL input/output */
-import * as Serialize from './url-io/serialize';
+import * as Serialize from './serialize';
 import {
   replaceInUrlQuery,
   replaceUrlQuery,
   pushInUrlQuery,
   pushUrlQuery,
-} from './url-io/updateUrlQuery';
-import UrlQueryParamTypes from './url-io/UrlQueryParamTypes';
-import UrlUpdateTypes from './url-io/UrlUpdateTypes';
+} from './updateUrlQuery';
+import UrlQueryParamTypes from './UrlQueryParamTypes';
+import UrlUpdateTypes from './UrlUpdateTypes';
 
 /** React */
 import addUrlProps from './react/addUrlProps';
@@ -40,7 +39,7 @@ const decode = Serialize.decode;
 const encode = Serialize.encode;
 
 export {
-  setUrlQueryOptions,
+  configureUrlQuery,
 
   Serialize,
   decode,

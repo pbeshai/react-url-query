@@ -5,7 +5,7 @@ import { createStore, applyMiddleware } from 'redux';
 import { Router, Route, IndexRoute, browserHistory } from 'react-router'
 import { syncHistoryWithStore } from 'react-router-redux'
 
-import { setUrlQueryOptions, urlQueryMiddleware } from 'react-url-query';
+import { configureUrlQuery, urlQueryMiddleware } from 'react-url-query';
 
 import rootReducer from './state/rootReducer';
 import App from './App';
@@ -23,7 +23,7 @@ const history = syncHistoryWithStore(browserHistory, store);
 
 // set the default history in url-query - this is a convenience that makes it
 // so we don't have to pass history to it all the time.
-setUrlQueryOptions({ history });
+configureUrlQuery({ history });
 
 ReactDOM.render(
   <Provider store={store}>
