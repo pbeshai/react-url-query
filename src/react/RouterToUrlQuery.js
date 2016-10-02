@@ -17,6 +17,12 @@ export default class RouterToUrlQuery extends Component {
   componentWillMount() {
     const { router } = this.context;
 
+    if (process.env.NODE_ENV === 'development' && !router) {
+      // eslint-disable-next-line
+      console.warn('RouterToUrlQuery: `router` object not found in context. Not configuring history for react-url-query.');
+      return;
+    }
+
     configureUrlQuery({
       history: {
         push: router.push || router.transitionTo,
