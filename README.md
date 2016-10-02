@@ -82,7 +82,7 @@ class MainPage extends PureComponent {
 export default addUrlProps({ urlPropsQueryConfig })(MainPage);
 ```
 
-If you prefer, instead of using a `urlPropsQueryConfig` you can provide the functions `mapUrlToProps` and `mapUrlChangeHandlersToProps`, as shown in the [basic-mapUrlToProps](https://github.com/pbeshai/react-url-query/tree/master/examples/basic) example.
+If you prefer, instead of using a `urlPropsQueryConfig` you can provide the functions `mapUrlToProps` and `mapUrlChangeHandlersToProps`, as shown in the [basic-mapUrlToProps](https://github.com/pbeshai/react-url-query/tree/master/examples/basic-mapUrlToProps) example.
 
 
 You'll also need to configure which `history` to use, typically done wherever you initialize your application. Examples of doing this with different setups are shown in the [examples section](https://github.com/pbeshai/react-url-query/tree/master/examples).
@@ -128,7 +128,7 @@ configureUrlQuery({ history });
 ### Examples
 
 - [basic](https://github.com/pbeshai/react-url-query/tree/master/examples/basic) - Basic usage of React URL Query without any third party tools
-- [basic-mapUrlToProps](https://github.com/pbeshai/react-url-query/tree/master/examples/basic) - Basic usage of React URL Query without any third party tools, uses alternative approach of `mapUrlToProps` instead of `urlPropsQueryConfig`.
+- [basic-mapUrlToProps](https://github.com/pbeshai/react-url-query/tree/master/examples/basic-mapUrlToProps) - Basic usage of React URL Query without any third party tools, uses alternative approach of `mapUrlToProps` instead of `urlPropsQueryConfig`.
 - [redux](https://github.com/pbeshai/react-url-query/tree/master/examples/redux) - Integration with Redux
 - [redux-with-actions](https://github.com/pbeshai/react-url-query/tree/master/examples/redux-with-actions) - Alternative integration with Redux using dispatched actions
 - [react-router-v2-and-redux](https://github.com/pbeshai/react-url-query/tree/master/examples/react-router-v2-and-redux) - Integration with React Router v2 and Redux
