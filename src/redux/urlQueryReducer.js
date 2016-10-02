@@ -9,6 +9,9 @@ import UrlUpdateTypes from '../UrlUpdateTypes';
 /**
  * Reducer that handles actions that modify the URL query parameters.
  * In this case, the actions replace a single query parameter at a time.
+ *
+ * NOTE: This is *NOT* a Redux reducer. It does not map from (state, action) -> state.
+ * Instead it "reduces" actions into URL query parameter state. NOT redux state.
  */
 export default function urlQueryReducer(action, location) {
   const updateType = action && action.meta && action.meta.updateType;
