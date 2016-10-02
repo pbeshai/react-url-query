@@ -1,6 +1,7 @@
 # React URL Query
 
 [![npm version](https://badge.fury.io/js/react-url-query.svg)](https://badge.fury.io/js/react-url-query)
+[![Build Status](https://travis-ci.org/pbeshai/react-url-query.svg?branch=master)](https://travis-ci.org/pbeshai/react-url-query)
 
 A library for managing state through query parameters in the URL in [React](https://facebook.github.io/react/). It integrates well with [React Router](https://github.com/ReactTraining/react-router) and [Redux](https://github.com/reactjs/redux) and provides additional tools specifically targeted at serializing and deserializing state in URL query parameters.
 
