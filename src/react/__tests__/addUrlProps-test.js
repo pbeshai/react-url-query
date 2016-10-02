@@ -381,4 +381,35 @@ describe('url change callbacks', () => {
     const barChangeResult = onChangeBar('new-bar');
     expect(barChangeResult).toEqual({ query: { foo: '1000', bar: 'new-bar' } });
   });
+
+  it('generated change handlers do not update if the URL is the same', () => {
+    const location = { query: { foo: '94', bar: 'baz' } };
+    const urlPropsQueryConfig = {
+      foo: { type: UrlQueryParamTypes.number },
+      bar: { type: UrlQueryParamTypes.string, updateType: UrlUpdateTypes.pushIn },
+    };
+
+    // make the history just return the new location so we can test for logging
+    const history = {
+      replace: jest.fn().mockImplementation(d => d),
+      push: jest.fn().mockImplementation(d => d),
+    };
+
+    configureUrlQuery({ history });
+
+    const Wrapped = addUrlProps({
+      urlPropsQueryConfig,
+      addUrlChangeHandlers: true,
+    })(MyComponent);
+
+    const wrapper = shallow(<Wrapped location={location} />);
+    const props = wrapper.first().props();
+    const { onChangeFoo, onChangeBar } = props;
+
+    onChangeFoo(94);
+    expect(history.replace).not.toBeCalled();
+
+    onChangeBar('baz');
+    expect(history.push).not.toBeCalled();
+  });
 });
