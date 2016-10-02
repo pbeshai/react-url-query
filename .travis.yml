@@ -4,7 +4,7 @@ node_js:
 script:
   - npm run check:src
   - npm run build
-  # - npm run check:examples # disable examples until we have the project on npm
+  - npm run check:examples
 branches:
   only:
     - master
