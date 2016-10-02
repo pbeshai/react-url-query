@@ -26,5 +26,4 @@ it('provides readLocationFromStore that reads from react-router-redux location',
   expect(urlQueryConfig.readLocationFromStore()).not.toBeDefined();
   expect(urlQueryConfig.readLocationFromStore({})).not.toBeDefined();
   expect(urlQueryConfig.readLocationFromStore({ routing: {} })).not.toBeDefined();
-
 });
