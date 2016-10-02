@@ -4,11 +4,7 @@
 
 React URL Query provides a number of top-level exports.
 
-
-#### Higher-order Component
 * [addUrlProps([options])](addUrlProps.md)
-
-#### Library Configuration
 * [configureUrlQuery([config])](configureUrlQuery.md)
 
 #### Type Enums
@@ -20,20 +16,20 @@ React URL Query provides a number of top-level exports.
 * [decode(type, encodedValue, [defaultValue])](Serialize.md#decode), _alias of Serialize.decode for convenience_
 * [encode(type, decodedValue)](Serialize.md#encode), _alias of Serialize.encode for convenience_
 
-#### Helpers for Subsetting Queries
+#### Utils
 * [subquery(query, ...params)](subquery.md)
 * [subqueryOmit(query, ...omitParams)](subqueryOmit.md)
 
-#### URL Update Helpers
+#### URL Update
 * [replaceInUrlQuery(queryParam, encodedValue, [location])](replaceInUrlQuery.md)
 * [pushInUrlQuery(queryParam, encodedValue, [location])](pushInUrlQuery.md)
 * [replaceUrlQuery(newQuery, [location])](replaceUrlQuery.md)
 * [pushUrlQuery(newQuery, [location])](pushUrlQuery.md)
 
-#### Integration with React-Router v4
-* [<RouterToUrlQuery />](RouterToUrlQuery.md)
+#### React-Router v4
+* [RouterToUrlQuery](RouterToUrlQuery.md)
 
-#### Helpers for alternative Redux integration
+#### Redux Action Integration
 * [replaceInUrlQueryFromAction(action, [location])](replaceInUrlQueryFromAction.md)
 * [replaceUrlQueryFromAction(action, [location])](replaceUrlQueryFromAction.md)
 * [pushInUrlQueryFromAction(action, [location])](pushInUrlQueryFromAction.md)
