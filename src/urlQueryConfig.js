@@ -9,6 +9,9 @@ function createurlQueryConfig() {
     // add in `props.params` from react-router to the url object
     addRouterParams: true,
 
+    // function to specify change handler name (onChange<PropName>)
+    changeHandlerName: propName => `onChange${propName[0].toUpperCase()}${propName.substring(1)}`,
+
     // use this history if no history is specified
     history: {
       push() {
