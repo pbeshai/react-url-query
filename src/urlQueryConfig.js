@@ -1,6 +1,6 @@
 // function to create the singleton options object that can be shared
 // throughout an application
-function createurlQueryConfig() {
+function createUrlQueryConfig() {
   // default options
   return {
     // add in generated URL change handlers based on a urlPropsQueryConfig if provided
@@ -36,4 +36,4 @@ function createurlQueryConfig() {
   };
 }
 
-export default createurlQueryConfig();
+export default createUrlQueryConfig();
