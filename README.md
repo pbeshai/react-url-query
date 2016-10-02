@@ -6,13 +6,13 @@ A library for managing state through query parameters in the URL in [React](http
 
 For details on how to use it, read the [docs](https://pbeshai.github.io/react-url-query) or browse the [examples](https://github.com/pbeshai/react-url-query/tree/master/examples).
 
-## Installation
+### Installation
 
 ```
 npm install --save react-url-query
 ```
 
-## How do I use it?
+### How do I use it?
 
 A [number of examples](https://github.com/pbeshai/react-url-query/tree/master/examples) have been created demonstrating a variety of methods of using the library with different technologies. Here is the most basic form of using it in a component:
 
@@ -124,7 +124,7 @@ const history = createHistory();
 configureUrlQuery({ history });
 ```
 
-## Examples
+### Examples
 
 - [basic](https://github.com/pbeshai/react-url-query/tree/master/examples/basic) - Basic usage of React URL Query without any third party tools
 - [basic-mapUrlToProps](https://github.com/pbeshai/react-url-query/tree/master/examples/basic) - Basic usage of React URL Query without any third party tools, uses alternative approach of `mapUrlToProps` instead of `urlPropsQueryConfig`.
@@ -134,7 +134,7 @@ configureUrlQuery({ history });
 - [react-router-v4-and-redux](https://github.com/pbeshai/react-url-query/tree/master/examples/react-router-v4-and-redux) - Integration with React Router v4 and Redux
 
 
-## Development
+### Development
 
 During development of examples, it can be helpful to have a watch running automatically rebuilding the package when changes take place. To get this running run:
 
@@ -142,13 +142,13 @@ During development of examples, it can be helpful to have a watch running automa
 npm run dev
 ```
 
-### Building
+#### Building
 
 ```
 npm run build
 ```
 
-### Linting
+#### Linting
 
 ```
 npm run lint
@@ -160,7 +160,7 @@ To lint examples, run:
 npm run lint:examples
 ```
 
-### Testing
+#### Testing
 
 ```
 npm run test
@@ -191,3 +191,8 @@ To publish the docs, run:
 ```
 npm run docs:publish
 ```
+
+
+### License
+
+MIT
