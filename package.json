@@ -1,7 +1,7 @@
 {
   "name": "react-url-query",
   "version": "1.0.0",
-  "description": "A library for managing state through query parameters in the URL in React",
+  "description": "A library for managing state through query parameters in the URL in React. Works well with or without Redux and React Router.",
   "main": "lib/index.js",
   "files": [
     "dist",
