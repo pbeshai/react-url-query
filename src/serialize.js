@@ -30,8 +30,8 @@ export function encodeDate(date) {
  * @return {Date} parsed date
  */
 export function decodeDate(dateString) {
-  if (dateString == null) {
-    return dateString;
+  if (dateString == null || !dateString.length) {
+    return undefined;
   }
 
   const parts = dateString.split('-');
@@ -60,6 +60,10 @@ export function decodeDate(dateString) {
  * @return {String} the encoded boolean
  */
 export function encodeBoolean(bool) {
+  if (bool === undefined) {
+    return undefined;
+  }
+
   return bool ? '1' : '0';
 }
 
@@ -172,10 +176,10 @@ export function encodeObject(obj, keyValSeparator = '-', entrySeparator = '_') {
  * @return {Object} The javascript object
  */
 export function decodeObject(objStr, keyValSeparator = '-', entrySeparator = '_') {
-  const obj = {};
-  if (!objStr) {
-    return obj;
+  if (!objStr || !objStr.length) {
+    return undefined;
   }
+  const obj = {};
 
   objStr.split(entrySeparator).forEach((entryStr) => {
     const [key, value] = entryStr.split(keyValSeparator);

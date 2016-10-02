@@ -22,9 +22,10 @@ describe('utils', () => {
         expect(result).toBe('2016-03-01');
       });
 
-      it('handles null', () => {
+      it('handles null and undefined', () => {
         const result = encodeDate(null);
         expect(result).toBeNull();
+        expect(encodeDate()).not.toBeDefined();
       });
     });
 
@@ -43,9 +44,11 @@ describe('utils', () => {
         expect(result.getDate()).toBe(1);
       });
 
-      it('handles null', () => {
+      it('handles null and undefined', () => {
         const result = decodeDate(null);
-        expect(result).toBeNull();
+        expect(result).not.toBeDefined();
+        expect(decodeDate()).not.toBeDefined();
+        expect(decodeDate('')).not.toBeDefined();
       });
 
       it('handles malformed input', () => {
@@ -58,6 +61,7 @@ describe('utils', () => {
       it('produces the correct value', () => {
         expect(encodeBoolean(true)).toBe('1');
         expect(encodeBoolean(false)).toBe('0');
+        expect(encodeBoolean()).not.toBeDefined();
       });
     });
 
@@ -65,6 +69,8 @@ describe('utils', () => {
       it('produces the correct value', () => {
         expect(decodeBoolean('1')).toBe(true);
         expect(decodeBoolean('0')).toBe(false);
+        expect(decodeBoolean()).not.toBeDefined();
+        expect(decodeBoolean('')).not.toBeDefined();
       });
 
       it('handles malformed input', () => {
@@ -76,6 +82,7 @@ describe('utils', () => {
       it('produces the correct value', () => {
         const input = { test: '123', foo: [1, 2, 3] };
         expect(encodeJson(input)).toBe(JSON.stringify(input));
+        expect(encodeJson()).not.toBeDefined();
       });
     });
 
@@ -87,6 +94,8 @@ describe('utils', () => {
           jim: ['grill'],
         };
         expect(output).toEqual(expectedOutput);
+        expect(decodeJson()).not.toBeDefined();
+        expect(decodeJson('')).not.toBeDefined();
       });
 
       it('handles malformed input', () => {
@@ -98,6 +107,7 @@ describe('utils', () => {
       it('produces the correct value', () => {
         const input = ['a', 'b', 'c'];
         expect(encodeArray(input)).toBe('a_b_c');
+        expect(encodeArray()).not.toBeDefined();
       });
     });
 
@@ -107,6 +117,8 @@ describe('utils', () => {
         const expectedOutput = ['a', 'b', 'c'];
 
         expect(output).toEqual(expectedOutput);
+        expect(decodeArray()).not.toBeDefined();
+        expect(decodeArray('')).not.toBeDefined();
       });
 
       it('handles empty values', () => {
@@ -119,6 +131,8 @@ describe('utils', () => {
         const input = { test: 'bar', foo: 94 };
         const expectedOutput = 'test-bar_foo-94';
         expect(encodeObject(input, '-', '_')).toBe(expectedOutput);
+        expect(encodeObject()).not.toBeDefined();
+        expect(encodeObject({})).not.toBeDefined();
       });
     });
 
@@ -131,6 +145,8 @@ describe('utils', () => {
           iros: '91',
         };
         expect(output).toEqual(expectedOutput);
+        expect(decodeObject()).not.toBeDefined();
+        expect(decodeObject('')).not.toBeDefined();
       });
 
       it('handles malformed input', () => {
