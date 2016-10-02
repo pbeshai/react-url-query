@@ -4,10 +4,19 @@ import UrlUpdateTypes from '../UrlUpdateTypes';
 
 export default function urlAction(actionType, payload = d => d, meta = () => {}) {
   return function urlActionCreator(...args) {
+    let metaFromAction = meta(...args);
+    if (metaFromAction == null) {
+      metaFromAction = {};
+
+    // we need meta to be an object so it merges in with the urlQuery meta property.
+    } else if (typeof metaFromAction !== 'object') {
+      metaFromAction = { value: metaFromAction };
+    }
+
     return {
       type: actionType,
       meta: {
-        ...meta(...args),
+        ...metaFromAction,
         // we need urlQuery set so the middleware knows to read this action
         urlQuery: true,
       },
@@ -23,7 +32,7 @@ export default function urlAction(actionType, payload = d => d, meta = () => {})
  * export const changeFoo = urlAction('CHANGE_FOO', 'replace');
  *
  */
-export function urlUpdateAction(actionType, encodeQuery = d => d, updateType) {
+export function urlUpdateAction(actionType, encodeQuery = d => d, updateType = UrlUpdateTypes.replace) {
   return urlAction(
     actionType,
     decodedQuery => ({
