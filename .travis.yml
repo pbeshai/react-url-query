@@ -13,4 +13,9 @@ branches:
 cache:
   directories:
   - $HOME/.npm
-  - examples/simple/node_modules
+  - examples/basic/node_modules
+  - examples/basic-mapUrlToProps/node_modules
+  - examples/react-router-v2-and-redux/node_modules
+  - examples/react-router-v4-and-redux/node_modules
+  - examples/redux/node_modules
+  - examples/redux-with-actions/node_modules
