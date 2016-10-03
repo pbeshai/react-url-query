@@ -218,7 +218,7 @@ export function decode(type, encodedValue, defaultValue) {
   if (typeof type === 'function') {
     decodedValue = type(encodedValue, defaultValue);
   } else if (typeof type === 'object' && type.decode) {
-    decodedValue = type.decode(encodedValue);
+    decodedValue = type.decode(encodedValue, defaultValue);
   } else if (encodedValue === undefined) {
     decodedValue = defaultValue;
   } else if (Decoders[type]) {
