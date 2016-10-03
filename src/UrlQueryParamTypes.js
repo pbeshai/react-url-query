@@ -6,7 +6,6 @@ const UrlQueryParamTypes = {
   json: 'json',
   date: 'date',
   boolean: 'boolean',
-  custom: 'custom',
 };
 
 export default UrlQueryParamTypes;
