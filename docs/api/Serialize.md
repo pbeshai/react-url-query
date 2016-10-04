@@ -2,19 +2,18 @@
 
 The `Serialize` module provides a number of utility functions for encoding data as strings and decoding data from strings. Two of these functions are pulled up as top-level exports of React URL Query in addition to being available inside `Serialize`: [encode](#encode) and [decode](#decode).
 
-* [`decode`](#decode) -
-* [`decodeArray`](#decodeArray) -
-* [`decodeBoolean`](#decodeBoolean) -
-* [`decodeDate`](#decodeDate) -
-* [`decodeJson`](#decodeJson) -
-* [`decodeObject`](#decodeObject) -
-
-* [`encode`](#encode) -
-* [`encodeArray`](#encodeArray) -
-* [`encodeBoolean`](#encodeBoolean) -
-* [`encodeDate`](#encodeDate) -
-* [`encodeJson`](#encodeJson) -
-* [`encodeObject`](#encodeObject) -
+* [`decode(type, encodedValue, [defaultVale])`](#decode)
+* [`decodeArray(encodedValue, [entrySeparator])`](#decodeArray)
+* [`decodeBoolean(encodedValue)`](#decodeBoolean)
+* [`decodeDate(encodedValue)`](#decodeDate)
+* [`decodeJson(encodedValue)`](#decodeJson)
+* [`decodeObject(encodedValue, [keyValSeparator], [entrySeparator])`](#decodeObject)
+* [`encode(type, decodedValue)`](#encode)
+* [`encodeArray(decodedValue)`](#encodeArray)
+* [`encodeBoolean(decodedValue)`](#encodeBoolean)
+* [`encodeDate(decodedValue)`](#encodeDate)
+* [`encodeJson(decodedValue)`](#encodeJson)
+* [`encodeObject(decodedValue)`](#encodeObject)
 
 ### <a id='decode'></a>[`decode(type, encodedValue, [defaultValue])`](#decode)
 
@@ -73,56 +72,102 @@ decodeArray('one---two---three', '---');
 ```
 
 
-### <a id='decodeBoolean'></a>[`decodeBoolean()`](#decodeBoolean)
+### <a id='decodeBoolean'></a>[`decodeBoolean(encodedValue)`](#decodeBoolean)
 
-Description
-
-#### Arguments
-
-1. `encodedValue` (*String*):
-
-#### Returns
-
-(*String*): The encoded string
-
-
-### <a id='decodeDate'></a>[`decodeDate()`](#decodeDate)
-
-Description
+Decodes a string into a boolean.
 
 #### Arguments
 
-1. `encodedValue` (*String*):
+1. `encodedValue` (*String*): The boolean value as a string, where `'1'` is `true`, `'0'` is false, and everything else is `undefined`.
 
 #### Returns
 
-(*String*): The encoded string
+(*Boolean*): The boolean representation of the encoded value.
 
+#### Examples
 
-### <a id='decodeJson'></a>[`decodeJson()`](#decodeJson)
+```js
+decodeBoolean('1');
+// === true
 
-Description
+decodeBoolean('0');
+// === false
+
+decodeBoolean('true');
+// === undefined
+```
+
+### <a id='decodeDate'></a>[`decodeDate(encodedValue)`](#decodeDate)
+
+Decodes a string into a Date. The string can be of form `YYYY`, `YYYY-MM`, or `YYYY-MM-DD`.
 
 #### Arguments
 
-1. `encodedValue` (*String*):
+1. `encodedValue` (*String*): The Date value as a string, can be of form `YYYY`, `YYYY-MM`, or `YYYY-MM-DD`.
 
 #### Returns
 
-(*String*): The encoded string
+(*Date*): The Date representation of the encoded value. If the input string is invalid, it returns `undefined`.
+
+#### Examples
+
+```js
+decodeDate('2014-04-21');
+// === new Date(2014, 3, 21)
+
+decodeDate('2015');
+// === new Date(2015 0, 1);
+```
 
 
-### <a id='decodeObject'></a>[`decodeObject()`](#decodeObject)
+### <a id='decodeJson'></a>[`decodeJson(encodedValue)`](#decodeJson)
 
-Description
+Decodes a string into javascript based on `JSON.parse`.
+
 
 #### Arguments
 
-1. `encodedValue` (*String*):
+1. `encodedValue` (*String*): The javascript data to parse.
+
 
 #### Returns
 
-(*String*): The encoded string
+(*Any*): The javascript representation of the encoded value. If the input string is invalid, it returns `undefined`.
+
+#### Examples
+
+```js
+decodeJson('{"foo": "bar", "jim": ["grill"]}');
+// === {'foo': 'bar', 'jim': ['grill']}
+
+decodeJson('["one", "two", "three"]');
+// === ['one', 'two', 'three']
+```
+
+
+### <a id='decodeObject'></a>[`decodeObject(encodedValue, [keyValSeparator], [entrySeparator])`](#decodeObject)
+
+Decodes a string into an object. Only supports simple, flat objects where the values are strings.
+
+#### Arguments
+
+1. `encodedValue` (*String*): The object value as a string where keys and values are separated by `keyValSeparator` and entries are separated by `entrySeparator`.
+1. [`keyValSeparator`] (*String*): The string used to separate keys from values in the encoded object. If not provided, defaults to `'-'`.
+1. [`entrySeparator`] (*String*): The string used to separate entries in the encoded object. If not provided, defaults to `'_'`.
+
+#### Returns
+
+(*Object*): The Object representation of the encoded value.
+
+#### Examples
+
+```js
+decodeObject('foo-bar_boo-baz');
+// === { foo: 'bar', boo: 'baz' }
+
+decodeObject('foo---bar___boo---baz', '---', '___');
+// === { foo: 'bar', boo: 'baz' }
+```
 
 
 ### <a id='encode'></a>[`encode()`](#encode)
