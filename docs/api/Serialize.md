@@ -8,12 +8,12 @@ The `Serialize` module provides a number of utility functions for encoding data 
 * [`decodeDate(encodedValue)`](#decodeDate)
 * [`decodeJson(encodedValue)`](#decodeJson)
 * [`decodeObject(encodedValue, [keyValSeparator], [entrySeparator])`](#decodeObject)
-* [`encode(type, decodedValue)`](#encode)
-* [`encodeArray(decodedValue)`](#encodeArray)
-* [`encodeBoolean(decodedValue)`](#encodeBoolean)
-* [`encodeDate(decodedValue)`](#encodeDate)
-* [`encodeJson(decodedValue)`](#encodeJson)
-* [`encodeObject(decodedValue)`](#encodeObject)
+* [`encode(type, valueToEncode)`](#encode)
+* [`encodeArray(valueToEncode)`](#encodeArray)
+* [`encodeBoolean(valueToEncode)`](#encodeBoolean)
+* [`encodeDate(valueToEncode)`](#encodeDate)
+* [`encodeJson(valueToEncode)`](#encodeJson)
+* [`encodeObject(valueToEncode)`](#encodeObject)
 
 ### <a id='decode'></a>[`decode(type, encodedValue, [defaultValue])`](#decode)
 
@@ -170,8 +170,9 @@ decodeObject('foo---bar___boo---baz', '---', '___');
 ```
 
 
-### <a id='encode'></a>[`encode()`](#encode)
+### <a id='encode'></a>[`encode(type, valueToEncode)`](#encode)
 
+# TODO
 Description
 
 #### Arguments
@@ -183,65 +184,94 @@ Description
 (*String*): The encoded string
 
 
-### <a id='encodeArray'></a>[`encodeArray()`](#encodeArray)
+### <a id='encodeArray'></a>[`encodeArray(valueToEncode, [entrySeparator])`](#encodeArray)
+
+Encodes an array as a string.
+
+#### Arguments
+
+1. `valueToEncode` (*String[]|Number[]|Boolean[]*): The array to be encoded as a string.
+1. [`entrySeparator`] (*String*): The string used to separate entries in the encoded array. If not provided, defaults to `'_'`.
+
+#### Returns
+
+(*String*): The array represented as a string where entries in the array are separated by `entrySeparator`.
+
+#### Examples
+
+```js
+encodeArray(['one', 'two', 'three']);
+// === 'one_two_three'
+
+encodeArray(['one', 'two', 'three'], '---');
+// === 'one---two---three'
+```
+
+### <a id='encodeBoolean'></a>[`encodeBoolean(valueToEncode)`](#encodeBoolean)
+
+Encodes a boolean as a string, where undefined values get `undefined`, truthy values get `'1'`, everything else gets `'0'`.
+
+#### Arguments
+
+1. `valueToEncode` (*Boolean*): The boolean value to be encoded as a string.
+
+#### Returns
+
+(*String*): The encoded string where undefined values get `undefined`, truthy values get `'1'`, everything else gets `'0'`.
+
+#### Examples
+
+```js
+encodeBoolean(true);
+// === '1'
+
+encodeBoolean(0);
+// === '0'
+
+encodeBoolean(false);
+// === '0'
+
+encodeBoolean('something');
+// === '1'
+
+encodeBoolean();
+// === undefined
+```
+
+
+### <a id='encodeDate'></a>[`encodeDate(valueToEncode)`](#encodeDate)
 
 Description
 
 #### Arguments
 
-1. `encodedValue` (*String*):
+1. `valueToEncode` (*String*):
 
 #### Returns
 
 (*String*): The encoded string
 
 
-### <a id='encodeBoolean'></a>[`encodeBoolean()`](#encodeBoolean)
+### <a id='encodeJson'></a>[`encodeJson(valueToEncode)`](#encodeJson)
 
 Description
 
 #### Arguments
 
-1. `encodedValue` (*String*):
+1. `valueToEncode` (*String*):
 
 #### Returns
 
 (*String*): The encoded string
 
 
-### <a id='encodeDate'></a>[`encodeDate()`](#encodeDate)
+### <a id='encodeObject'></a>[`encodeObject(valueToEncode)`](#encodeObject)
 
 Description
 
 #### Arguments
 
-1. `encodedValue` (*String*):
-
-#### Returns
-
-(*String*): The encoded string
-
-
-### <a id='encodeJson'></a>[`encodeJson()`](#encodeJson)
-
-Description
-
-#### Arguments
-
-1. `encodedValue` (*String*):
-
-#### Returns
-
-(*String*): The encoded string
-
-
-### <a id='encodeObject'></a>[`encodeObject()`](#encodeObject)
-
-Description
-
-#### Arguments
-
-1. `encodedValue` (*String*):
+1. `valueToEncode` (*String*):
 
 #### Returns
 
