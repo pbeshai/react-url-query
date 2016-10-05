@@ -4,8 +4,8 @@ Given a query object, returns an object with only a subset of the parameters in 
 
 #### Arguments
 
-1. [`query`] (*Object*): The query parameters object, mapping from query param to encoded value.
-1. [`...omitParams`] (*String*): The list of query parameters to exclude from the returned result. These values should match a subset of the keys in `query`.
+1. `query` (*Object*): The query parameters object, mapping from query param to encoded value.
+1. `...omitParams` (*String*): The list of query parameters to exclude from the returned result. These values should match a subset of the keys in `query`.
 
 #### Returns
 
