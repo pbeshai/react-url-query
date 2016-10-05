@@ -1,4 +1,4 @@
-# Serialize
+### Serialize
 
 The `Serialize` module provides a number of utility functions for encoding data as strings and decoding data from strings. Two of these functions are pulled up as top-level exports of React URL Query in addition to being available inside `Serialize`: [encode](#encode) and [decode](#decode).
 

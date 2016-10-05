@@ -1,4 +1,4 @@
-# name()
+### `urlQueryReducer(action, [location])`
 
 Description
 

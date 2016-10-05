@@ -1,4 +1,4 @@
-# replaceInUrlQuery(queryParam, encodedValue, [location])
+### `replaceInUrlQuery(queryParam, encodedValue, [location])`
 
 Updates the URL to have the specified query parameter's (`queryParam`) value set to `encodedValue`, while keeping all the other query parameters the same. Uses replace to change the URL, which means nothing gets pushed on to the history stack, so the back button will not be able to return you to the previous state.
 

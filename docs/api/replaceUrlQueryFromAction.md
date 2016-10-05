@@ -1,4 +1,4 @@
-# name()
+### `replaceUrlQueryFromAction(action, [location])`
 
 Description
 

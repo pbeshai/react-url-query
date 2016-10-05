@@ -1,4 +1,4 @@
-# addUrlProps([options])
+### `addUrlProps([options])`
 
 Higher order component (HOC) that injects URL query parameters as props.
 

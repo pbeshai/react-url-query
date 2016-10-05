@@ -1,4 +1,4 @@
-# name()
+### `urlReplaceInAction(actionType, queryParam, valueType)`
 
 Description
 

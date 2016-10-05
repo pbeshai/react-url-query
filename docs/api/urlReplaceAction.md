@@ -1,4 +1,4 @@
-# name()
+### `urlReplaceAction(actionType, [encodeQuery])`
 
 Description
 

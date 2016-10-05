@@ -1,4 +1,4 @@
-# UrlUpdateTypes
+### UrlUpdateTypes
 
 An enum listing all the available update types that can be used to indicate how the URL updates.
 

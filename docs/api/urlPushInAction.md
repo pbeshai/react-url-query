@@ -1,4 +1,4 @@
-# name()
+### `urlPushInAction(actionType, queryParam, valueType)`
 
 Description
 

@@ -1,4 +1,4 @@
-# subqueryOmit(query, ...omitParams)
+### `subqueryOmit(query, ...omitParams)`
 
 Given a query object, returns an object with only a subset of the parameters in it. Similar to lodash's `omit`. A similar function that takes a list of parameters to include is [`subquery`](subquery.md).
 

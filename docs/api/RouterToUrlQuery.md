@@ -1,4 +1,4 @@
-## `<RouterToUrlQuery>`
+### `<RouterToUrlQuery>`
 
 This component is intended to be used with React Router v4. It passes `router` from `this.context` to the url query configuration via `configureUrlQuery` to be used as the `history` by adapting the interface. It maps:
 

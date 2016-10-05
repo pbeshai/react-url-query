@@ -1,4 +1,4 @@
-# name()
+### `configureUrlQuery(config)`
 
 Description
 

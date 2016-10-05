@@ -1,4 +1,4 @@
-# subquery(query, ...params)
+### `subquery(query, ...params)`
 
 Given a query object, returns an object with only a subset of the parameters in it. Similar to lodash's `pick`. A similar function that takes a list of parameters to exclude is [`subqueryOmit`](subqueryOmit.md).
 

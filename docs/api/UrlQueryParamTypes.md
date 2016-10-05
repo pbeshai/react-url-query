@@ -1,4 +1,4 @@
-# UrlQueryParamTypes
+### UrlQueryParamTypes
 
 An enum listing all the query parameter types that have built-in [serializers](Serialize.md) for encoding in and decoding from the URL.
 

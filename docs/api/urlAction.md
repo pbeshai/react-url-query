@@ -1,4 +1,4 @@
-# name()
+### `urlAction(actionType, [payload], [meta])`
 
 Description
 

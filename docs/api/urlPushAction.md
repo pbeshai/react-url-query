@@ -1,4 +1,4 @@
-# name()
+### `urlPushAction(actionType, [encodeQuery])`
 
 Description
 

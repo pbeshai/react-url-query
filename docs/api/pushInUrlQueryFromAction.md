@@ -1,4 +1,4 @@
-# name()
+### `pushInUrlQueryFromAction(action, [location])`
 
 Description
 

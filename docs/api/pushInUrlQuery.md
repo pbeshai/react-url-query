@@ -1,4 +1,4 @@
-# pushInUrlQuery(queryParam, encodedValue, [location])
+### `pushInUrlQuery(queryParam, encodedValue, [location])`
 
 Updates the URL to have the specified query parameter's (`queryParam`) value set to `encodedValue`, while keeping all the other query parameters the same. Uses push to change the URL, which means the new state will be pushed on to the history stack, so the back button will be able to return you to the previous state.
 
