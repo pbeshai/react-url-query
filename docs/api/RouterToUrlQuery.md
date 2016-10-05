@@ -1,16 +1,30 @@
-# name()
+## `<RouterToUrlQuery>`
 
-Description
+This component is intended to be used with React Router v4. It passes `router` from `this.context` to the url query configuration via `configureUrlQuery` to be used as the `history` by adapting the interface. It maps:
 
-#### Arguments
+* `push`: `router.push` or `router.transitionTo`
+* `replace`: `router.replace` or `router.replaceWith`
 
-1. [`arg-name`] (*type*): Description
+Since it reads from the context, it needs to be placed as a child of `<Router>`.
 
-#### Returns
+Note that when using this, you will not be configuring `history` in `configureUrlQuery`, but you still can configure other options.
 
-(*type*): Description
+#### Props
 
-#### Remarks
+It takes no props besides `children`.
 
+#### Example
 
-#### Examples
+```js
+import { RouterToUrlQuery } from 'react-url-query';
+import Router from 'react-router/BrowserRouter';
+
+ReactDOM.render(
+  <Router>
+    <RouterToUrlQuery>
+      <App />
+    </RouterToUrlQuery>
+  </Router>,
+  document.getElementById('root')
+);
+```
