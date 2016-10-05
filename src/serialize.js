@@ -91,7 +91,7 @@ export function decodeBoolean(boolStr) {
  * @return {String} The JSON string representation of any
  */
 export function encodeJson(any) {
-  if (!any) {
+  if (any == null) {
     return undefined;
   }
 

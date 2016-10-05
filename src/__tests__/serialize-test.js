@@ -83,6 +83,9 @@ describe('utils', () => {
         const input = { test: '123', foo: [1, 2, 3] };
         expect(encodeJson(input)).toBe(JSON.stringify(input));
         expect(encodeJson()).not.toBeDefined();
+        expect(encodeJson(null)).not.toBeDefined();
+        expect(encodeJson(0)).toBe('0');
+        expect(encodeJson(false)).toBe('false');
       });
     });
 
