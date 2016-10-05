@@ -169,19 +169,37 @@ decodeObject('foo---bar___boo---baz', '---', '___');
 // === { foo: 'bar', boo: 'baz' }
 ```
 
-
 ### <a id='encode'></a>[`encode(type, valueToEncode)`](#encode)
 
-# TODO
-Description
+Encodes a value of the specified type as a string. It does so by delegating to one of the encode*Type* functions based on `type` or by using the custom function passed in through `type`.
 
 #### Arguments
 
-1. `encodedValue` (*String*):
+1. `type` (*String|Function|Object*): The type of the data, typically a string from [UrlQueryParamTypes](UrlQueryParamTypes.md). If a function is provided, that function is called with `valueToEncode` as its argument. If an object is provided with shape `{ encode }`, `type.encode` is called with `valueToEncode` as its argument. If no encoder is found to match the string `type`, the `valueToEncode` is returned unmodified.
+1. `valueToEncode` (*Any*): The value to encode as a string. Should match the specified type.
 
 #### Returns
 
-(*String*): The encoded string
+(*String*): The value encoded as a string based on the type.
+
+#### Examples
+
+```js
+encode(UrlQueryParamTypes.number, 94);
+// === '94'
+
+encode(UrlQueryParamTypes.object, { test: 'ing', foo: 'bar' });
+// === 'test-ing_foo-bar'
+
+encode(d => d.substring(6), 'custom94');
+// === '94'
+
+encode({ encode: d => d.substring(6) }, 'custom94');
+// === '94'
+
+encode('some-type', '94');
+// === '94'
+```
 
 
 ### <a id='encodeArray'></a>[`encodeArray(valueToEncode, [entrySeparator])`](#encodeArray)
@@ -241,38 +259,73 @@ encodeBoolean();
 
 ### <a id='encodeDate'></a>[`encodeDate(valueToEncode)`](#encodeDate)
 
-Description
+Encodes a Date as a string in `YYYY-MM-DD` format.
 
 #### Arguments
 
-1. `valueToEncode` (*String*):
+1. `valueToEncode` (*Date*): The Date value to be encoded as a string.
 
 #### Returns
 
-(*String*): The encoded string
+(*String*): The encoded string in `YYYY-MM-DD` format.
+
+#### Examples
+
+```js
+encodeDate(new Date(2014, 1, 15));
+// === '2014-02-15'
+
+encodeDate(new Date('Sun Sep 18 2016 20:00:00'));
+// === '2016-09-18'
+```
 
 
 ### <a id='encodeJson'></a>[`encodeJson(valueToEncode)`](#encodeJson)
 
-Description
+Encodes javascript data into a string through `JSON.stringify`.
 
 #### Arguments
 
-1. `valueToEncode` (*String*):
+1. `valueToEncode` (*Any*):
 
 #### Returns
 
-(*String*): The encoded string
+(*String*): The javascript data encoded as a string. If the input was nully, returns `undefined`.
+
+#### Examples
+
+```js
+encodeJson({'foo': 'bar', 'jim': ['grill']});
+// === '{"foo": "bar", "jim": ["grill"]}'
+
+encodeJson(['one', 'two', 'three']);
+// === '["one", "two", "three"]'
+
+encodeJson(null);
+// === undefined
+```
 
 
-### <a id='encodeObject'></a>[`encodeObject(valueToEncode)`](#encodeObject)
+### <a id='encodeObject'></a>[`encodeObject(valueToEncode, [keyValSeparator], [entrySeparator])`](#encodeObject)
 
-Description
+Encodes a flat javascript object as a string. Only supports flat objects where the values are strings.
 
 #### Arguments
 
-1. `valueToEncode` (*String*):
+1. `valueToEncode` (*Object*): The javascript object to encode.
+1. [`keyValSeparator`] (*String*): The string used to separate keys from values in the encoded object. If not provided, defaults to `'-'`.
+1. [`entrySeparator`] (*String*): The string used to separate entries in the encoded object. If not provided, defaults to `'_'`.
 
 #### Returns
 
-(*String*): The encoded string
+(*String*): The object encoded as a string.
+
+#### Examples
+
+```js
+encodeObject({ foo: 'bar', boo: 'baz' });
+// === 'foo-bar_boo-baz'
+
+encodeObject({ foo: 'bar', boo: 'baz' }, '---', '___');
+// === 'foo---bar___boo---baz'
+```
