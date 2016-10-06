@@ -2,7 +2,7 @@
 
 If you want to have URL update actions dispatched via Redux as shown in [this example](https://github.com/pbeshai/react-url-query/tree/master/examples/redux-with-actions), you need to use this Redux middleware. It intercepts actions where `meta.urlQuery` is true and passes them to the configured `reducer` (by default [urlQueryReducer](urlQueryReducer)) to be interpreted.
 
-If you are using [react-router-redux](), you will want to read `location` from the store. The default setting for `readLocationFromStore` does this. If you want to read `location` from another place in the store, specify a different `readLocationStore` in the options.
+If you are using [react-router-redux](https://github.com/reactjs/react-router-redux), you will want to read `location` from the store. The default setting for `readLocationFromStore` does this. If you want to read `location` from another place in the store, specify a different `readLocationStore` in the options.
 
 Default settings result in URL actions not making it to the final Redux store, so listeners to the store won't be notified of a change. This is because usually there is something else listening for changes to the URL and causing the components to update, so we'd end up with an unnecessary second render. If you want the store to be notified, you need to set the `shortcircuit` option to `false`.
 
