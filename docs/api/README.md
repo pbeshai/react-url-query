@@ -14,7 +14,7 @@ React URL Query provides a number of top-level exports.
 #### Serialization
 * [Serialize](Serialize.md)
 * [decode(type, encodedValue, [defaultValue])](Serialize.md#decode), _alias of Serialize.decode for convenience_
-* [encode(type, decodedValue)](Serialize.md#encode), _alias of Serialize.encode for convenience_
+* [encode(type, valueToEncode)](Serialize.md#encode), _alias of Serialize.encode for convenience_
 
 #### Utils
 * [subquery(query, ...params)](subquery.md)

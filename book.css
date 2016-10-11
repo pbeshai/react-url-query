@@ -1,0 +1,8 @@
+.book-summary ul.summary li a:hover {
+  color: #008cff;
+  text-decoration: none;
+}
+
+.book-summary ul.summary li span {
+  opacity: 0.5;
+}

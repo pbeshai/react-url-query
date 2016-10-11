@@ -1,5 +1,5 @@
 {
-  "gitbook": "3.x.x",
+  "gitbook": ">=3.2.1",
   "title": "React URL Query Docs",
   "plugins": ["edit-link", "prism", "-highlight", "github", "anchorjs"],
   "pluginsConfig": {
@@ -11,9 +11,9 @@
       "url": "https://github.com/pbeshai/react-url-query/"
     },
     "theme-default": {
-      "showLevel": true,
+      "showLevel": false,
       "styles": {
-        "website": "build/gitbook.css"
+        "website": "book.css"
       }
     }
   }
