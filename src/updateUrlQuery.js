@@ -22,6 +22,7 @@ function mergeLocationQueryOrSearch(location, newQuery) {
     return {
       ...location,
       query: newQuery,
+      search: undefined, // this is necessary at least for React Router v4
     };
   }
 
