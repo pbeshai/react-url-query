@@ -10,7 +10,7 @@ Default settings result in URL actions not making it to the final Redux store, s
 #### Arguments
 
 1. [`options`] (*Object*): The options for configuring the middleware. They include:
-  * `reducer` (*Function*): A function that takes `action, location` and updates the URL. If not specified in `options`, it is read from [urlQuerConfig](urlQuerConfig.md), and finally defaults to  [urlQueryReducer](urlQueryReducer) if no value is provided.
+  * `reducer` (*Function*): A function that takes `action, location` and updates the URL. If not specified in `options`, it is read from the [configuration](configureUrlQuery.md), and finally defaults to  [urlQueryReducer](urlQueryReducer) if no value is provided.
   * `readLocationFromStore` (*Function*): A function that takes `state`, the Redux store state, and returns the current URL location to pass to the reducer. If not specified, defaults to reading from `react-router-redux`'s default location.
   * `shortcircuit` (*Boolean*): A flag on whether or not we should pass on to the next Redux middleware, and thus eventually receive notifications from the Redux store.
 
