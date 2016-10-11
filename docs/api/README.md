@@ -4,7 +4,7 @@
 
 React URL Query provides a number of top-level exports.
 
-* [addUrlProps([options])](addUrlProps.md)
+* [addUrlProps([options])(WrappedComponent)](addUrlProps.md)
 * [configureUrlQuery(config)](configureUrlQuery.md)
 
 #### Type Enums
