@@ -45,7 +45,7 @@ class MainPage extends PureComponent {
     foo: PropTypes.number,
 
     // change handlers are automatically generated when given a config.
-    // By default they updating that single query parameter and maintaining existing
+    // By default they update that single query parameter and maintain existing
     // values in the other parameters.
     onChangeFoo: PropTypes.func,
     onChangeBar: PropTypes.func,
