@@ -2,7 +2,11 @@
 
 Example of using react-url-query. Start it with `npm start`.
 
-This example demonstrates basic usage through using `mapUrlToProps` and `history`.
+Shows a basic configuration to get React URL Query working in your application when you are not using React Router or Redux. Uses alternative approach of `mapUrlToProps` instead of `urlPropsQueryConfig`. The steps are:
+
+1. Use a [history](https://github.com/mjackson/history) of some sort to control pushing or replacing items in the browser's history stack. Be sure to listen for changes to the history and force an update when they occur (see [App.js](https://github.com/pbeshai/react-url-query/blob/master/examples/basic-mapUrlToProps/src/App.js))
+1. Configure React URL Query to use the history in your application's setup (see [index.js](https://github.com/pbeshai/react-url-query/blob/master/examples/basic-mapUrlToProps/src/index.js)).
+1. Use a `mapUrlToProps`, `mapUrlChangeHandlersToProps` and [`addUrlProps`](api/addUrlProps.md) to connect your component to React URL Query (see [MainPage.js](https://github.com/pbeshai/react-url-query/blob/master/examples/basic-mapUrlToProps/src/MainPage.js)).
 
 
 ## Available Scripts

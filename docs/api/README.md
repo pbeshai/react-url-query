@@ -30,6 +30,9 @@ React URL Query provides a number of top-level exports.
 * [RouterToUrlQuery](RouterToUrlQuery.md)
 
 #### Redux Action Integration
+
+Note that these helpers are provided in the event you would like to use Redux's `dispatch` to update the URL. They are *not necessary* for using React URL Query with Redux. Compare the [example without using dispatch](https://github.com/pbeshai/react-url-query/tree/master/examples/redux) with the [example using dispatch](https://github.com/pbeshai/react-url-query/tree/master/examples/redux-with-actions).
+
 * [replaceInUrlQueryFromAction(action, [location])](replaceInUrlQueryFromAction.md)
 * [replaceUrlQueryFromAction(action, [location])](replaceUrlQueryFromAction.md)
 * [pushInUrlQueryFromAction(action, [location])](pushInUrlQueryFromAction.md)

@@ -3,9 +3,27 @@
 [![npm version](https://badge.fury.io/js/react-url-query.svg)](https://badge.fury.io/js/react-url-query)
 [![Build Status](https://travis-ci.org/pbeshai/react-url-query.svg?branch=master)](https://travis-ci.org/pbeshai/react-url-query)
 
-A library for managing state through query parameters in the URL in [React](https://facebook.github.io/react/). It integrates well with [React Router](https://github.com/ReactTraining/react-router) and [Redux](https://github.com/reactjs/redux) and provides additional tools specifically targeted at serializing and deserializing state in URL query parameters.
+A library for managing state through query parameters in the URL in [React](https://facebook.github.io/react/). It integrates well with [React Router](https://github.com/ReactTraining/react-router) and [Redux](https://github.com/reactjs/redux) and provides additional tools specifically targeted at serializing and deserializing state in URL query parameters.  With React URL Query, you can create components where there is no difference in handling state from an external store like Redux and state from the URL.
 
-For details on how to use it, read the [docs](https://pbeshai.github.io/react-url-query) or browse the [examples](https://github.com/pbeshai/react-url-query/tree/master/examples).
+* [API Reference](https://pbeshai.github.io/react-url-query/docs/api/)
+* [Examples](https://pbeshai.github.io/react-url-query/docs/Examples.html)
+
+
+### Motivation
+
+When developing web applications, it's really common to want to encode parts of the state in URL query parameters to capture what users are seeing on screen. Think of things like filters, toggles, selected items, and so on. Storing them in the URL allows users to easily link others to what they are seeing and [facilitates discussion](http://dl.acm.org/citation.cfm?id=1240781). React URL Query makes doing this really easy.
+
+The current set of tools for React does not provide facilities for easy interaction with query parameters.
+
+The fantastic library [React Router](https://github.com/ReactTraining/react-router) is the standard for integrating URL changes in React applications and provides us access to the query parameters as an object, but the fields within are always represented as strings-- just as they appear in the URL. This makes sense, but means developers must work to decode the strings into the proper types depending on what is being stored in a given param (e.g. numbers, booleans, arrays, objects). Furthermore, when one wants to update the query parameters in the URL, React Router gives us functions to do so via [`context.router`](https://github.com/ReactTraining/react-router/blob/master/docs/API.md#contextrouter), but no facilities for encoding our values as strings.
+
+The current front-runner for state management in React app's is [Redux](https://github.com/reactjs/redux). When first dealing with encoding state in URL query parameters, it's common to wonder how to get them in sync with what is in the Redux store. Dan Abramov, Redux's creator, [suggests that you don't do that](http://stackoverflow.com/a/36657751). Instead, he puts forth the idea of decoding the query parameters in the `mapStateToProps` function (you can look into `props.location.query` if you're using React Router). However, when it comes to encoding changes to the query parameters back into the URL, we're back to calling router functions directly.
+
+React URL Query is based off the idea that we can have an equivalent to `mapStateToProps` and `mapDispatchToProps` (see [Redux's Usage with React](http://redux.js.org/docs/basics/UsageWithReact.html)) but for the URL. In fact, it allows you to provide [`mapUrlToProps`](https://pbeshai.github.io/react-url-query/docs/api/addUrlProps.html) and [`mapUrlChangeHandlersToProps`](https://pbeshai.github.io/react-url-query/docs/api/addUrlProps.html) when configuring components to do just that. You can decode URL query params into props in `mapUrlToProps` and you can encode them back into params through change handlers in `mapUrlChangeHandlersToProps`. This means the component code itself doesn't need to be aware of which props are managed by Redux and which props are managed by the URL-- it can just read props and call change handlers, and the application will update appropriately.
+
+There are some very common patterns when encoding and decoding URL query parameters: each parameter has a type and a name in the URL and parameters of a given type should always be encoded or decoded the same way. It's cumbersome and repetitive to always create the `map___ToProps` functions to handle this common use case, so React URL Query provides a succinct way of describing URL query parameters through its [`urlPropsQueryConfig`](https://pbeshai.github.io/react-url-query/docs/api/addUrlProps.html). You can just describe the type and names of the query parameters, and the decoded query params along with their change handlers will be passed in as props to the wrapped component.
+
+Check it out below or in the other [examples](https://pbeshai.github.io/react-url-query/docs/Examples.html) to see how it works.
 
 ### Installation
 
@@ -15,7 +33,7 @@ npm install --save react-url-query
 
 ### How do I use it?
 
-A [number of examples](https://github.com/pbeshai/react-url-query/tree/master/examples) have been created demonstrating a variety of methods of using the library with different technologies. Here is the most basic form of using it in a component:
+A [number of examples](https://pbeshai.github.io/react-url-query/docs/Examples.html) have been created demonstrating a variety of methods of using the library with different technologies. Here is the most basic form of using it in a component:
 
 ```js
 import React, { PureComponent, PropTypes } from 'react';
@@ -85,7 +103,7 @@ export default addUrlProps({ urlPropsQueryConfig })(MainPage);
 If you prefer, instead of using a `urlPropsQueryConfig` you can provide the functions `mapUrlToProps` and `mapUrlChangeHandlersToProps`, as shown in the [basic-mapUrlToProps](https://github.com/pbeshai/react-url-query/tree/master/examples/basic-mapUrlToProps) example.
 
 
-You'll also need to configure which `history` to use, typically done wherever you initialize your application. Examples of doing this with different setups are shown in the [examples section](https://github.com/pbeshai/react-url-query/tree/master/examples).
+You'll also need to configure which `history` to use, typically done wherever you initialize your application. Examples of doing this with different setups are shown in the [examples section](https://pbeshai.github.io/react-url-query/docs/Examples.html).
 
 If you are using react-router, how you link in the history depends on the version.
 

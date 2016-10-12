@@ -41,7 +41,7 @@ By default, each key, *myProp*, in the `urlPropsQueryConfig` will add the follow
 * `myProp`: The decoded property from the URL query param `myProp` (or however specified by `queryParam`).
 * `onChangeMyProp`: The change handler for updating the URL with the new value for `myProp`.
 
-See the examples [below](#examples) and [those in the repo](https://github.com/pbeshai/react-url-query/tree/master/examples) to get a better idea of how it all works.
+See the examples [below](#examples) and [those in the repo](../Examples.md) to get a better idea of how it all works.
 
 #### Arguments
 

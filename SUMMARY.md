@@ -1,7 +1,7 @@
 # Table of Contents
 
 * [Read Me](/README.md)
-* [Introduction](/docs/INTRODUCTION.md)
+* [Examples](/docs/Examples.md)
 * [Change Log](/CHANGELOG.md)
 
 

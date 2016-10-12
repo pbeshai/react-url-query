@@ -2,7 +2,10 @@
 
 Example of using react-url-query. Start it with `npm start`.
 
-This example demonstrates usage with React Router v4 and Redux.
+Demonstrates how to use React URL Query with React Router v4 and Redux. This example also demonstrates using a custom type for a URL query parameter. When using React Router v4, we do *not* use [`configureUrlQuery`](api/configureUrlQuery.md) as we do in all the others. Instead we use [`<RouterToUrlQuery>`](api/RouterToUrlQuery.md). The steps are:
+
+1. Use `<RouterToUrlQuery>` to configure React URL Query to use the React Router's history in your application's setup (see [index.js](https://github.com/pbeshai/react-url-query/blob/master/examples/react-router-v4-and-redux/src/index.js)).
+1. Use a `urlPropsQueryConfig` and [`addUrlProps`](api/addUrlProps.md) to connect your component to React URL Query. In this case, we wrap the connected component: `addUrlProps(...)(connect(...)(MyComponent))` (see [MainPage.js](https://github.com/pbeshai/react-url-query/blob/master/examples/react-router-v4-and-redux/src/MainPage.js)).
 
 ## Available Scripts
 
