@@ -4,7 +4,7 @@ Higher order component that injects URL query parameters as props in the wrapped
 
 * `urlPropsQueryConfig` (*Object*): The `urlPropsQueryConfig` object, [see below for details](#urlPropsQueryConfig). Most commonly this is the only option configured.
 
-* `addUrlChangeHandlers` (*Boolean*): If true and a `urlPropsQueryConfig` object is provided, change handler functions will be generated for each configured query parameter. If not provided, it uses whatever was configured in [`configureUrlQuery`](configureUrlQuery.md).
+* `addUrlChangeHandlers` (*Boolean*): If true and a `urlPropsQueryConfig` object is provided, change handler functions will be generated for each configured query parameter. It will also add a special handler `onChangeUrlQueryParams()` for updating multiple parameters at once (pass an object mapping prop names to their new (unencoded) values). If not provided, it uses whatever was configured in [`configureUrlQuery`](configureUrlQuery.md).
 
 * `changeHandlerName` (*Function*): Specifies how change handler names are generated when `addUrlChangeHandlers` is set to `true`. By default, maps `propName` to `onChangePropName`. If not provided, it uses whatever was configured in [`configureUrlQuery`](configureUrlQuery.md).
 

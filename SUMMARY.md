@@ -27,6 +27,8 @@
     * [pushInUrlQuery](/docs/api/pushInUrlQuery.md)
     * [replaceUrlQuery](/docs/api/replaceUrlQuery.md)
     * [pushUrlQuery](/docs/api/pushUrlQuery.md)
+    * [multiReplaceInUrlQuery](/docs/api/multiReplaceInUrlQuery.md)
+    * [multiPushInUrlQuery](/docs/api/multiPushInUrlQuery.md)
 
   * React Router v4
     * [RouterToUrlQuery](/docs/api/RouterToUrlQuery.md)

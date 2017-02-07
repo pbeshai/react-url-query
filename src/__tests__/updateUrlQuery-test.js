@@ -6,6 +6,7 @@ import {
   replaceInUrlQuery,
   pushInUrlQuery,
   updateUrlQuerySingle,
+  updateUrlQueryMulti,
 } from '../updateUrlQuery';
 
 function makeMockHistory() {
@@ -146,6 +147,52 @@ describe('pushInUrlQuery', () => {
     const location = { pathname: '/', search: '?foo=99&bar=baz' };
     const newLocation = pushInUrlQuery('foo', '123', location);
     expect(newLocation).toEqual({ pathname: '/', search: '?bar=baz&foo=123' });
+    expect(history.push).toBeCalled();
+    expect(history.replace).not.toBeCalled();
+  });
+});
+
+describe('updateUrlQueryMulti', () => {
+  it('works with replace', () => {
+    const history = makeMockHistory();
+    configureUrlQuery({ history });
+
+    const location = { pathname: '/', search: '?foo=99&bar=baz&blatt=david' };
+    const newLocation = updateUrlQueryMulti(UrlUpdateTypes.replace, { bar: 'test', foo: '123' }, location);
+    expect(newLocation).toEqual({ pathname: '/', search: '?bar=test&foo=123' });
+    expect(history.replace).toBeCalled();
+    expect(history.push).not.toBeCalled();
+  });
+
+  it('works with push', () => {
+    const history = makeMockHistory();
+    configureUrlQuery({ history });
+
+    const location = { pathname: '/', search: '?foo=99&bar=baz&blatt=david' };
+    const newLocation = updateUrlQueryMulti(UrlUpdateTypes.push, { bar: 'test', foo: '123' }, location);
+    expect(newLocation).toEqual({ pathname: '/', search: '?bar=test&foo=123' });
+    expect(history.push).toBeCalled();
+    expect(history.replace).not.toBeCalled();
+  });
+
+  it('works with replaceIn', () => {
+    const history = makeMockHistory();
+    configureUrlQuery({ history });
+
+    const location = { pathname: '/', search: '?foo=99&bar=baz&blatt=david' };
+    const newLocation = updateUrlQueryMulti(UrlUpdateTypes.replaceIn, { bar: 'test', foo: '123' }, location);
+    expect(newLocation).toEqual({ pathname: '/', search: '?bar=test&blatt=david&foo=123' });
+    expect(history.replace).toBeCalled();
+    expect(history.push).not.toBeCalled();
+  });
+
+  it('works with pushIn', () => {
+    const history = makeMockHistory();
+    configureUrlQuery({ history });
+
+    const location = { pathname: '/', search: '?foo=99&bar=baz&blatt=david' };
+    const newLocation = updateUrlQueryMulti(UrlUpdateTypes.pushIn, { bar: 'test', foo: '123' }, location);
+    expect(newLocation).toEqual({ pathname: '/', search: '?bar=test&blatt=david&foo=123' });
     expect(history.push).toBeCalled();
     expect(history.replace).not.toBeCalled();
   });

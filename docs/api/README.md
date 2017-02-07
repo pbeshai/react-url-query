@@ -25,6 +25,8 @@ React URL Query provides a number of top-level exports.
 * [pushInUrlQuery(queryParam, encodedValue, [location])](pushInUrlQuery.md)
 * [replaceUrlQuery(newQuery, [location])](replaceUrlQuery.md)
 * [pushUrlQuery(newQuery, [location])](pushUrlQuery.md)
+* [multiReplaceInUrlQuery(queryReplacements, [location])](multiReplaceInUrlQuery.md)
+* [multiPushInUrlQuery(queryReplacements, [location])](multiPushInUrlQuery.md)
 
 #### React-Router v4
 * [RouterToUrlQuery](RouterToUrlQuery.md)

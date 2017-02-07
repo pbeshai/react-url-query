@@ -80,6 +80,36 @@ function updateInLocation(queryParam, encodedValue, location) {
   return newLocation;
 }
 
+/**
+ * Update multiple parts of the location at once
+ */
+function multiUpdateInLocation(queryReplacements, location) {
+  location = getLocation(location);
+
+  // if a query is there, use it, otherwise parse the search string
+  const currQuery = location.query || parseQueryString(location.search);
+
+  const newQuery = {
+    ...currQuery,
+    ...queryReplacements,
+  };
+
+  // remove if it is nully or an empty string when encoded
+  Object.keys(queryReplacements).forEach((queryParam) => {
+    const encodedValue = queryReplacements[queryParam];
+    if (encodedValue == null || encodedValue === '') {
+      delete newQuery[queryParam];
+    }
+  });
+
+  const newLocation = mergeLocationQueryOrSearch(location, newQuery);
+
+  // remove the key from the location
+  delete newLocation.key;
+
+  return newLocation;
+}
+
 export function replaceUrlQuery(newQuery, location) {
   const newLocation = updateLocation(newQuery, location);
   return urlQueryConfig.history.replace(newLocation);
@@ -97,6 +127,23 @@ export function replaceInUrlQuery(queryParam, encodedValue, location) {
 
 export function pushInUrlQuery(queryParam, encodedValue, location) {
   const newLocation = updateInLocation(queryParam, encodedValue, location);
+  return urlQueryConfig.history.push(newLocation);
+}
+
+/**
+ * Replace multiple query parameters in a URL at once with only one
+ * call to `history.replace`
+ *
+ * @param {Object} queryReplacements Object representing the params and
+ *   their encoded values. { queryParam: encodedValue, ... }
+ */
+export function multiReplaceInUrlQuery(queryReplacements, location) {
+  const newLocation = multiUpdateInLocation(queryReplacements, location);
+  return urlQueryConfig.history.replace(newLocation);
+}
+
+export function multiPushInUrlQuery(queryReplacements, location) {
+  const newLocation = multiUpdateInLocation(queryReplacements, location);
   return urlQueryConfig.history.push(newLocation);
 }
 
@@ -119,6 +166,29 @@ export function updateUrlQuerySingle(updateType = UrlUpdateTypes.replaceIn,
   }
   if (updateType === UrlUpdateTypes.push) {
     return pushUrlQuery(newQuery, location);
+  }
+
+  return undefined;
+}
+
+
+/**
+ * Updates a multiple values in a query based on the type
+ */
+export function updateUrlQueryMulti(updateType = UrlUpdateTypes.replaceIn,
+    queryReplacements, location) {
+  if (updateType === UrlUpdateTypes.replaceIn) {
+    return multiReplaceInUrlQuery(queryReplacements, location);
+  }
+  if (updateType === UrlUpdateTypes.pushIn) {
+    return multiPushInUrlQuery(queryReplacements, location);
+  }
+
+  if (updateType === UrlUpdateTypes.replace) {
+    return replaceUrlQuery(queryReplacements, location);
+  }
+  if (updateType === UrlUpdateTypes.push) {
+    return pushUrlQuery(queryReplacements, location);
   }
 
   return undefined;
