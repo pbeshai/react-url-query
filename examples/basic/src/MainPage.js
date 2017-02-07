@@ -34,7 +34,7 @@ class MainPage extends PureComponent {
     const {
       foo, bar, onChangeFoo, onChangeBar, onChangeUrlQueryParams
     } = this.props;
-    console.log('RENDER', foo, bar);
+
     return (
       <div>
         <table>
