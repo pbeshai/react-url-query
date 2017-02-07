@@ -160,6 +160,7 @@ describe('url change callbacks', () => {
 
     expect(props.onChangeFoo).toBeDefined();
     expect(props.onChangeBar).toBeDefined();
+    expect(props.onChangeUrlQueryParams).toBeDefined();
   });
 
   it('does not generate change handlers when addUrlChangeHandlers is false', () => {
@@ -175,6 +176,7 @@ describe('url change callbacks', () => {
 
     expect(props.onChangeFoo).not.toBeDefined();
     expect(props.onChangeBar).not.toBeDefined();
+    expect(props.onChangeUrlQueryParams).not.toBeDefined();
   });
 
   it('reads addUrlChangeHandlers from urlQueryConfig', () => {

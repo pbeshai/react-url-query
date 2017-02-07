@@ -3,8 +3,9 @@ import { parse as parseQueryString } from 'query-string';
 
 import urlQueryDecoder from '../urlQueryDecoder';
 import urlQueryConfig from '../urlQueryConfig';
-import { updateUrlQuerySingle } from '../updateUrlQuery';
+import { updateUrlQuerySingle, updateUrlQueryMulti } from '../updateUrlQuery';
 import { encode } from '../serialize';
+import UrlUpdateTypes from '../UrlUpdateTypes';
 
 /**
  * Higher order component (HOC) that injects URL query parameters as props.
@@ -128,6 +129,38 @@ export default function addUrlProps(options = {}) {
 
                 return handlersAccum;
               }, {});
+
+              // add in a batch change handler
+              const batchHandlerName = changeHandlerName('urlQueryParams');
+              handlers[batchHandlerName] = function generatedBatchUrlChangeHandler(queryValues,
+                updateType = UrlUpdateTypes.replaceIn) {
+                const { location } = this.props;
+
+                let allEncodedValuesUnchanged = true;
+
+                // encode each value
+                const queryReplacements = Object.keys(queryValues).reduce((accum, propName) => {
+                  const { queryParam = propName, type } = urlPropsQueryConfig[propName];
+                  const value = queryValues[propName];
+
+                  const encodedValue = encode(type, value);
+                  accum[queryParam] = encodedValue;
+
+                  // add a simple check when we have props.location.query to see if
+                  // we even need to update.
+                  if (location && location.query && location.query[queryParam] !== encodedValue) {
+                    allEncodedValuesUnchanged = false;
+                  }
+
+                  return accum;
+                }, {});
+
+                if (location && location.query && allEncodedValuesUnchanged) {
+                  return undefined; // skip updating if no encoded values changed
+                }
+
+                return updateUrlQueryMulti(updateType, queryReplacements, location);
+              }.bind(this);
 
               // cache these so we don't regenerate new functions every render
               cachedHandlers = handlers;

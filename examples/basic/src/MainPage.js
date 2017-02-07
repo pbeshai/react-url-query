@@ -22,6 +22,7 @@ class MainPage extends PureComponent {
     // updating that single query parameter and keeping the other existing ones.
     onChangeFoo: PropTypes.func,
     onChangeBar: PropTypes.func,
+    onChangeUrlQueryParams: PropTypes.func,
   }
 
   static defaultProps = {
@@ -30,8 +31,10 @@ class MainPage extends PureComponent {
   }
 
   render() {
-    const { foo, bar, onChangeFoo, onChangeBar } = this.props;
-
+    const {
+      foo, bar, onChangeFoo, onChangeBar, onChangeUrlQueryParams
+    } = this.props;
+    console.log('RENDER', foo, bar);
     return (
       <div>
         <table>
@@ -53,6 +56,16 @@ class MainPage extends PureComponent {
               <td>
                 <button onClick={() => onChangeBar(Math.random().toString(32).substring(8))}>
                   Change bar
+                </button>
+              </td>
+            </tr>
+            <tr>
+              <td colSpan={4}>
+                <button onClick={() => onChangeUrlQueryParams({
+                  foo: Math.round(Math.random() * 1000),
+                  bar: Math.random().toString(32).substring(8),
+                })}>
+                  Change both with one URL update
                 </button>
               </td>
             </tr>
