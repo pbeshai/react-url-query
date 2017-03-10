@@ -6,6 +6,8 @@ export {
   replaceUrlQuery,
   pushInUrlQuery,
   pushUrlQuery,
+  multiReplaceInUrlQuery,
+  multiPushInUrlQuery,
 } from './updateUrlQuery';
 export UrlQueryParamTypes from './UrlQueryParamTypes';
 export UrlUpdateTypes from './UrlUpdateTypes';
