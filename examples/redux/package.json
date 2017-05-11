@@ -6,6 +6,7 @@
     "react-scripts": "^0.6.0"
   },
   "dependencies": {
+    "prop-types": "^15.5.9",
     "history": "^4.2.0",
     "react": "^15.3.2",
     "react-dom": "^15.3.2",
