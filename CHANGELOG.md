@@ -3,6 +3,11 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+# 1.1.2
+
+- Fixes warning about using `prop-types` npm package (#15)
+- Updates to use the latest React Router v4 API (#17)
+
 # 1.1.1
 
 - Fixes bug where multiReplaceInUrlQuery and multiPushInUrlQuery were not exported. (#8)
