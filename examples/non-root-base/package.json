@@ -1,0 +1,19 @@
+{
+  "dependencies": {
+    "babel-loader": "^7.0.0",
+    "babel-plugin-transform-class-properties": "^6.24.1",
+    "babel-register": "^6.24.1",
+    "express": "^4.15.2",
+    "react": "^15.5.4",
+    "react-dom": "^15.5.4",
+    "react-redux": "^4.4.5",
+    "react-router": "^2.8.1",
+    "react-router-redux": "^4.0.6",
+    "redux": "^3.6.0",
+    "webpack": "^2.5.1"
+  },
+  "scripts": {
+    "webpack": "webpack --config webpack.config.js",
+    "start": "node src/server"
+  }
+}
