@@ -1,6 +1,6 @@
 import React, { PureComponent, PropTypes } from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router';
+import { Link } from 'react-router-dom';
 
 import { addUrlProps, UrlQueryParamTypes, subquery } from 'react-url-query';
 import { changeBaz } from './state/actions';

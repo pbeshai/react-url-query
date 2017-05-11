@@ -25,8 +25,8 @@ export default class RouterToUrlQuery extends Component {
 
     configureUrlQuery({
       history: {
-        push: router.push || router.transitionTo,
-        replace: router.replace || router.replaceWith,
+        push: (router.history && router.history.push) || router.push || router.transitionTo,
+        replace: (router.history && router.history.replace) || router.replace || router.replaceWith,
       },
     });
   }

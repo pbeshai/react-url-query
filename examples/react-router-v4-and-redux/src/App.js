@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
-import Match from 'react-router/Match';
+import {
+  Route,
+} from 'react-router-dom';
+
 import MainPage from './MainPage';
 
 class App extends Component {
@@ -8,8 +11,7 @@ class App extends Component {
       <div>
         <h3>react-url-query example: react-router-v4-and-redux</h3>
 
-        <Match exactly pattern="/" component={MainPage} />
-        <Match pattern="/:word" component={MainPage} />
+        <Route pattern="/:word" component={MainPage} />
       </div>
     );
   }
