@@ -86,6 +86,7 @@
   },
   "dependencies": {
     "loose-envify": "^1.2.0",
+    "prop-types": "^15.5.9",
     "query-string": "^4.2.3"
   },
   "npmFileMap": [
