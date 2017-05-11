@@ -2,7 +2,10 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { createStore } from 'redux';
-import Router from 'react-router/BrowserRouter';
+import {
+  BrowserRouter as Router,
+} from 'react-router-dom'
+
 
 import { RouterToUrlQuery } from 'react-url-query';
 
