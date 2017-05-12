@@ -45,7 +45,7 @@ export default function addUrlProps(options = {}) {
       let location;
 
       // react-router provides it as a prop
-      if (props.location && (props.location.query || props.location.search)) {
+      if (props.location && (props.location.query || props.location.search != null)) {
         location = props.location;
 
       // check in history
