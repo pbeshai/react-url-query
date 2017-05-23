@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+# 1.1.4
+
+- Fixes missed warnings about using `prop-types` npm package (#15)
+
 # 1.1.3
 
 - Fixes bug where location prop wasn't recognized if search attribute was the empty string (#12)
