@@ -1,4 +1,5 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { parse as parseQueryString } from 'query-string';
 
 import urlQueryDecoder from '../urlQueryDecoder';
