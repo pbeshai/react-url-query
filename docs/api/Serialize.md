@@ -7,13 +7,17 @@ The `Serialize` module provides a number of utility functions for encoding data 
 * [`decodeBoolean(encodedValue)`](#decodeBoolean)
 * [`decodeDate(encodedValue)`](#decodeDate)
 * [`decodeJson(encodedValue)`](#decodeJson)
+* [`decodeNumericArray(encodedValue, [entrySeparator])`](#decodeNumericArray)
+* [`decodeNumericObject(encodedValue, [keyValSeparator], [entrySeparator])`](#decodeNumericObject)
 * [`decodeObject(encodedValue, [keyValSeparator], [entrySeparator])`](#decodeObject)
 * [`encode(type, valueToEncode)`](#encode)
-* [`encodeArray(valueToEncode)`](#encodeArray)
+* [`encodeArray(valueToEncode, [entrySeparator])`](#encodeArray)
 * [`encodeBoolean(valueToEncode)`](#encodeBoolean)
 * [`encodeDate(valueToEncode)`](#encodeDate)
 * [`encodeJson(valueToEncode)`](#encodeJson)
-* [`encodeObject(valueToEncode)`](#encodeObject)
+* [`encodeNumericArray(valueToEncode, [entrySeparator])`](#encodeNumericArray)
+* [`encodeNumericObject(valueToEncode, [keyValSeparator], [entrySeparator])`](#encodeNumericObject)
+* [`encodeObject(valueToEncode, [keyValSeparator], [entrySeparator])`](#encodeObject)
 
 ### <a id='decode'></a>[`decode(type, encodedValue, [defaultValue])`](#decode)
 
@@ -142,6 +146,54 @@ decodeJson('{"foo": "bar", "jim": ["grill"]}');
 
 decodeJson('["one", "two", "three"]');
 // === ['one', 'two', 'three']
+```
+
+### <a id='decodeNumericArray'></a>[`decodeNumericArray(encodedValue, [entrySeparator])`](#decodeNumericArray)
+
+Decodes a string into an array of numbers.
+
+#### Arguments
+
+1. `encodedValue` (*String*): The array as a string with entries separated by `entrySeparator`
+1. [`entrySeparator`] (*String*): The string used to separate entries in the encoded array. If not provided, defaults to `'_'`.
+
+#### Returns
+
+(*String[]*): An array representation of the encoded value. Each entry is a number.
+
+#### Examples
+
+```js
+decodeNumericArray('1_2_3');
+// === [1, 2, 3]
+
+decodeNumericArray('1---2---3', '---');
+// === [1, 2, 3]
+```
+
+
+### <a id='decodeNumericObject'></a>[`decodeNumericObject(encodedValue, [keyValSeparator], [entrySeparator])`](#decodeNumericObject)
+
+Decodes a string into an object. Supports simple, flat objects where the values are numbers.
+
+#### Arguments
+
+1. `encodedValue` (*String*): The object value as a string where keys and values are separated by `keyValSeparator` and entries are separated by `entrySeparator`.
+1. [`keyValSeparator`] (*String*): The string used to separate keys from values in the encoded object. If not provided, defaults to `'-'`.
+1. [`entrySeparator`] (*String*): The string used to separate entries in the encoded object. If not provided, defaults to `'_'`.
+
+#### Returns
+
+(*Object*): The Object representation of the encoded value.
+
+#### Examples
+
+```js
+decodeNumericObject('foo-44_boo-51');
+// === { foo: 44, boo: 51 }
+
+decodeNumericObject('foo---44___boo---51', '---', '___');
+// === { foo: 44, boo: 51 }
 ```
 
 
@@ -303,6 +355,55 @@ encodeJson(['one', 'two', 'three']);
 
 encodeJson(null);
 // === undefined
+```
+
+
+### <a id='encodeNumericArray'></a>[`encodeNumericArray(valueToEncode, [entrySeparator])`](#encodeNumericArray)
+
+Encodes an array as a string.
+
+#### Arguments
+
+1. `valueToEncode` (*String[]|Number[]|Boolean[]*): The array to be encoded as a string.
+1. [`entrySeparator`] (*String*): The string used to separate entries in the encoded array. If not provided, defaults to `'_'`.
+
+#### Returns
+
+(*String*): The array represented as a string where entries in the array are separated by `entrySeparator`.
+
+#### Examples
+
+```js
+encodeNumericArray([1, 2, 3]);
+// === '1_2_3'
+
+encodeNumericArray([1, 2, 3], '---');
+// === '1---2---3'
+```
+
+
+### <a id='encodeNumericObject'></a>[`encodeNumericObject(valueToEncode, [keyValSeparator], [entrySeparator])`](#encodeNumericObject)
+
+Encodes a flat javascript object as a string. Supports flat objects where the values are numbers.
+
+#### Arguments
+
+1. `valueToEncode` (*Object*): The javascript object to encode.
+1. [`keyValSeparator`] (*String*): The string used to separate keys from values in the encoded object. If not provided, defaults to `'-'`.
+1. [`entrySeparator`] (*String*): The string used to separate entries in the encoded object. If not provided, defaults to `'_'`.
+
+#### Returns
+
+(*String*): The object encoded as a string.
+
+#### Examples
+
+```js
+encodeNumericObject({ foo: 94, boo: 137 });
+// === 'foo-94_boo-137'
+
+encodeNumericObject({ foo: 94, boo: 137 }, '---', '___');
+// === 'foo---94___boo---137'
 ```
 
 

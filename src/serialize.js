@@ -118,24 +118,24 @@ export function decodeJson(jsonStr) {
 }
 
 /**
- * Encodes anything as a JSON string.
+ * Encodes an array as a JSON string.
  *
- * @param {Any} any The thing to be encoded
- * @return {String} The JSON string representation of any
+ * @param {Array} array The array to be encoded
+ * @return {String} The JSON string representation of array
  */
-export function encodeArray(any, entrySeparator = '_') {
-  if (!any) {
+export function encodeArray(array, entrySeparator = '_') {
+  if (!array) {
     return undefined;
   }
 
-  return any.join(entrySeparator);
+  return array.join(entrySeparator);
 }
 
 /**
- * Decodes a JSON string into javascript
+ * Decodes a JSON string into javascript array
  *
  * @param {String} jsonStr The JSON string representation
- * @return {Any} The javascript representation
+ * @return {Array} The javascript representation
  */
 export function decodeArray(arrayStr, entrySeparator = '_') {
   if (!arrayStr) {
@@ -144,6 +144,31 @@ export function decodeArray(arrayStr, entrySeparator = '_') {
 
   return arrayStr.split(entrySeparator).map(item => (item === '' ? undefined : item));
 }
+
+/**
+ * Encodes a numeric array as a JSON string. (alias of encodeArray)
+ *
+ * @param {Array} array The array to be encoded
+ * @return {String} The JSON string representation of array
+ */
+export const encodeNumericArray = encodeArray;
+
+/**
+ * Decodes a JSON string into javascript array where all entries are numbers
+ *
+ * @param {String} jsonStr The JSON string representation
+ * @return {Array} The javascript representation
+ */
+export function decodeNumericArray(arrayStr, entrySeparator = '_') {
+  const decoded = decodeArray(arrayStr, entrySeparator);
+
+  if (!decoded) {
+    return undefined;
+  }
+
+  return decoded.map(d => (d == null ? d : +d));
+}
+
 
 /**
  * Encode simple objects as readable strings. Currently works only for simple,
@@ -189,6 +214,46 @@ export function decodeObject(objStr, keyValSeparator = '-', entrySeparator = '_'
   return obj;
 }
 
+
+/**
+ * Encode simple objects as readable strings. Alias of encodeObject.
+ *
+ * For example { foo: 123, boo: 521 } -> "foo-123_boo-521"
+ *
+ * @param {Object} object The object to encode
+ * @param {String} keyValSeparator="-" The separator between keys and values
+ * @param {String} entrySeparator="_" The separator between entries
+ * @return {String} The encoded object
+ */
+export const encodeNumericObject = encodeObject;
+
+/**
+ * Decodes a simple object to javascript where all values are numbers.
+ * Currently works only for simple, flat objects.
+ *
+ * For example "foo-123_boo-521" -> { foo: 123, boo: 521 }
+ *
+ * @param {String} objStr The object string to decode
+ * @param {String} keyValSeparator="-" The separator between keys and values
+ * @param {String} entrySeparator="_" The separator between entries
+ * @return {Object} The javascript object
+ */
+export function decodeNumericObject(objStr, keyValSeparator = '-', entrySeparator = '_') {
+  const decoded = decodeObject(objStr, keyValSeparator, entrySeparator);
+
+  if (!decoded) {
+    return undefined;
+  }
+
+  // convert to numbers
+  Object.keys(decoded).forEach((key) => {
+    decoded[key] = decoded[key] == null ? decoded[key] : +decoded[key];
+  });
+
+  return decoded;
+}
+
+
 /**
  * Collection of Decoders by type
  */
@@ -200,6 +265,8 @@ export const Decoders = {
   json: decodeJson,
   date: decodeDate,
   boolean: decodeBoolean,
+  numericObject: decodeNumericObject,
+  numericArray: decodeNumericArray,
 };
 
 
@@ -241,6 +308,8 @@ export const Encoders = {
   json: encodeJson,
   date: encodeDate,
   boolean: encodeBoolean,
+  numericObject: encodeNumericObject,
+  numericArray: encodeNumericArray,
 };
 
 /**
