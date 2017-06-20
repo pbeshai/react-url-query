@@ -1,0 +1,21 @@
+{
+  "extends": "eslint-config-airbnb",
+  "parser": "babel-eslint",
+  "rules": {
+    "max-len": [1, 120, { "ignoreComments": true, "ignoreTrailingComments": true, "ignoreUrls": true }],
+    "react/jsx-filename-extension": 0,
+    "no-param-reassign": 0,
+    "import/no-extraneous-dependencies": ["error", { "devDependencies": ["**/__tests__/*", "**/*.test.js", "**/*.spec.js"]}]
+  },
+  "plugins": [
+    "react",
+    "import"
+  ],
+  "env": {
+    "browser": true,
+    "commonjs": true,
+    "es6": true,
+    "jest": true,
+    "node": true
+  },
+}

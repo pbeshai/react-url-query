@@ -1,0 +1,820 @@
+
+<!DOCTYPE HTML>
+<html lang="" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>API Reference · React URL Query Docs</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.2">
+        
+        
+        
+    
+    <link rel="stylesheet" href="../../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-prism/prism.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-search/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+        <link rel="stylesheet" href="../../book.css">
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="addUrlProps.html" />
+    
+    
+    <link rel="prev" href="../../CHANGELOG.html" />
+    
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../../">
+            
+                <a href="../../">
+            
+                    
+                    Read Me
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="../Examples.html">
+            
+                <a href="../Examples.html">
+            
+                    
+                    Examples
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" data-path="../../CHANGELOG.html">
+            
+                <a href="../../CHANGELOG.html">
+            
+                    
+                    Change Log
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+        
+        <li class="divider"></li>
+        
+        
+    
+        <li class="chapter active" data-level="2.1" data-path="./">
+            
+                <a href="./">
+            
+                    
+                    API Reference
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="2.1.1" data-path="addUrlProps.html">
+            
+                <a href="addUrlProps.html">
+            
+                    
+                    addUrlProps
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.1.2" data-path="configureUrlQuery.html">
+            
+                <a href="configureUrlQuery.html">
+            
+                    
+                    configureUrlQuery
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.1.3" >
+            
+                <span>
+            
+                    
+                    Type Enums
+            
+                </span>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="2.1.3.1" data-path="UrlQueryParamTypes.html">
+            
+                <a href="UrlQueryParamTypes.html">
+            
+                    
+                    UrlQueryParamTypes
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.1.3.2" data-path="UrlUpdateTypes.html">
+            
+                <a href="UrlUpdateTypes.html">
+            
+                    
+                    UrlUpdateTypes
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="2.1.4" >
+            
+                <span>
+            
+                    
+                    Serialization
+            
+                </span>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="2.1.4.1" data-path="Serialize.html">
+            
+                <a href="Serialize.html">
+            
+                    
+                    Serialize
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.1.4.2" data-path="Serialize.html">
+            
+                <a href="Serialize.html#decode">
+            
+                    
+                    decode
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.1.4.3" data-path="Serialize.html">
+            
+                <a href="Serialize.html#encode">
+            
+                    
+                    encode
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="2.1.5" >
+            
+                <span>
+            
+                    
+                    Utils
+            
+                </span>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="2.1.5.1" data-path="subquery.html">
+            
+                <a href="subquery.html">
+            
+                    
+                    subquery
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.1.5.2" data-path="subqueryOmit.html">
+            
+                <a href="subqueryOmit.html">
+            
+                    
+                    subqueryOmit
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="2.1.6" >
+            
+                <span>
+            
+                    
+                    URL Update
+            
+                </span>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="2.1.6.1" data-path="replaceInUrlQuery.html">
+            
+                <a href="replaceInUrlQuery.html">
+            
+                    
+                    replaceInUrlQuery
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.1.6.2" data-path="pushInUrlQuery.html">
+            
+                <a href="pushInUrlQuery.html">
+            
+                    
+                    pushInUrlQuery
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.1.6.3" data-path="replaceUrlQuery.html">
+            
+                <a href="replaceUrlQuery.html">
+            
+                    
+                    replaceUrlQuery
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.1.6.4" data-path="pushUrlQuery.html">
+            
+                <a href="pushUrlQuery.html">
+            
+                    
+                    pushUrlQuery
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.1.6.5" data-path="multiReplaceInUrlQuery.html">
+            
+                <a href="multiReplaceInUrlQuery.html">
+            
+                    
+                    multiReplaceInUrlQuery
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.1.6.6" data-path="multiPushInUrlQuery.html">
+            
+                <a href="multiPushInUrlQuery.html">
+            
+                    
+                    multiPushInUrlQuery
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="2.1.7" >
+            
+                <span>
+            
+                    
+                    React Router v4
+            
+                </span>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="2.1.7.1" data-path="RouterToUrlQuery.html">
+            
+                <a href="RouterToUrlQuery.html">
+            
+                    
+                    RouterToUrlQuery
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="2.1.8" >
+            
+                <span>
+            
+                    
+                    Redux Action Integration
+            
+                </span>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="2.1.8.1" data-path="replaceInUrlQueryFromAction.html">
+            
+                <a href="replaceInUrlQueryFromAction.html">
+            
+                    
+                    replaceInUrlQueryFromAction
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.1.8.2" data-path="replaceUrlQueryFromAction.html">
+            
+                <a href="replaceUrlQueryFromAction.html">
+            
+                    
+                    replaceUrlQueryFromAction
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.1.8.3" data-path="pushInUrlQueryFromAction.html">
+            
+                <a href="pushInUrlQueryFromAction.html">
+            
+                    
+                    pushInUrlQueryFromAction
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.1.8.4" data-path="pushUrlQueryFromAction.html">
+            
+                <a href="pushUrlQueryFromAction.html">
+            
+                    
+                    pushUrlQueryFromAction
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.1.8.5" data-path="urlAction.html">
+            
+                <a href="urlAction.html">
+            
+                    
+                    urlAction
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.1.8.6" data-path="urlReplaceInAction.html">
+            
+                <a href="urlReplaceInAction.html">
+            
+                    
+                    urlReplaceInAction
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.1.8.7" data-path="urlPushInAction.html">
+            
+                <a href="urlPushInAction.html">
+            
+                    
+                    urlPushInAction
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.1.8.8" data-path="urlReplaceAction.html">
+            
+                <a href="urlReplaceAction.html">
+            
+                    
+                    urlReplaceAction
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.1.8.9" data-path="urlPushAction.html">
+            
+                <a href="urlPushAction.html">
+            
+                    
+                    urlPushAction
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.1.8.10" data-path="urlQueryMiddleware.html">
+            
+                <a href="urlQueryMiddleware.html">
+            
+                    
+                    urlQueryMiddleware
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.1.8.11" data-path="urlQueryReducer.html">
+            
+                <a href="urlQueryReducer.html">
+            
+                    
+                    urlQueryReducer
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            Published with GitBook
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href="../.." >API Reference</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <h1 id="api-reference">API Reference</h1>
+<h3 id="top-level-exports">Top-Level Exports</h3>
+<p>React URL Query provides a number of top-level exports.</p>
+<ul>
+<li><a href="addUrlProps.html">addUrlProps([options])(WrappedComponent)</a></li>
+<li><a href="configureUrlQuery.html">configureUrlQuery(config)</a></li>
+</ul>
+<h4 id="type-enums">Type Enums</h4>
+<ul>
+<li><a href="UrlQueryParamTypes.html">UrlQueryParamTypes</a></li>
+<li><a href="UrlUpdateTypes.html">UrlUpdateTypes</a></li>
+</ul>
+<h4 id="serialization">Serialization</h4>
+<ul>
+<li><a href="Serialize.html">Serialize</a></li>
+<li><a href="Serialize.html#decode">decode(type, encodedValue, [defaultValue])</a>, <em>alias of Serialize.decode for convenience</em></li>
+<li><a href="Serialize.html#encode">encode(type, valueToEncode)</a>, <em>alias of Serialize.encode for convenience</em></li>
+</ul>
+<h4 id="utils">Utils</h4>
+<ul>
+<li><a href="subquery.html">subquery(query, ...params)</a></li>
+<li><a href="subqueryOmit.html">subqueryOmit(query, ...omitParams)</a></li>
+</ul>
+<h4 id="url-update">URL Update</h4>
+<ul>
+<li><a href="replaceInUrlQuery.html">replaceInUrlQuery(queryParam, encodedValue, [location])</a></li>
+<li><a href="pushInUrlQuery.html">pushInUrlQuery(queryParam, encodedValue, [location])</a></li>
+<li><a href="replaceUrlQuery.html">replaceUrlQuery(newQuery, [location])</a></li>
+<li><a href="pushUrlQuery.html">pushUrlQuery(newQuery, [location])</a></li>
+<li><a href="multiReplaceInUrlQuery.html">multiReplaceInUrlQuery(queryReplacements, [location])</a></li>
+<li><a href="multiPushInUrlQuery.html">multiPushInUrlQuery(queryReplacements, [location])</a></li>
+</ul>
+<h4 id="react-router-v4">React-Router v4</h4>
+<ul>
+<li><a href="RouterToUrlQuery.html">RouterToUrlQuery</a></li>
+</ul>
+<h4 id="redux-action-integration">Redux Action Integration</h4>
+<p>Note that these helpers are provided in the event you would like to use Redux&apos;s <code>dispatch</code> to update the URL. They are <em>not necessary</em> for using React URL Query with Redux. Compare the <a href="https://github.com/pbeshai/react-url-query/tree/master/examples/redux" target="_blank">example without using dispatch</a> with the <a href="https://github.com/pbeshai/react-url-query/tree/master/examples/redux-with-actions" target="_blank">example using dispatch</a>.</p>
+<ul>
+<li><a href="replaceInUrlQueryFromAction.html">replaceInUrlQueryFromAction(action, [location])</a></li>
+<li><a href="replaceUrlQueryFromAction.html">replaceUrlQueryFromAction(action, [location])</a></li>
+<li><a href="pushInUrlQueryFromAction.html">pushInUrlQueryFromAction(action, [location])</a></li>
+<li><a href="pushUrlQueryFromAction.html">pushUrlQueryFromAction(action, [location])</a></li>
+<li><a href="urlAction.html">urlAction(actionType, payload, [meta])</a></li>
+<li><a href="urlReplaceInAction.html">urlReplaceInAction(actionType, queryParam, valueType)</a></li>
+<li><a href="urlPushInAction.html">urlPushInAction(actionType, queryParam, valueType)</a></li>
+<li><a href="urlReplaceAction.html">urlReplaceAction(actionType, [encodeQuery])</a></li>
+<li><a href="urlPushAction.html">urlPushAction(actionType, [encodeQuery])</a></li>
+<li><a href="urlQueryMiddleware.html">urlQueryMiddleware([options])</a></li>
+<li><a href="urlQueryReducer.html">urlQueryReducer(action, [location])</a></li>
+</ul>
+<h3 id="importing">Importing</h3>
+<p>You can import any of the <strong>Top-Level Exports</strong> as follows:</p>
+<h4 id="es6">ES6</h4>
+<pre class="language-"><code class="lang-js"><span class="token keyword">import</span> <span class="token punctuation">{</span> addUrlProps <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">&apos;react-url-query&apos;</span>
+</code></pre>
+
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="../../CHANGELOG.html" class="navigation navigation-prev " aria-label="Previous page: Change Log">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="addUrlProps.html" class="navigation navigation-next " aria-label="Next page: addUrlProps">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"API Reference","level":"2.1","depth":1,"next":{"title":"addUrlProps","level":"2.1.1","depth":2,"path":"docs/api/addUrlProps.md","ref":"docs/api/addUrlProps.md","articles":[]},"previous":{"title":"Change Log","level":"1.3","depth":1,"path":"CHANGELOG.md","ref":"CHANGELOG.md","articles":[]},"dir":"ltr"},"config":{"plugins":["edit-link","prism","-highlight","github","anchorjs"],"styles":{"website":"book.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"prism":{},"github":{"url":"https://github.com/pbeshai/react-url-query/"},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"edit-link":{"label":"Edit This Page","base":"https://github.com/pbeshai/react-url-query/tree/master"},"theme-default":{"styles":{"website":"book.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"anchorjs":{}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"React URL Query Docs","gitbook":">=3.2.1"},"file":{"path":"docs/api/README.md","mtime":"2017-03-10T13:31:24.000Z","type":"markdown"},"gitbook":{"version":"3.2.2","time":"2017-06-20T21:55:11.919Z"},"basePath":"../..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <script src="../../gitbook/gitbook.js"></script>
+    <script src="../../gitbook/theme.js"></script>
+    
+        
+        <script src="../../gitbook/gitbook-plugin-edit-link/plugin.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-github/plugin.js"></script>
+        
+    
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/3.1.1/anchor.min.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-anchorjs/anchor-style.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-search/search-engine.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-search/search.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-sharing/buttons.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    </body>
+</html>
+

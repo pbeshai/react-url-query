@@ -1,0 +1,18 @@
+language: node_js
+node_js:
+  - "6"
+script:
+  - npm run check:src
+  - npm run build
+branches:
+  only:
+    - master
+cache:
+  directories:
+  - $HOME/.npm
+  - examples/basic/node_modules
+  - examples/basic-mapUrlToProps/node_modules
+  - examples/react-router-v2-and-redux/node_modules
+  - examples/react-router-v4-and-redux/node_modules
+  - examples/redux/node_modules
+  - examples/redux-with-actions/node_modules
