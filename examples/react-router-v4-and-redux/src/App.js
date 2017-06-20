@@ -11,7 +11,7 @@ class App extends Component {
       <div>
         <h3>react-url-query example: react-router-v4-and-redux</h3>
 
-        <Route pattern="/:word" component={MainPage} />
+        <Route exact path="/:word" component={MainPage} />
       </div>
     );
   }

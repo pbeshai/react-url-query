@@ -24,11 +24,20 @@ export default class RouterToUrlQuery extends Component {
       return;
     }
 
+    let history;
+    if (router.history && router.history.push && router.history.replace) {
+      history = router.history;
+    } else if (router.push && router.replace) {
+      history = router;
+    } else if (router.transitionTo && router.replaceWith) {
+      history = {
+        push: router.transitionTo,
+        replace: router.replaceWith,
+      };
+    }
+
     configureUrlQuery({
-      history: {
-        push: (router.history && router.history.push) || router.push || router.transitionTo,
-        replace: (router.history && router.history.replace) || router.replace || router.replaceWith,
-      },
+      history,
     });
   }
 

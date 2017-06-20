@@ -45,13 +45,14 @@ export default function addUrlProps(options = {}) {
     function getUrlObject(props) {
       let location;
 
-      // react-router provides it as a prop
-      if (props.location && (props.location.query || props.location.search != null)) {
-        location = props.location;
 
       // check in history
-      } else if (urlQueryConfig.history.location) {
+      if (urlQueryConfig.history.location) {
         location = urlQueryConfig.history.location;
+
+      // react-router provides it as a prop
+      } else if (props.location && (props.location.query || props.location.search != null)) {
+        location = props.location;
 
       // not found. just use location from window
       } else {
@@ -70,7 +71,7 @@ export default function addUrlProps(options = {}) {
 
       // add in react-router params if requested
       if (addRouterParams || (addRouterParams !== false && urlQueryConfig.addRouterParams)) {
-        Object.assign(result, props.params);
+        Object.assign(result, props.params, props.match && props.match.params);
       }
 
       return result;
@@ -116,7 +117,13 @@ export default function addUrlProps(options = {}) {
                 // handler encodes the value and updates the URL with the encoded value
                 // based on the `updateType` in the config. Default is `replaceIn`
                 handlersAccum[handlerName] = function generatedUrlChangeHandler(value) {
-                  const { location } = this.props;
+                  let { location } = urlQueryConfig.history;
+
+                  // for backwards compatibility
+                  if (!location) {
+                    location = this.props.location;
+                  }
+
                   const encodedValue = encode(type, value);
 
                   // add a simple check when we have props.location.query to see if
@@ -135,7 +142,12 @@ export default function addUrlProps(options = {}) {
               const batchHandlerName = changeHandlerName('urlQueryParams');
               handlers[batchHandlerName] = function generatedBatchUrlChangeHandler(queryValues,
                 updateType = UrlUpdateTypes.replaceIn) {
-                const { location } = this.props;
+                let { location } = urlQueryConfig.history;
+
+                // for backwards compatibility
+                if (!location) {
+                  location = this.props.location;
+                }
 
                 let allEncodedValuesUnchanged = true;
 
