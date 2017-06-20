@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+# 1.2.0
+
+- Adds in numericArray and numericObject types
+- Fixes problem with React Router v4 where location could get out of sync (#22)
+- Updates addRouterParams feature to work with React Router v4's props.match.params
+
 # 1.1.4
 
 - Fixes missed warnings about using `prop-types` npm package (#15)
