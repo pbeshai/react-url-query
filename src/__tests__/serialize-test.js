@@ -11,6 +11,10 @@ import {
   decodeObject,
   encode,
   decode,
+  encodeNumericObject,
+  encodeNumericArray,
+  decodeNumericObject,
+  decodeNumericArray,
 } from '../serialize';
 
 describe('utils', () => {
@@ -153,8 +157,62 @@ describe('utils', () => {
       });
 
       it('handles malformed input', () => {
-        expect(decodeJson('foo-bar-jim-grill')).not.toBeDefined();
-        expect(decodeJson('foo_bar_jim_grill')).not.toBeDefined();
+        expect(decodeObject('foo-bar-jim-grill')).toEqual({ foo: 'bar' });
+        expect(decodeObject('foo_bar_jim_grill'))
+          .toEqual({ foo: undefined, bar: undefined, jim: undefined, grill: undefined });
+      });
+    });
+
+    describe('encodeNumericArray', () => {
+      it('produces the correct value', () => {
+        const input = [9, 4, 0];
+        expect(encodeNumericArray(input)).toBe('9_4_0');
+        expect(encodeNumericArray()).not.toBeDefined();
+      });
+    });
+
+    describe('decodeNumericArray', () => {
+      it('produces the correct value', () => {
+        const output = decodeNumericArray('9_4_0');
+        const expectedOutput = [9, 4, 0];
+
+        expect(output).toEqual(expectedOutput);
+        expect(decodeNumericArray()).not.toBeDefined();
+        expect(decodeNumericArray('')).not.toBeDefined();
+      });
+
+      it('handles empty values', () => {
+        expect(decodeNumericArray('__')).toEqual([undefined, undefined, undefined]);
+      });
+    });
+
+    describe('encodeNumericObject', () => {
+      it('produces the correct value', () => {
+        const input = { test: 55, foo: 94 };
+        const expectedOutput = 'test-55_foo-94';
+        expect(encodeNumericObject(input, '-', '_')).toBe(expectedOutput);
+        expect(encodeNumericObject()).not.toBeDefined();
+        expect(encodeNumericObject({})).not.toBeDefined();
+      });
+    });
+
+    describe('decodeNumericObject', () => {
+      it('produces the correct value', () => {
+        const output = decodeNumericObject('foo-55_jim-100_iros-94');
+        const expectedOutput = {
+          foo: 55,
+          jim: 100,
+          iros: 94,
+        };
+        expect(output).toEqual(expectedOutput);
+        expect(decodeNumericObject()).not.toBeDefined();
+        expect(decodeNumericObject('')).not.toBeDefined();
+      });
+
+      it('handles malformed input', () => {
+        expect(decodeNumericObject('foo-bar-jim-grill')).toEqual({ foo: NaN });
+        expect(decodeNumericObject('foo_bar_jim_grill'))
+          .toEqual({ foo: undefined, bar: undefined, jim: undefined, grill: undefined });
       });
     });
 
@@ -266,6 +324,26 @@ describe('utils', () => {
       it('decode(encode(array)) === array', () => {
         const input = ['A', 'R', 'R', 'A', 'Y'];
         expect(decode('array', encode('array', input))).toEqual(input);
+      });
+
+      it('encode(decode(numericObject)) === numericObject', () => {
+        const input = 'foo-555_baz-999';
+        expect(encode('numericObject', decode('numericObject', input))).toBe(input);
+      });
+
+      it('decode(encode(numericObject)) === numericObject', () => {
+        const input = { foo: 3, baz: 777 };
+        expect(decode('numericObject', encode('numericObject', input))).toEqual(input);
+      });
+
+      it('encode(decode(numericArray)) === numericArray', () => {
+        const input = '1_2_3';
+        expect(encode('numericArray', decode('numericArray', input))).toBe(input);
+      });
+
+      it('decode(encode(numericArray)) === numericArray', () => {
+        const input = [5, 6, 7];
+        expect(decode('numericArray', encode('numericArray', input))).toEqual(input);
       });
     });
   });
