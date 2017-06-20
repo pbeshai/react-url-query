@@ -71,7 +71,7 @@ export default function addUrlProps(options = {}) {
 
       // add in react-router params if requested
       if (addRouterParams || (addRouterParams !== false && urlQueryConfig.addRouterParams)) {
-        Object.assign(result, props.params);
+        Object.assign(result, props.params, props.match && props.match.params);
       }
 
       return result;
