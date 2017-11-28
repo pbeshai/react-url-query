@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+# 1.3.0
+
+- Support global configuration of `entrySeparator` and `keyValSeparator` serialisation properties
+
 # 1.2.0
 
 - Adds in numericArray and numericObject types

@@ -16,6 +16,9 @@ import {
   decodeNumericObject,
   decodeNumericArray,
 } from '../serialize';
+import configureUrlQuery from '../configureUrlQuery';
+
+const resetConfiguration = () => configureUrlQuery({ entrySeparator: '_', keyValSeparator: '-' });
 
 describe('utils', () => {
   describe('serialization', () => {
@@ -116,6 +119,17 @@ describe('utils', () => {
         expect(encodeArray(input)).toBe('a_b_c');
         expect(encodeArray()).not.toBeDefined();
       });
+
+      it('produces the correct value with a different global separator', () => {
+        const input = ['a', 'b', 'c'];
+        // configureUrlQuery({ entrySeparator: '+' });
+
+        expect(encodeArray(input)).toBe('a+b+c');
+        expect(encodeArray()).not.toBeDefined();
+
+        // Revert change so it does not effect other tests
+        resetConfiguration();
+      });
     });
 
     describe('decodeArray', () => {
@@ -140,6 +154,19 @@ describe('utils', () => {
         expect(encodeObject(input, '-', '_')).toBe(expectedOutput);
         expect(encodeObject()).not.toBeDefined();
         expect(encodeObject({})).not.toBeDefined();
+      });
+
+      it('produces the correct value with different global separators', () => {
+        // configureUrlQuery({ entrySeparator: ',', keyValSeparator: ':' });
+        const input = { test: 'bar', foo: 94 };
+        const expectedOutput = 'test:bar,foo:94';
+
+        expect(encodeObject(input)).toBe(expectedOutput);
+        expect(encodeObject()).not.toBeDefined();
+        expect(encodeObject({})).not.toBeDefined();
+
+        // Revert change so it does not effect other tests
+        resetConfiguration();
       });
     });
 
