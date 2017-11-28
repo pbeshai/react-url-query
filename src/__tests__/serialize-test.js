@@ -18,6 +18,7 @@ import {
 } from '../serialize';
 import configureUrlQuery from '../configureUrlQuery';
 
+// Resets the global configuration to prevent side-effects in other tests
 const resetConfiguration = () => configureUrlQuery({ entrySeparator: '_', keyValSeparator: '-' });
 
 describe('utils', () => {
@@ -122,7 +123,7 @@ describe('utils', () => {
 
       it('produces the correct value with a different global separator', () => {
         const input = ['a', 'b', 'c'];
-        // configureUrlQuery({ entrySeparator: '+' });
+        configureUrlQuery({ entrySeparator: '+' });
 
         expect(encodeArray(input)).toBe('a+b+c');
         expect(encodeArray()).not.toBeDefined();
@@ -157,7 +158,7 @@ describe('utils', () => {
       });
 
       it('produces the correct value with different global separators', () => {
-        // configureUrlQuery({ entrySeparator: ',', keyValSeparator: ':' });
+        configureUrlQuery({ entrySeparator: ',', keyValSeparator: ':' });
         const input = { test: 'bar', foo: 94 };
         const expectedOutput = 'test:bar,foo:94';
 
