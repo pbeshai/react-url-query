@@ -9,18 +9,20 @@ import configureUrlQuery from '../configureUrlQuery';
 export default class RouterToUrlQuery extends Component {
   static propTypes = {
     children: PropTypes.node,
-  }
+  };
 
   static contextTypes = {
     router: PropTypes.object,
-  }
+  };
 
   componentWillMount() {
     const { router } = this.context;
 
     if (process.env.NODE_ENV === 'development' && !router) {
       // eslint-disable-next-line
-      console.warn('RouterToUrlQuery: `router` object not found in context. Not configuring history for react-url-query.');
+      console.warn(
+        'RouterToUrlQuery: `router` object not found in context. Not configuring history for react-url-query.'
+      );
       return;
     }
 

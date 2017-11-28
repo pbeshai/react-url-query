@@ -1,38 +1,41 @@
 {
   "name": "react-url-query",
   "version": "1.3.0",
-  "description": "A library for managing state through query parameters in the URL in React. Works well with or without Redux and React Router.",
+  "description":
+    "A library for managing state through query parameters in the URL in React. Works well with or without Redux and React Router.",
   "main": "lib/index.js",
-  "files": [
-    "dist",
-    "lib",
-    "es",
-    "src"
-  ],
+  "files": ["dist", "lib", "es", "src"],
   "scripts": {
     "clean": "rimraf lib dist es coverage",
     "lint": "npm run lint:src && npm run lint:examples",
     "lint:src": "eslint src test build",
     "lint:examples": "eslint examples",
+    "prettier": "prettier --write \"src/**/*.js\"",
     "test": "cross-env BABEL_ENV=commonjs jest",
     "test:watch": "npm test -- --watch",
     "test:cov": "npm test -- --coverage",
     "test:examples": "babel-node examples/testAll.js",
     "check:src": "npm run lint:src && npm run test",
-    "check:examples": "npm run build:examples && npm run lint:examples && npm run test:examples",
+    "check:examples":
+      "npm run build:examples && npm run lint:examples && npm run test:examples",
     "build:commonjs": "cross-env BABEL_ENV=commonjs babel src --out-dir lib",
     "build:es": "cross-env BABEL_ENV=es babel src --out-dir es",
-    "build:umd": "cross-env BABEL_ENV=commonjs NODE_ENV=development webpack src/index.js dist/react-url-query.js",
-    "build:umd:min": "cross-env BABEL_ENV=commonjs NODE_ENV=production webpack src/index.js dist/react-url-query.min.js",
+    "build:umd":
+      "cross-env BABEL_ENV=commonjs NODE_ENV=development webpack src/index.js dist/react-url-query.js",
+    "build:umd:min":
+      "cross-env BABEL_ENV=commonjs NODE_ENV=production webpack src/index.js dist/react-url-query.min.js",
     "build:examples": "babel-node examples/buildAll.js",
-    "build": "npm run build:commonjs && npm run build:es && npm run build:umd && npm run build:umd:min",
+    "build":
+      "npm run build:commonjs && npm run build:es && npm run build:umd && npm run build:umd:min",
     "dev": "cross-env BABEL_ENV=commonjs babel src --watch --out-dir lib",
     "prepublish": "npm run clean && npm run check:src && npm run build",
     "docs:clean": "rimraf _book",
     "docs:prepare": "gitbook install",
-    "docs:build": "npm run docs:prepare && gitbook build -g pbeshai/react-url-query",
+    "docs:build":
+      "npm run docs:prepare && gitbook build -g pbeshai/react-url-query",
     "docs:watch": "npm run docs:prepare && gitbook serve",
-    "docs:publish": "npm run docs:clean && npm run docs:build && cd _book && git init && git commit --allow-empty -m 'update book' && git checkout -b gh-pages && touch .nojekyll && git add . && git commit -am 'update book' && git push git@github.com:pbeshai/react-url-query gh-pages --force"
+    "docs:publish":
+      "npm run docs:clean && npm run docs:build && cd _book && git init && git commit --allow-empty -m 'update book' && git checkout -b gh-pages && touch .nojekyll && git add . && git commit -am 'update book' && git push git@github.com:pbeshai/react-url-query gh-pages --force"
   },
   "repository": {
     "type": "git",
@@ -49,7 +52,8 @@
     "url reducer",
     "middleware"
   ],
-  "author": "Peter Beshai <peter.beshai@gmail.com> (https://github.com/pbeshai)",
+  "author":
+    "Peter Beshai <peter.beshai@gmail.com> (https://github.com/pbeshai)",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/pbeshai/react-url-query/issues"
@@ -58,7 +62,7 @@
   "devDependencies": {
     "babel-cli": "6.14.0",
     "babel-core": "6.14.0",
-    "babel-eslint": "6.1.2",
+    "babel-eslint": "^7.2.3",
     "babel-jest": "15.0.0",
     "babel-loader": "6.2.5",
     "babel-plugin-transform-es2015-modules-commonjs": "6.14.0",
@@ -68,13 +72,15 @@
     "babel-register": "6.14.0",
     "cross-env": "3.0.0",
     "enzyme": "^2.4.1",
-    "eslint": "3.6.0",
-    "eslint-config-airbnb": "^12.0.0",
-    "eslint-plugin-import": "^1.16.0",
-    "eslint-plugin-jsx-a11y": "^2.2.2",
-    "eslint-plugin-react": "^6.3.0",
+    "eslint": "^4.12.0",
+    "eslint-config-react-app": "^2.0.1",
+    "eslint-plugin-flowtype": "^2.39.1",
+    "eslint-plugin-import": "^2.8.0",
+    "eslint-plugin-jsx-a11y": "^5.1.1",
+    "eslint-plugin-react": "^7.5.1",
     "gitbook-cli": "^2.3.0",
     "jest": "15.1.1",
+    "prettier": "^1.8.2",
     "react": "^15.0.0",
     "react-addons-test-utils": "^15.3.2",
     "react-dom": "^15.3.2",
@@ -92,19 +98,13 @@
   "npmFileMap": [
     {
       "basePath": "/dist/",
-      "files": [
-        "*.js"
-      ]
+      "files": ["*.js"]
     }
   ],
   "browserify": {
-    "transform": [
-      "loose-envify"
-    ]
+    "transform": ["loose-envify"]
   },
   "jest": {
-    "testPathDirs": [
-      "src"
-    ]
+    "testPathDirs": ["src"]
   }
 }

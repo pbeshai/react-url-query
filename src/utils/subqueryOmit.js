@@ -7,7 +7,8 @@ export default function subqueryOmit(query, ...omitParams) {
     return query;
   }
 
-  return Object.keys(query).filter(param => !omitParams.includes(param))
+  return Object.keys(query)
+    .filter(param => !omitParams.includes(param))
     .reduce((newQuery, param) => {
       newQuery[param] = query[param];
       return newQuery;

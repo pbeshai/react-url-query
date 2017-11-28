@@ -23,9 +23,7 @@ export default function addUrlProps(options = {}) {
     addUrlChangeHandlers,
   } = options;
 
-  let {
-    changeHandlerName,
-  } = options;
+  let { changeHandlerName } = options;
 
   return function addPropsWrapper(WrappedComponent) {
     // caching to prevent unnecessary generation of new onChange functions
@@ -45,21 +43,24 @@ export default function addUrlProps(options = {}) {
     function getUrlObject(props) {
       let location;
 
-
       // check in history
       if (urlQueryConfig.history.location) {
         location = urlQueryConfig.history.location;
 
-      // react-router provides it as a prop
-      } else if (props.location && (props.location.query || props.location.search != null)) {
+        // react-router provides it as a prop
+      } else if (
+        props.location &&
+        (props.location.query || props.location.search != null)
+      ) {
         location = props.location;
 
-      // not found. just use location from window
+        // not found. just use location from window
       } else {
         location = window.location;
       }
 
-      const currentQuery = location.query || parseQueryString(location.search) || {};
+      const currentQuery =
+        location.query || parseQueryString(location.search) || {};
 
       let result;
       // if a url query decoder is provided, decode the query then return that.
@@ -70,20 +71,24 @@ export default function addUrlProps(options = {}) {
       }
 
       // add in react-router params if requested
-      if (addRouterParams || (addRouterParams !== false && urlQueryConfig.addRouterParams)) {
+      if (
+        addRouterParams ||
+        (addRouterParams !== false && urlQueryConfig.addRouterParams)
+      ) {
         Object.assign(result, props.params, props.match && props.match.params);
       }
 
       return result;
     }
 
-    const displayName = WrappedComponent.displayName || WrappedComponent.name || 'Component';
+    const displayName =
+      WrappedComponent.displayName || WrappedComponent.name || 'Component';
     class AddUrlProps extends Component {
-      static displayName = `AddUrlProps(${displayName})`
-      static WrappedComponent = WrappedComponent
+      static displayName = `AddUrlProps(${displayName})`;
+      static WrappedComponent = WrappedComponent;
       static propTypes = {
         location: PropTypes.any, // eslint-disable-line react/forbid-prop-types
-      }
+      };
 
       /**
        * Create URL change handlers based on props, the urlPropsQueryConfig (if provided),
@@ -96,7 +101,11 @@ export default function addUrlProps(options = {}) {
         if (urlPropsQueryConfig) {
           // if we have a props->query config, generate the change handler props unless
           // addUrlChangeHandlers is false
-          if (addUrlChangeHandlers || (addUrlChangeHandlers == null && urlQueryConfig.addUrlChangeHandlers)) {
+          if (
+            addUrlChangeHandlers ||
+            (addUrlChangeHandlers == null &&
+              urlQueryConfig.addUrlChangeHandlers)
+          ) {
             // use cache if available. Have to do this since urlQueryConfig can change between
             // renders (although that is unusual).
             if (cachedHandlers) {
@@ -108,40 +117,62 @@ export default function addUrlProps(options = {}) {
               }
 
               // for each URL config prop, create a handler
-              handlers = Object.keys(urlPropsQueryConfig).reduce((handlersAccum, propName) => {
-                const { updateType, queryParam = propName, type } = urlPropsQueryConfig[propName];
+              handlers = Object.keys(urlPropsQueryConfig).reduce(
+                (handlersAccum, propName) => {
+                  const {
+                    updateType,
+                    queryParam = propName,
+                    type,
+                  } = urlPropsQueryConfig[propName];
 
-                // name handler for `foo` => `onChangeFoo`
-                const handlerName = changeHandlerName(propName);
+                  // name handler for `foo` => `onChangeFoo`
+                  const handlerName = changeHandlerName(propName);
 
-                // handler encodes the value and updates the URL with the encoded value
-                // based on the `updateType` in the config. Default is `replaceIn`
-                handlersAccum[handlerName] = function generatedUrlChangeHandler(value) {
-                  let { location } = urlQueryConfig.history;
+                  // handler encodes the value and updates the URL with the encoded value
+                  // based on the `updateType` in the config. Default is `replaceIn`
+                  handlersAccum[
+                    handlerName
+                  ] = function generatedUrlChangeHandler(value) {
+                    let { location } = urlQueryConfig.history;
 
-                  // for backwards compatibility
-                  if (!location) {
-                    location = this.props.location;
-                  }
+                    // for backwards compatibility
+                    if (!location) {
+                      location = this.props.location;
+                    }
 
-                  const encodedValue = encode(type, value);
+                    const encodedValue = encode(type, value);
 
-                  // add a simple check when we have props.location.query to see if
-                  // we even need to update.
-                  if (location && location.query && location.query[queryParam] === encodedValue) {
-                    return undefined; // skip updating
-                  }
+                    // add a simple check when we have props.location.query to see if
+                    // we even need to update.
+                    if (
+                      location &&
+                      location.query &&
+                      location.query[queryParam] === encodedValue
+                    ) {
+                      return undefined; // skip updating
+                    }
 
-                  return updateUrlQuerySingle(updateType, queryParam, encodedValue, location);
-                }.bind(this); // bind this so we can access props dynamically
+                    return updateUrlQuerySingle(
+                      updateType,
+                      queryParam,
+                      encodedValue,
+                      location
+                    );
+                  }.bind(this); // bind this so we can access props dynamically
 
-                return handlersAccum;
-              }, {});
+                  return handlersAccum;
+                },
+                {}
+              );
 
               // add in a batch change handler
               const batchHandlerName = changeHandlerName('urlQueryParams');
-              handlers[batchHandlerName] = function generatedBatchUrlChangeHandler(queryValues,
-                updateType = UrlUpdateTypes.replaceIn) {
+              handlers[
+                batchHandlerName
+              ] = function generatedBatchUrlChangeHandler(
+                queryValues,
+                updateType = UrlUpdateTypes.replaceIn
+              ) {
                 let { location } = urlQueryConfig.history;
 
                 // for backwards compatibility
@@ -152,27 +183,40 @@ export default function addUrlProps(options = {}) {
                 let allEncodedValuesUnchanged = true;
 
                 // encode each value
-                const queryReplacements = Object.keys(queryValues).reduce((accum, propName) => {
-                  const { queryParam = propName, type } = urlPropsQueryConfig[propName];
-                  const value = queryValues[propName];
+                const queryReplacements = Object.keys(queryValues).reduce(
+                  (accum, propName) => {
+                    const { queryParam = propName, type } = urlPropsQueryConfig[
+                      propName
+                    ];
+                    const value = queryValues[propName];
 
-                  const encodedValue = encode(type, value);
-                  accum[queryParam] = encodedValue;
+                    const encodedValue = encode(type, value);
+                    accum[queryParam] = encodedValue;
 
-                  // add a simple check when we have props.location.query to see if
-                  // we even need to update.
-                  if (location && location.query && location.query[queryParam] !== encodedValue) {
-                    allEncodedValuesUnchanged = false;
-                  }
+                    // add a simple check when we have props.location.query to see if
+                    // we even need to update.
+                    if (
+                      location &&
+                      location.query &&
+                      location.query[queryParam] !== encodedValue
+                    ) {
+                      allEncodedValuesUnchanged = false;
+                    }
 
-                  return accum;
-                }, {});
+                    return accum;
+                  },
+                  {}
+                );
 
                 if (location && location.query && allEncodedValuesUnchanged) {
                   return undefined; // skip updating if no encoded values changed
                 }
 
-                return updateUrlQueryMulti(updateType, queryReplacements, location);
+                return updateUrlQueryMulti(
+                  updateType,
+                  queryReplacements,
+                  location
+                );
               }.bind(this);
 
               // cache these so we don't regenerate new functions every render
@@ -184,12 +228,15 @@ export default function addUrlProps(options = {}) {
         // if a manual mapping function is provided, use it, passing in the auto-generated
         // handlers as an optional secondary argument.
         if (mapUrlChangeHandlersToProps) {
-          handlers = mapUrlChangeHandlersToProps.call(this, propsWithUrl, handlers);
+          handlers = mapUrlChangeHandlersToProps.call(
+            this,
+            propsWithUrl,
+            handlers
+          );
         }
 
         return handlers;
       }
-
 
       render() {
         // get the url query parameters as an object mapping name to value.
@@ -200,12 +247,18 @@ export default function addUrlProps(options = {}) {
         const url = getUrlObject(this.props);
 
         // pass to mapUrlToProps for further decoding if provided
-        this.propsWithUrl = Object.assign({}, this.props, mapUrlToProps(url, this.props));
+        this.propsWithUrl = Object.assign(
+          {},
+          this.props,
+          mapUrlToProps(url, this.props)
+        );
 
         // add in the URL change handlers - either auto-generated based on config
         // or from mapUrlChangeHandlersToProps.
-        Object.assign(this.propsWithUrl, this.getUrlChangeHandlerProps(this.propsWithUrl));
-
+        Object.assign(
+          this.propsWithUrl,
+          this.getUrlChangeHandlerProps(this.propsWithUrl)
+        );
 
         // render the wrapped component with the URL props added in.
         return <WrappedComponent {...this.propsWithUrl} />;

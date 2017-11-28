@@ -9,8 +9,9 @@ it('returns empty object if no params', () => {
 });
 
 it('returns proper subquery', () => {
-  expect(subquery({ one: 'one', two: 'two', thr: 'ree' }, 'two', 'one'))
-    .toEqual({ one: 'one', two: 'two' });
+  expect(
+    subquery({ one: 'one', two: 'two', thr: 'ree' }, 'two', 'one')
+  ).toEqual({ one: 'one', two: 'two' });
 });
 
 it('returns a new object even if all keys match', () => {

@@ -22,7 +22,12 @@ describe('updateUrlQuerySingle', () => {
     configureUrlQuery({ history });
 
     const location = { pathname: '/', search: '?foo=99&bar=baz' };
-    const newLocation = updateUrlQuerySingle(UrlUpdateTypes.replace, 'foo', '123', location);
+    const newLocation = updateUrlQuerySingle(
+      UrlUpdateTypes.replace,
+      'foo',
+      '123',
+      location
+    );
     expect(newLocation).toEqual({ pathname: '/', search: '?foo=123' });
     expect(history.replace).toBeCalled();
     expect(history.push).not.toBeCalled();
@@ -33,7 +38,12 @@ describe('updateUrlQuerySingle', () => {
     configureUrlQuery({ history });
 
     const location = { pathname: '/', search: '?foo=99&bar=baz' };
-    const newLocation = updateUrlQuerySingle(UrlUpdateTypes.push, 'foo', '123', location);
+    const newLocation = updateUrlQuerySingle(
+      UrlUpdateTypes.push,
+      'foo',
+      '123',
+      location
+    );
     expect(newLocation).toEqual({ pathname: '/', search: '?foo=123' });
     expect(history.push).toBeCalled();
     expect(history.replace).not.toBeCalled();
@@ -44,7 +54,12 @@ describe('updateUrlQuerySingle', () => {
     configureUrlQuery({ history });
 
     const location = { pathname: '/', search: '?foo=99&bar=baz' };
-    const newLocation = updateUrlQuerySingle(UrlUpdateTypes.replaceIn, 'foo', '123', location);
+    const newLocation = updateUrlQuerySingle(
+      UrlUpdateTypes.replaceIn,
+      'foo',
+      '123',
+      location
+    );
     expect(newLocation).toEqual({ pathname: '/', search: '?bar=baz&foo=123' });
     expect(history.replace).toBeCalled();
     expect(history.push).not.toBeCalled();
@@ -55,7 +70,12 @@ describe('updateUrlQuerySingle', () => {
     configureUrlQuery({ history });
 
     const location = { pathname: '/', search: '?foo=99&bar=baz' };
-    const newLocation = updateUrlQuerySingle(UrlUpdateTypes.pushIn, 'foo', '123', location);
+    const newLocation = updateUrlQuerySingle(
+      UrlUpdateTypes.pushIn,
+      'foo',
+      '123',
+      location
+    );
     expect(newLocation).toEqual({ pathname: '/', search: '?bar=baz&foo=123' });
     expect(history.push).toBeCalled();
     expect(history.replace).not.toBeCalled();
@@ -106,7 +126,10 @@ describe('replaceInUrlQuery', () => {
 
     const location = { pathname: '/', query: { foo: '99', bar: 'baz' } };
     const newLocation = replaceInUrlQuery('foo', '123', location);
-    expect(newLocation).toEqual({ pathname: '/', query: { foo: '123', bar: 'baz' } });
+    expect(newLocation).toEqual({
+      pathname: '/',
+      query: { foo: '123', bar: 'baz' },
+    });
     expect(history.replace).toBeCalled();
     expect(history.push).not.toBeCalled();
   });
@@ -118,7 +141,10 @@ describe('replaceInUrlQuery', () => {
     history.location = { pathname: '/', query: { foo: '99', bar: 'baz' } };
 
     const newLocation = replaceInUrlQuery('foo', '123');
-    expect(newLocation).toEqual({ pathname: '/', query: { foo: '123', bar: 'baz' } });
+    expect(newLocation).toEqual({
+      pathname: '/',
+      query: { foo: '123', bar: 'baz' },
+    });
     expect(history.replace).toBeCalled();
     expect(history.push).not.toBeCalled();
   });
@@ -158,7 +184,11 @@ describe('updateUrlQueryMulti', () => {
     configureUrlQuery({ history });
 
     const location = { pathname: '/', search: '?foo=99&bar=baz&blatt=david' };
-    const newLocation = updateUrlQueryMulti(UrlUpdateTypes.replace, { bar: 'test', foo: '123' }, location);
+    const newLocation = updateUrlQueryMulti(
+      UrlUpdateTypes.replace,
+      { bar: 'test', foo: '123' },
+      location
+    );
     expect(newLocation).toEqual({ pathname: '/', search: '?bar=test&foo=123' });
     expect(history.replace).toBeCalled();
     expect(history.push).not.toBeCalled();
@@ -169,7 +199,11 @@ describe('updateUrlQueryMulti', () => {
     configureUrlQuery({ history });
 
     const location = { pathname: '/', search: '?foo=99&bar=baz&blatt=david' };
-    const newLocation = updateUrlQueryMulti(UrlUpdateTypes.push, { bar: 'test', foo: '123' }, location);
+    const newLocation = updateUrlQueryMulti(
+      UrlUpdateTypes.push,
+      { bar: 'test', foo: '123' },
+      location
+    );
     expect(newLocation).toEqual({ pathname: '/', search: '?bar=test&foo=123' });
     expect(history.push).toBeCalled();
     expect(history.replace).not.toBeCalled();
@@ -180,8 +214,15 @@ describe('updateUrlQueryMulti', () => {
     configureUrlQuery({ history });
 
     const location = { pathname: '/', search: '?foo=99&bar=baz&blatt=david' };
-    const newLocation = updateUrlQueryMulti(UrlUpdateTypes.replaceIn, { bar: 'test', foo: '123' }, location);
-    expect(newLocation).toEqual({ pathname: '/', search: '?bar=test&blatt=david&foo=123' });
+    const newLocation = updateUrlQueryMulti(
+      UrlUpdateTypes.replaceIn,
+      { bar: 'test', foo: '123' },
+      location
+    );
+    expect(newLocation).toEqual({
+      pathname: '/',
+      search: '?bar=test&blatt=david&foo=123',
+    });
     expect(history.replace).toBeCalled();
     expect(history.push).not.toBeCalled();
   });
@@ -191,8 +232,15 @@ describe('updateUrlQueryMulti', () => {
     configureUrlQuery({ history });
 
     const location = { pathname: '/', search: '?foo=99&bar=baz&blatt=david' };
-    const newLocation = updateUrlQueryMulti(UrlUpdateTypes.pushIn, { bar: 'test', foo: '123' }, location);
-    expect(newLocation).toEqual({ pathname: '/', search: '?bar=test&blatt=david&foo=123' });
+    const newLocation = updateUrlQueryMulti(
+      UrlUpdateTypes.pushIn,
+      { bar: 'test', foo: '123' },
+      location
+    );
+    expect(newLocation).toEqual({
+      pathname: '/',
+      search: '?bar=test&blatt=david&foo=123',
+    });
     expect(history.push).toBeCalled();
     expect(history.replace).not.toBeCalled();
   });
