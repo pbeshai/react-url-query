@@ -33,6 +33,16 @@ function createUrlQueryConfig() {
 
       return undefined;
     },
+    /**
+     * The separator between entries
+     * @default {String} "_"
+     */
+    entrySeparator: '_',
+    /**
+     * The separator between keys and values
+     * @default {String} "-"
+     */
+    keyValSeparator: '-',
   };
 }
 

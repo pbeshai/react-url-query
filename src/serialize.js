@@ -1,6 +1,7 @@
 /**
  * Functions for encoding and decoding values as strings.
  */
+import config from './urlQueryConfig';
 
 /**
  * Encodes a date as a string in YYYY-MM-DD format.
@@ -123,7 +124,7 @@ export function decodeJson(jsonStr) {
  * @param {Array} array The array to be encoded
  * @return {String} The JSON string representation of array
  */
-export function encodeArray(array, entrySeparator = '_') {
+export function encodeArray(array, entrySeparator = config.entrySeparator) {
   if (!array) {
     return undefined;
   }
@@ -137,7 +138,7 @@ export function encodeArray(array, entrySeparator = '_') {
  * @param {String} jsonStr The JSON string representation
  * @return {Array} The javascript representation
  */
-export function decodeArray(arrayStr, entrySeparator = '_') {
+export function decodeArray(arrayStr, entrySeparator = config.entrySeparator) {
   if (!arrayStr) {
     return undefined;
   }
@@ -159,7 +160,7 @@ export const encodeNumericArray = encodeArray;
  * @param {String} jsonStr The JSON string representation
  * @return {Array} The javascript representation
  */
-export function decodeNumericArray(arrayStr, entrySeparator = '_') {
+export function decodeNumericArray(arrayStr, entrySeparator = config.entrySeparator) {
   const decoded = decodeArray(arrayStr, entrySeparator);
 
   if (!decoded) {
@@ -181,7 +182,7 @@ export function decodeNumericArray(arrayStr, entrySeparator = '_') {
  * @param {String} entrySeparator="_" The separator between entries
  * @return {String} The encoded object
  */
-export function encodeObject(obj, keyValSeparator = '-', entrySeparator = '_') {
+export function encodeObject(obj, keyValSeparator = config.keyValSeparator, entrySeparator = config.entrySeparator) {
   if (!obj || !Object.keys(obj).length) {
     return undefined;
   }
@@ -200,7 +201,7 @@ export function encodeObject(obj, keyValSeparator = '-', entrySeparator = '_') {
  * @param {String} entrySeparator="_" The separator between entries
  * @return {Object} The javascript object
  */
-export function decodeObject(objStr, keyValSeparator = '-', entrySeparator = '_') {
+export function decodeObject(objStr, keyValSeparator = config.keyValSeparator, entrySeparator = config.entrySeparator) {
   if (!objStr || !objStr.length) {
     return undefined;
   }
@@ -238,7 +239,11 @@ export const encodeNumericObject = encodeObject;
  * @param {String} entrySeparator="_" The separator between entries
  * @return {Object} The javascript object
  */
-export function decodeNumericObject(objStr, keyValSeparator = '-', entrySeparator = '_') {
+export function decodeNumericObject(
+  objStr,
+  keyValSeparator = config.keyValSeparator,
+  entrySeparator = config.entrySeparator
+) {
   const decoded = decodeObject(objStr, keyValSeparator, entrySeparator);
 
   if (!decoded) {

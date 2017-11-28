@@ -12,6 +12,10 @@ This function configures the singleton instance of React URL Query. The availabl
 
 * `readLocationFromStore` (*Function*): Reads in `location` from the Redux store if available and passes it to the reducer in [`urlQueryMiddleware`](urlQueryMiddleware.md). This property is only used when the middleware is added to Redux, as in [this example](https://github.com/pbeshai/react-url-query/tree/master/examples/redux-with-actions). Defaults to reading from `state.routing.locationBeforeTransitions`, the standard location for [react-router-redux](https://github.com/reactjs/react-router-redux).
 
+* `entrySeparator` (*String*): Specifies the separator that should be between entries when encoding / decoding. By default `_`.
+
+* `keyValSeparator` (*String*): Specifies the separator that should be between key and values when encoding / decoding. By default `-`.
+
 #### Arguments
 
 1. `options` (*Object*): The options to update in the configuration.
