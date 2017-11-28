@@ -18,7 +18,9 @@ export function encodeDate(date) {
   const month = date.getMonth() + 1;
   const day = date.getDate();
 
-  return `${year}-${month < 10 ? `0${month}` : month}-${day < 10 ? `0${day}` : day}`;
+  return `${year}-${month < 10 ? `0${month}` : month}-${day < 10
+    ? `0${day}`
+    : day}`;
 }
 
 /**
@@ -86,6 +88,69 @@ export function decodeBoolean(boolStr) {
 }
 
 /**
+ * Encodes a number as a string.
+ *
+ * @param {Number} num
+ * @return {String} the encoded number
+ */
+export function encodeNumber(num) {
+  if (num == null) {
+    return undefined;
+  }
+
+  return String(num);
+}
+
+/**
+ * Decodes a number from a string via parseFloat. If the number is invalid,
+ * it returns undefined.
+ *
+ * @param {String} numStr the encoded number string
+ * @return {Number} the number value
+ */
+export function decodeNumber(numStr) {
+  if (numStr == null) {
+    return undefined;
+  }
+
+  const result = parseFloat(numStr);
+
+  if (isNaN(result)) {
+    return undefined;
+  }
+
+  return result;
+}
+
+/**
+ * Encodes a string while safely handling null and undefined values.
+ *
+ * @param {String} string
+ * @return {String} the encoded string
+ */
+export function encodeString(str) {
+  if (str == null) {
+    return undefined;
+  }
+
+  return String(str);
+}
+
+/**
+ * Decodes a string while safely handling null and undefined values.
+ *
+ * @param {String} str the encoded string
+ * @return {String} the string value
+ */
+export function decodeString(str) {
+  if (str == null) {
+    return undefined;
+  }
+
+  return String(str);
+}
+
+/**
  * Encodes anything as a JSON string.
  *
  * @param {Any} any The thing to be encoded
@@ -113,7 +178,9 @@ export function decodeJson(jsonStr) {
   let result;
   try {
     result = JSON.parse(jsonStr);
-  } catch (e) { /* ignore errors, returning undefined */ }
+  } catch (e) {
+    /* ignore errors, returning undefined */
+  }
 
   return result;
 }
@@ -143,7 +210,9 @@ export function decodeArray(arrayStr, entrySeparator = config.entrySeparator) {
     return undefined;
   }
 
-  return arrayStr.split(entrySeparator).map(item => (item === '' ? undefined : item));
+  return arrayStr
+    .split(entrySeparator)
+    .map(item => (item === '' ? undefined : item));
 }
 
 /**
@@ -160,7 +229,10 @@ export const encodeNumericArray = encodeArray;
  * @param {String} jsonStr The JSON string representation
  * @return {Array} The javascript representation
  */
-export function decodeNumericArray(arrayStr, entrySeparator = config.entrySeparator) {
+export function decodeNumericArray(
+  arrayStr,
+  entrySeparator = config.entrySeparator
+) {
   const decoded = decodeArray(arrayStr, entrySeparator);
 
   if (!decoded) {
@@ -169,7 +241,6 @@ export function decodeNumericArray(arrayStr, entrySeparator = config.entrySepara
 
   return decoded.map(d => (d == null ? d : +d));
 }
-
 
 /**
  * Encode simple objects as readable strings. Currently works only for simple,
@@ -182,12 +253,18 @@ export function decodeNumericArray(arrayStr, entrySeparator = config.entrySepara
  * @param {String} entrySeparator="_" The separator between entries
  * @return {String} The encoded object
  */
-export function encodeObject(obj, keyValSeparator = config.keyValSeparator, entrySeparator = config.entrySeparator) {
+export function encodeObject(
+  obj,
+  keyValSeparator = config.keyValSeparator,
+  entrySeparator = config.entrySeparator
+) {
   if (!obj || !Object.keys(obj).length) {
     return undefined;
   }
 
-  return Object.keys(obj).map(key => `${key}${keyValSeparator}${obj[key]}`).join(entrySeparator);
+  return Object.keys(obj)
+    .map(key => `${key}${keyValSeparator}${obj[key]}`)
+    .join(entrySeparator);
 }
 
 /**
@@ -201,20 +278,23 @@ export function encodeObject(obj, keyValSeparator = config.keyValSeparator, entr
  * @param {String} entrySeparator="_" The separator between entries
  * @return {Object} The javascript object
  */
-export function decodeObject(objStr, keyValSeparator = config.keyValSeparator, entrySeparator = config.entrySeparator) {
+export function decodeObject(
+  objStr,
+  keyValSeparator = config.keyValSeparator,
+  entrySeparator = config.entrySeparator
+) {
   if (!objStr || !objStr.length) {
     return undefined;
   }
   const obj = {};
 
-  objStr.split(entrySeparator).forEach((entryStr) => {
+  objStr.split(entrySeparator).forEach(entryStr => {
     const [key, value] = entryStr.split(keyValSeparator);
     obj[key] = value;
   });
 
   return obj;
 }
-
 
 /**
  * Encode simple objects as readable strings. Alias of encodeObject.
@@ -251,20 +331,19 @@ export function decodeNumericObject(
   }
 
   // convert to numbers
-  Object.keys(decoded).forEach((key) => {
+  Object.keys(decoded).forEach(key => {
     decoded[key] = decoded[key] == null ? decoded[key] : +decoded[key];
   });
 
   return decoded;
 }
 
-
 /**
  * Collection of Decoders by type
  */
 export const Decoders = {
-  number: parseFloat,
-  string: d => d,
+  number: decodeNumber,
+  string: decodeString,
   object: decodeObject,
   array: decodeArray,
   json: decodeJson,
@@ -273,7 +352,6 @@ export const Decoders = {
   numericObject: decodeNumericObject,
   numericArray: decodeNumericArray,
 };
-
 
 /**
  * Generic decode function that takes a type as an argument.
@@ -306,8 +384,8 @@ export function decode(type, encodedValue, defaultValue) {
  * Collection of Decoders by type
  */
 export const Encoders = {
-  number: String,
-  string: d => d,
+  number: encodeNumber,
+  string: encodeString,
   object: encodeObject,
   array: encodeArray,
   json: encodeJson,
