@@ -307,6 +307,8 @@ describe('utils', () => {
       it('decodes using default value', () => {
         const input = undefined;
         expect(decode('number', input, 94)).toBe(94);
+        expect(decode('array', 'foo_bar', [])).toEqual(['foo', 'bar']);
+        expect(decode('object', 'a-b_c-d', {})).toEqual({ a: 'b', c: 'd' });
       });
 
       it('decodes using custom function', () => {

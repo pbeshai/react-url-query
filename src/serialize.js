@@ -372,7 +372,7 @@ export function decode(type, encodedValue, defaultValue) {
   } else if (encodedValue === undefined) {
     decodedValue = defaultValue;
   } else if (Decoders[type]) {
-    decodedValue = Decoders[type](encodedValue, defaultValue);
+    decodedValue = Decoders[type](encodedValue);
   } else {
     decodedValue = encodedValue;
   }
