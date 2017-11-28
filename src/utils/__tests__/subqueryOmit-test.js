@@ -10,8 +10,9 @@ it('returns full input object if no params', () => {
 });
 
 it('returns proper subquery', () => {
-  expect(subqueryOmit({ one: 'one', two: 'two', thr: 'ree' }, 'two', 'one'))
-    .toEqual({ thr: 'ree' });
+  expect(
+    subqueryOmit({ one: 'one', two: 'two', thr: 'ree' }, 'two', 'one')
+  ).toEqual({ thr: 'ree' });
 });
 
 it('returns an empty object when all keys omitted', () => {

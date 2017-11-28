@@ -19,7 +19,9 @@ describe('url query params as props', () => {
     const location = { query: { foo: '94', bar: 'baz' } };
 
     const Wrapped = addUrlProps()(MyComponent);
-    const wrapper = shallow(<Wrapped location={location} otherProp foo={1000} />);
+    const wrapper = shallow(
+      <Wrapped location={location} otherProp foo={1000} />
+    );
     const props = wrapper.first().props(); // this only works when using `shallow` not `mount`
 
     expect(props.otherProp).toBe(true);
@@ -76,7 +78,9 @@ describe('url query params as props', () => {
       };
     }
 
-    const Wrapped = addUrlProps({ mapUrlToProps, urlPropsQueryConfig })(MyComponent);
+    const Wrapped = addUrlProps({ mapUrlToProps, urlPropsQueryConfig })(
+      MyComponent
+    );
     const wrapper = shallow(<Wrapped location={location} />);
     const props = wrapper.first().props();
 
@@ -111,18 +115,21 @@ describe('adds router params', () => {
     const location = { query: { fooInUrl: '94', bar: 'baz' } };
 
     const Wrapped = addUrlProps({ addRouterParams: true })(MyComponent);
-    const wrapper = shallow(<Wrapped location={location} params={{ word: 'test' }} />);
+    const wrapper = shallow(
+      <Wrapped location={location} params={{ word: 'test' }} />
+    );
     const props = wrapper.first().props();
 
     expect(props.word).toBe('test');
   });
 
-
   it('url props does not include props.params if addRouterParams is false', () => {
     const location = { query: { fooInUrl: '94', bar: 'baz' } };
 
     const Wrapped = addUrlProps({ addRouterParams: false })(MyComponent);
-    const wrapper = shallow(<Wrapped location={location} params={{ word: 'test' }} />);
+    const wrapper = shallow(
+      <Wrapped location={location} params={{ word: 'test' }} />
+    );
     const props = wrapper.first().props();
 
     expect(props.word).not.toBeDefined();
@@ -139,7 +146,9 @@ describe('adds router params', () => {
     // update global config to be false after creating component, before rendering
     configureUrlQuery({ addRouterParams: false });
 
-    const wrapper = shallow(<Wrapped location={location} params={{ word: 'test' }} />);
+    const wrapper = shallow(
+      <Wrapped location={location} params={{ word: 'test' }} />
+    );
     const props = wrapper.first().props();
 
     expect(props.word).not.toBeDefined();
@@ -154,7 +163,10 @@ describe('url change callbacks', () => {
       bar: { type: UrlQueryParamTypes.string },
     };
 
-    const Wrapped = addUrlProps({ urlPropsQueryConfig, addUrlChangeHandlers: true })(MyComponent);
+    const Wrapped = addUrlProps({
+      urlPropsQueryConfig,
+      addUrlChangeHandlers: true,
+    })(MyComponent);
     const wrapper = shallow(<Wrapped location={location} />);
     const props = wrapper.first().props();
 
@@ -170,7 +182,10 @@ describe('url change callbacks', () => {
       bar: { type: UrlQueryParamTypes.string },
     };
 
-    const Wrapped = addUrlProps({ urlPropsQueryConfig, addUrlChangeHandlers: false })(MyComponent);
+    const Wrapped = addUrlProps({
+      urlPropsQueryConfig,
+      addUrlChangeHandlers: false,
+    })(MyComponent);
     const wrapper = shallow(<Wrapped location={location} />);
     const props = wrapper.first().props();
 
@@ -217,7 +232,9 @@ describe('url change callbacks', () => {
     };
     const changeHandlerName = propName => `handle_${propName}`;
 
-    const Wrapped = addUrlProps({ urlPropsQueryConfig, changeHandlerName })(MyComponent);
+    const Wrapped = addUrlProps({ urlPropsQueryConfig, changeHandlerName })(
+      MyComponent
+    );
     const wrapper = shallow(<Wrapped location={location} />);
     const props = wrapper.first().props();
 
@@ -302,7 +319,10 @@ describe('url change callbacks', () => {
       bar: { type: UrlQueryParamTypes.string },
     };
 
-    const Wrapped = addUrlProps({ urlPropsQueryConfig, addUrlChangeHandlers: true })(MyComponent);
+    const Wrapped = addUrlProps({
+      urlPropsQueryConfig,
+      addUrlChangeHandlers: true,
+    })(MyComponent);
     const wrapper = shallow(<Wrapped location={location} />);
     const props = wrapper.first().props();
     const { onChangeFoo, onChangeBar } = props;
@@ -319,7 +339,10 @@ describe('url change callbacks', () => {
     const location = { query: { foo: '94', bar: 'baz' } };
     const urlPropsQueryConfig = {
       foo: { type: UrlQueryParamTypes.number },
-      bar: { type: UrlQueryParamTypes.string, updateType: UrlUpdateTypes.pushIn },
+      bar: {
+        type: UrlQueryParamTypes.string,
+        updateType: UrlUpdateTypes.pushIn,
+      },
     };
 
     // make the history just return the new location so we can test for logging
@@ -353,7 +376,10 @@ describe('url change callbacks', () => {
     const location = { query: { foo: '94', bar: 'baz' } };
     const urlPropsQueryConfig = {
       foo: { type: UrlQueryParamTypes.number },
-      bar: { type: UrlQueryParamTypes.string, updateType: UrlUpdateTypes.pushIn },
+      bar: {
+        type: UrlQueryParamTypes.string,
+        updateType: UrlUpdateTypes.pushIn,
+      },
     };
 
     // make the history just return the new location so we can test for logging
@@ -388,7 +414,10 @@ describe('url change callbacks', () => {
     const location = { query: { foo: '94', bar: 'baz' } };
     const urlPropsQueryConfig = {
       foo: { type: UrlQueryParamTypes.number },
-      bar: { type: UrlQueryParamTypes.string, updateType: UrlUpdateTypes.pushIn },
+      bar: {
+        type: UrlQueryParamTypes.string,
+        updateType: UrlUpdateTypes.pushIn,
+      },
     };
 
     // make the history just return the new location so we can test for logging

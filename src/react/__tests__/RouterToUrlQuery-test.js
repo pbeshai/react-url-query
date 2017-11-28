@@ -11,11 +11,11 @@ describe('<RouterToUrlQuery />', () => {
     class PutRouterInContext extends Component {
       static propTypes = {
         children: PropTypes.node,
-      }
+      };
 
       static childContextTypes = {
         router: PropTypes.object,
-      }
+      };
 
       // eslint-disable-next-line
       getChildContext() {
@@ -57,11 +57,11 @@ describe('<RouterToUrlQuery />', () => {
     class PutRouterInContext extends Component {
       static propTypes = {
         children: PropTypes.node,
-      }
+      };
 
       static childContextTypes = {
         router: PropTypes.object,
-      }
+      };
 
       // eslint-disable-next-line
       getChildContext() {

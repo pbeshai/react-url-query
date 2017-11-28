@@ -9,7 +9,9 @@ it('provides defaults for all options', () => {
 });
 
 it('changeHandlerName produces a string based on the prop name', () => {
-  expect(urlQueryConfig.changeHandlerName('foo').toLowerCase()).toContain('foo');
+  expect(urlQueryConfig.changeHandlerName('foo').toLowerCase()).toContain(
+    'foo'
+  );
 });
 
 it('provides a history with push and replace functions', () => {
@@ -19,11 +21,16 @@ it('provides a history with push and replace functions', () => {
 
 it('provides readLocationFromStore that reads from react-router-redux location', () => {
   expect(typeof urlQueryConfig.readLocationFromStore).toBe('function');
-  const reactRouterReduxState = { routing: { locationBeforeTransitions: { foo: 'bar' } } };
-  expect(urlQueryConfig.readLocationFromStore(reactRouterReduxState))
-    .toEqual({ foo: 'bar' });
+  const reactRouterReduxState = {
+    routing: { locationBeforeTransitions: { foo: 'bar' } },
+  };
+  expect(urlQueryConfig.readLocationFromStore(reactRouterReduxState)).toEqual({
+    foo: 'bar',
+  });
 
   expect(urlQueryConfig.readLocationFromStore()).not.toBeDefined();
   expect(urlQueryConfig.readLocationFromStore({})).not.toBeDefined();
-  expect(urlQueryConfig.readLocationFromStore({ routing: {} })).not.toBeDefined();
+  expect(
+    urlQueryConfig.readLocationFromStore({ routing: {} })
+  ).not.toBeDefined();
 });

@@ -1,14 +1,17 @@
 import { encode } from '../serialize';
 import UrlUpdateTypes from '../UrlUpdateTypes';
 
-
-export default function urlAction(actionType, payload = d => d, meta = () => {}) {
+export default function urlAction(
+  actionType,
+  payload = d => d,
+  meta = () => {}
+) {
   return function urlActionCreator(...args) {
     let metaFromAction = meta(...args);
     if (metaFromAction == null) {
       metaFromAction = {};
 
-    // we need meta to be an object so it merges in with the urlQuery meta property.
+      // we need meta to be an object so it merges in with the urlQuery meta property.
     } else if (typeof metaFromAction !== 'object') {
       metaFromAction = { value: metaFromAction };
     }
@@ -32,14 +35,18 @@ export default function urlAction(actionType, payload = d => d, meta = () => {})
  * export const changeFoo = urlAction('CHANGE_FOO', 'replace');
  *
  */
-export function urlUpdateAction(actionType, encodeQuery = d => d, updateType = UrlUpdateTypes.replace) {
+export function urlUpdateAction(
+  actionType,
+  encodeQuery = d => d,
+  updateType = UrlUpdateTypes.replace
+) {
   return urlAction(
     actionType,
     decodedQuery => ({
       encodedQuery: encodeQuery(decodedQuery),
       decodedQuery,
     }),
-    () => ({ updateType }),
+    () => ({ updateType })
   );
 }
 
@@ -58,7 +65,12 @@ export function urlPushAction(actionType, encodeQuery) {
  * export const changeFoo = urlInAction('CHANGE_FOO', 'foo', 'number', 'replaceIn');
  *
  */
-export function urlUpdateInAction(actionType, queryParam, valueType, updateType) {
+export function urlUpdateInAction(
+  actionType,
+  queryParam,
+  valueType,
+  updateType
+) {
   return urlAction(
     actionType,
     decodedValue => ({
@@ -67,14 +79,24 @@ export function urlUpdateInAction(actionType, queryParam, valueType, updateType)
       decodedValue,
       type: valueType,
     }),
-    () => ({ updateType }),
+    () => ({ updateType })
   );
 }
 
 export function urlReplaceInAction(actionType, queryParam, valueType) {
-  return urlUpdateInAction(actionType, queryParam, valueType, UrlUpdateTypes.replaceIn);
+  return urlUpdateInAction(
+    actionType,
+    queryParam,
+    valueType,
+    UrlUpdateTypes.replaceIn
+  );
 }
 
 export function urlPushInAction(actionType, queryParam, valueType) {
-  return urlUpdateInAction(actionType, queryParam, valueType, UrlUpdateTypes.pushIn);
+  return urlUpdateInAction(
+    actionType,
+    queryParam,
+    valueType,
+    UrlUpdateTypes.pushIn
+  );
 }

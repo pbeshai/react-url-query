@@ -39,14 +39,17 @@ function updateLocation(newQuery, location) {
 
   // remove query params that are nully or an empty strings.
   // note: these values are assumed to be already encoded as strings.
-  const filteredQuery = Object.keys(newQuery).reduce((queryAccumulator, queryParam) => {
-    const encodedValue = newQuery[queryParam];
-    if (encodedValue != null && encodedValue !== '') {
-      queryAccumulator[queryParam] = encodedValue;
-    }
+  const filteredQuery = Object.keys(newQuery).reduce(
+    (queryAccumulator, queryParam) => {
+      const encodedValue = newQuery[queryParam];
+      if (encodedValue != null && encodedValue !== '') {
+        queryAccumulator[queryParam] = encodedValue;
+      }
 
-    return queryAccumulator;
-  }, {});
+      return queryAccumulator;
+    },
+    {}
+  );
 
   const newLocation = mergeLocationQueryOrSearch(location, filteredQuery);
 
@@ -95,7 +98,7 @@ function multiUpdateInLocation(queryReplacements, location) {
   };
 
   // remove if it is nully or an empty string when encoded
-  Object.keys(queryReplacements).forEach((queryParam) => {
+  Object.keys(queryReplacements).forEach(queryParam => {
     const encodedValue = queryReplacements[queryParam];
     if (encodedValue == null || encodedValue === '') {
       delete newQuery[queryParam];
@@ -150,8 +153,12 @@ export function multiPushInUrlQuery(queryReplacements, location) {
 /**
  * Updates a single value in a query based on the type
  */
-export function updateUrlQuerySingle(updateType = UrlUpdateTypes.replaceIn,
-    queryParam, encodedValue, location) {
+export function updateUrlQuerySingle(
+  updateType = UrlUpdateTypes.replaceIn,
+  queryParam,
+  encodedValue,
+  location
+) {
   if (updateType === UrlUpdateTypes.replaceIn) {
     return replaceInUrlQuery(queryParam, encodedValue, location);
   }
@@ -171,12 +178,14 @@ export function updateUrlQuerySingle(updateType = UrlUpdateTypes.replaceIn,
   return undefined;
 }
 
-
 /**
  * Updates a multiple values in a query based on the type
  */
-export function updateUrlQueryMulti(updateType = UrlUpdateTypes.replaceIn,
-    queryReplacements, location) {
+export function updateUrlQueryMulti(
+  updateType = UrlUpdateTypes.replaceIn,
+  queryReplacements,
+  location
+) {
   if (updateType === UrlUpdateTypes.replaceIn) {
     return multiReplaceInUrlQuery(queryReplacements, location);
   }

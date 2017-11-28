@@ -27,7 +27,11 @@ it('only runs on url query actions', () => {
 });
 
 it('passes to next reducer if shortciruit is false', () => {
-  const options = { reducer: jest.fn(), readLocationFromStore: false, shortcircuit: false };
+  const options = {
+    reducer: jest.fn(),
+    readLocationFromStore: false,
+    shortcircuit: false,
+  };
   const store = { getState: () => ({}) };
   const next = jest.fn();
   const action = { type: 'ACTION_TYPE', meta: { urlQuery: true } };
@@ -37,14 +41,16 @@ it('passes to next reducer if shortciruit is false', () => {
 });
 
 it('reads location from store', () => {
-  const options = { reducer: jest.fn(), readLocationFromStore: state => state.location };
+  const options = {
+    reducer: jest.fn(),
+    readLocationFromStore: state => state.location,
+  };
   const store = { getState: () => ({ location: 'location' }) };
   const next = jest.fn();
   const action = { type: 'ACTION_TYPE', meta: { urlQuery: true } };
   urlQueryMiddleware(options)(store)(next)(action);
   expect(options.reducer).toBeCalledWith(action, 'location');
 });
-
 
 it('uses reducer from urlQueryConfig if not passed in', () => {
   configureUrlQuery({ reducer: jest.fn() });
@@ -58,7 +64,6 @@ it('uses reducer from urlQueryConfig if not passed in', () => {
   // reset urlQueryConfig
   configureUrlQuery({ reducer: undefined });
 });
-
 
 it('uses default reducer if none in options or urlQueryConfig', () => {
   const options = { readLocationFromStore: false };

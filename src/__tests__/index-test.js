@@ -28,7 +28,6 @@ import {
   subqueryOmit,
 } from '../index';
 
-
 describe('index', () => {
   it('includes all expected functions without crashing', () => {
     expect(configureUrlQuery).toBeDefined();

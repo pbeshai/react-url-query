@@ -30,8 +30,13 @@ export default function urlQueryReducer(action, location) {
   }
 
   if (process.env.NODE_ENV === 'development') {
-    console.warn(`urlQueryReducer encountered unhandled action.meta.updateType ${updateType}.`, // eslint-disable-line no-console
-      'action =', action);
+    console.warn(
+      `urlQueryReducer encountered unhandled action.meta.updateType ${
+        updateType
+      }.`, // eslint-disable-line no-console
+      'action =',
+      action
+    );
   }
 
   return undefined;

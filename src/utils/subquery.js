@@ -1,7 +1,7 @@
 /**
-* Helper function to get only parts of a query. Specify
-* which parameters to include.
-*/
+ * Helper function to get only parts of a query. Specify
+ * which parameters to include.
+ */
 export default function subquery(query, ...params) {
   if (!query) {
     return query;

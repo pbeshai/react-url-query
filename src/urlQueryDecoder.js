@@ -22,17 +22,29 @@ export default function urlQueryDecoder(config) {
 
       let decodedValue;
       // reused cached value
-      if (cachedQuery && cachedQuery[queryParam] !== undefined && cachedQuery[queryParam] === encodedValue) {
+      if (
+        cachedQuery &&
+        cachedQuery[queryParam] !== undefined &&
+        cachedQuery[queryParam] === encodedValue
+      ) {
         decodedValue = cachedDecodedQuery[key];
 
-      // not cached, decode now
-      // only decode if no validate provided or validate is provided and the encoded value is valid
+        // not cached, decode now
+        // only decode if no validate provided or validate is provided and the encoded value is valid
       } else {
-        decodedValue = decode(keyConfig.type, encodedValue, keyConfig.defaultValue);
+        decodedValue = decode(
+          keyConfig.type,
+          encodedValue,
+          keyConfig.defaultValue
+        );
       }
 
       // validate the decoded value if configured. set to undefined if not valid
-      if (decodedValue !== undefined && keyConfig.validate && !keyConfig.validate(decodedValue)) {
+      if (
+        decodedValue !== undefined &&
+        keyConfig.validate &&
+        !keyConfig.validate(decodedValue)
+      ) {
         decodedValue = undefined;
       }
 

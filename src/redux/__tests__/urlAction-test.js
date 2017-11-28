@@ -9,10 +9,12 @@ import urlAction, {
 import UrlQueryParamTypes from '../../UrlQueryParamTypes';
 import UrlUpdateTypes from '../../UrlUpdateTypes';
 
-
 it('urlAction creates the proper action creator -> action', () => {
-  const creator = urlAction('TEST_ACTION', payload => payload.toUpperCase(),
-    meta => meta.toLowerCase());
+  const creator = urlAction(
+    'TEST_ACTION',
+    payload => payload.toUpperCase(),
+    meta => meta.toLowerCase()
+  );
   const action = creator('teStStrING');
   expect(action).toEqual({
     type: 'TEST_ACTION',
@@ -53,8 +55,11 @@ it('urlAction handles nully meta', () => {
 });
 
 it('urlUpdateAction creates the proper action creator -> action', () => {
-  const creator = urlUpdateAction('TEST_ACTION', query => ({ foo: String(query.foo), bar: '1' }),
-    UrlUpdateTypes.push);
+  const creator = urlUpdateAction(
+    'TEST_ACTION',
+    query => ({ foo: String(query.foo), bar: '1' }),
+    UrlUpdateTypes.push
+  );
   const action = creator({ foo: 137 });
   expect(action).toEqual({
     type: 'TEST_ACTION',
@@ -86,7 +91,10 @@ it('urlUpdateAction default encodeQuery and updateType work', () => {
 });
 
 it('urlReplaceAction creates the proper action creator -> action', () => {
-  const creator = urlReplaceAction('TEST_ACTION', query => ({ foo: String(query.foo), bar: '1' }));
+  const creator = urlReplaceAction('TEST_ACTION', query => ({
+    foo: String(query.foo),
+    bar: '1',
+  }));
   const action = creator({ foo: 137 });
   expect(action).toEqual({
     type: 'TEST_ACTION',
@@ -102,7 +110,10 @@ it('urlReplaceAction creates the proper action creator -> action', () => {
 });
 
 it('urlPushAction creates the proper action creator -> action', () => {
-  const creator = urlPushAction('TEST_ACTION', query => ({ foo: String(query.foo), bar: '1' }));
+  const creator = urlPushAction('TEST_ACTION', query => ({
+    foo: String(query.foo),
+    bar: '1',
+  }));
   const action = creator({ foo: 137 });
   expect(action).toEqual({
     type: 'TEST_ACTION',
@@ -118,7 +129,12 @@ it('urlPushAction creates the proper action creator -> action', () => {
 });
 
 it('urlUpdateInAction creates the proper action creator -> action', () => {
-  const creator = urlUpdateInAction('TEST_ACTION', 'foo', UrlQueryParamTypes.number, UrlUpdateTypes.push);
+  const creator = urlUpdateInAction(
+    'TEST_ACTION',
+    'foo',
+    UrlQueryParamTypes.number,
+    UrlUpdateTypes.push
+  );
   const action = creator(99);
   expect(action).toEqual({
     type: 'TEST_ACTION',
@@ -136,7 +152,11 @@ it('urlUpdateInAction creates the proper action creator -> action', () => {
 });
 
 it('urlReplaceInAction creates the proper action creator -> action', () => {
-  const creator = urlReplaceInAction('TEST_ACTION', 'foo', UrlQueryParamTypes.array);
+  const creator = urlReplaceInAction(
+    'TEST_ACTION',
+    'foo',
+    UrlQueryParamTypes.array
+  );
   const action = creator(['bar', 'baz']);
   expect(action).toEqual({
     type: 'TEST_ACTION',
@@ -154,7 +174,11 @@ it('urlReplaceInAction creates the proper action creator -> action', () => {
 });
 
 it('urlPushInAction creates the proper action creator -> action', () => {
-  const creator = urlPushInAction('TEST_ACTION', 'foo', UrlQueryParamTypes.number);
+  const creator = urlPushInAction(
+    'TEST_ACTION',
+    'foo',
+    UrlQueryParamTypes.number
+  );
   const action = creator(123);
   expect(action).toEqual({
     type: 'TEST_ACTION',
