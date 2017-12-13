@@ -6,7 +6,7 @@ import { encode } from './serialize';
  *
  * @param {Object} query The query object (typically from props.location.query)
  *
- * @return {Object} the decoded values `{ key: decodedValue, ... }`
+ * @return {Object} the encoded values `{ key: encodedValue, ... }`
  */
 export default function urlQueryEncoder(config) {
   return function encodeQuery(query) {
