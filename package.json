@@ -88,10 +88,6 @@
     "react": "^15.0 || ^16.0"
   },
   "dependencies": {
-    "gitbook-plugin-anchorjs": "^1.1.1",
-    "gitbook-plugin-edit-link": "^2.0.2",
-    "gitbook-plugin-github": "^2.0.0",
-    "gitbook-plugin-prism": "^2.3.0",
     "loose-envify": "^1.2.0",
     "prop-types": "^15.5.9",
     "query-string": "^4.2.3"
