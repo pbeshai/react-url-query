@@ -20,7 +20,7 @@ it('works with different named query param', () => {
   };
 
   const encode = urlQueryEncoder(urlPropsQueryConfig);
-  const encoded = encode({ fooInUrl: 137, bar: 'str' });
+  const encoded = encode({ foo: 137, bar: 'str' });
 
-  expect(encoded).toEqual({ foo: '137', bar: 'str' });
+  expect(encoded).toEqual({ fooInUrl: '137', bar: 'str' });
 });

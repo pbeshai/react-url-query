@@ -15,11 +15,11 @@ export default function urlQueryEncoder(config) {
       const keyConfig = config[key];
       // read from the URL key if provided, otherwise use the key
       const { queryParam = key } = keyConfig;
-      const decodedValue = query[queryParam];
+      const decodedValue = query[key];
 
       const encodedValue = encode(keyConfig.type, decodedValue);
 
-      encoded[key] = encodedValue;
+      encoded[queryParam] = encodedValue;
       return encoded;
     }, {});
 
