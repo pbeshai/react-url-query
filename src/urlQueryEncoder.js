@@ -9,10 +9,7 @@ export default function urlQueryEncoder(config) {
       const { queryParam = key } = keyConfig;
       const decodedValue = query[queryParam];
 
-      const encodedValue = encode(
-        keyConfig.type,
-        decodedValue
-      );
+      const encodedValue = encode(keyConfig.type, decodedValue);
 
       encoded[key] = encodedValue;
       return encoded;
