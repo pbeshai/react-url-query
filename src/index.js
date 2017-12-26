@@ -9,6 +9,8 @@ export {
   multiReplaceInUrlQuery,
   multiPushInUrlQuery,
 } from './updateUrlQuery';
+export urlQueryDecoder from './urlQueryDecoder';
+export urlQueryEncoder from './urlQueryEncoder';
 export UrlQueryParamTypes from './UrlQueryParamTypes';
 export UrlUpdateTypes from './UrlUpdateTypes';
 

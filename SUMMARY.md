@@ -17,6 +17,8 @@
     * [Serialize](/docs/api/Serialize.md)
     * [decode](/docs/api/Serialize.md#decode), _alias of Serialize.decode for convenience_
     * [encode](/docs/api/Serialize.md#encode), _alias of Serialize.encode for convenience_
+    * [urlQueryDecoder(config)](/docs/api/urlQueryDecoder.md)
+    * [urlQueryEncoder(config)](/docs/api/urlQueryEncoder.md)
 
   * Utils
     * [subquery](/docs/api/subquery.md)
