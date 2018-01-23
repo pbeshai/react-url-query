@@ -13,7 +13,7 @@ Uses push to change the URL, which means the new state will be pushed on to the 
 
 #### Arguments
 
-1. `queryReplacements` (*String*): The object representing the query parameters and their encoded values to update.
+1. `queryReplacements` (*Object*): The object representing the query parameters and their encoded values to update.
 1. [`location`] (*Object*): The location from which the current URL state should be read. If not provided, `location` is read from the configured `history` or the `window`.
 
 #### Returns
