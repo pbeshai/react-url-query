@@ -13,7 +13,7 @@ Uses replace to change the URL, which means nothing gets pushed on to the histor
 
 #### Arguments
 
-1. `queryReplacements` (*String*): The object representing the query parameters and their encoded values to update.
+1. `queryReplacements` (*Object*): The object representing the query parameters and their encoded values to update.
 1. [`location`] (*Object*): The location from which the current URL state should be read. If not provided, `location` is read from the configured `history` or the `window`.
 
 #### Returns
