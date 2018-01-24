@@ -28,7 +28,8 @@ const urlPropsQueryConfig = {
   arr: { type: UrlQueryParamTypes.array },
   bar: { type: UrlQueryParamTypes.string, validate: bar => bar && bar.length < 6 },
   foo: { type: UrlQueryParamTypes.number, queryParam: 'fooInUrl' },
-  custom: { type: customType }
+  baz: { type: UrlQueryParamTypes.string, queryParam: 'baz' },
+  custom: { type: customType },
 }
 
 /**
@@ -41,14 +42,6 @@ function mapStateToProps(state, props) {
   };
 }
 
-/**
- * Standard react-redux mapDispatchToProps
- */
-function mapDispatchToProps(dispatch) {
-  return {
-    onChangeBaz: (baz) => dispatch(changeBaz(baz)),
-  };
-}
 
 /**
  * The MainPage container. Note that none of the code within this component
@@ -95,9 +88,19 @@ class MainPage extends PureComponent {
     }
   }
 
+  handleBazChange = (e) => {
+    const newBaz = e.target.value;
+    this.updateBaz(newBaz);
+  }
+
+  updateBaz = (baz) => {
+    this.props.onChangeBaz(baz);
+    this.props.dispatch(changeBaz(baz));
+  }
+
   render() {
     const { arr, foo, bar, baz, custom, word, location, onChangeArr,
-      onChangeBar, onChangeBaz, onChangeFoo, onChangeCustom } = this.props;
+      onChangeBar, onChangeFoo, onChangeCustom } = this.props;
 
     return (
       <div>
@@ -165,9 +168,14 @@ class MainPage extends PureComponent {
               <td>{baz}</td>
               <td>(redux state)</td>
               <td>
-                <button onClick={() => onChangeBaz(Math.random().toString(32).substring(10))}>
+                <button onClick={() => {
+                    let baz = Math.random().toString(32).substring(10);
+                    this.updateBaz(baz);
+                }}>
                   Change baz
                 </button>
+                <span>  the value of baz: </span>
+                <input value={this.props.baz} onChange={this.handleBazChange}/>
               </td>
             </tr>
           </tbody>
@@ -182,4 +190,4 @@ class MainPage extends PureComponent {
  * to props for MainPage. In this case the mapping happens automatically by
  * first decoding the URL query parameters based on the urlPropsQueryConfig.
  */
-export default addUrlProps({ urlPropsQueryConfig })(connect(mapStateToProps, mapDispatchToProps)(MainPage));
+export default addUrlProps({ urlPropsQueryConfig })(connect(mapStateToProps)(MainPage));
