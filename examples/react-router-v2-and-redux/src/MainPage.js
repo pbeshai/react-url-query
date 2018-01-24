@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Link } from 'react-router';
 
-import { addUrlProps, UrlQueryParamTypes, subquery } from 'react-url-query';
+import { addUrlProps, UrlQueryParamTypes, UrlUpdateTypes, subquery } from 'react-url-query';
 import { changeBaz } from './state/actions';
 
 /**
@@ -28,7 +28,7 @@ const urlPropsQueryConfig = {
   arr: { type: UrlQueryParamTypes.array },
   bar: { type: UrlQueryParamTypes.string, validate: bar => bar && bar.length < 6 },
   foo: { type: UrlQueryParamTypes.number, queryParam: 'fooInUrl' },
-  baz: { type: UrlQueryParamTypes.string, queryParam: 'baz' },
+  baz: { type: UrlQueryParamTypes.string, updateType: UrlUpdateTypes.pushIn, queryParam: 'baz' },
   custom: { type: customType },
 }
 
@@ -37,6 +37,7 @@ const urlPropsQueryConfig = {
  * the `baz` prop in MainPage. Used via the higher-order component `connect`.
  */
 function mapStateToProps(state, props) {
+    console.log(state.app);
   return {
     baz: state.app.baz,
   };
@@ -69,6 +70,17 @@ class MainPage extends PureComponent {
     baz: 'baz',
     custom: 'custom',
     foo: 123,
+  }
+
+  /**
+   * When copy the URL to share, the state can be updated here and related
+   * components will also be updated;
+   */
+  componentWillMount() {
+      const query = this.props.location.query;
+      if(!!query.baz) {
+          this.updateBaz(query.baz);
+      }
   }
 
   /**
@@ -175,7 +187,7 @@ class MainPage extends PureComponent {
                   Change baz
                 </button>
                 <span>  the value of baz: </span>
-                <input value={this.props.baz} onChange={this.handleBazChange}/>
+                <input value={baz} onChange={this.handleBazChange}/>
               </td>
             </tr>
           </tbody>
