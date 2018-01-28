@@ -381,7 +381,7 @@ export function decode(type, encodedValue, defaultValue) {
 }
 
 /**
- * Collection of Decoders by type
+ * Collection of Encoders by type
  */
 export const Encoders = {
   number: encodeNumber,
