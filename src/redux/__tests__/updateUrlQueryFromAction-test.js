@@ -1,15 +1,19 @@
 import {
   replaceInUrlQueryFromAction,
   replaceUrlQueryFromAction,
+  multiReplaceInUrlQueryFromAction,
   pushInUrlQueryFromAction,
   pushUrlQueryFromAction,
+  multiPushInUrlQueryFromAction,
 } from '../updateUrlQueryFromAction';
 
 import {
   replaceInUrlQuery,
   replaceUrlQuery,
+  multiReplaceInUrlQuery,
   pushInUrlQuery,
   pushUrlQuery,
+  multiPushInUrlQuery,
 } from '../../updateUrlQuery';
 
 // mock this module so we can test if it as called with correct args
@@ -29,6 +33,22 @@ it('pushInUrlQueryFromAction extracts correct args from action', () => {
     'location'
   );
   expect(pushInUrlQuery).toBeCalledWith('foo', '94', 'location');
+});
+
+it('multiReplaceInUrlQueryFromAction extracts correct args from action', () => {
+  multiReplaceInUrlQueryFromAction(
+    { payload: { encodedQuery: { foo: '94' } } },
+    'location'
+  );
+  expect(multiReplaceInUrlQuery).toBeCalledWith({ foo: '94' }, 'location');
+});
+
+it('multiPushInUrlQueryFromAction extracts correct args from action', () => {
+  multiPushInUrlQueryFromAction(
+    { payload: { encodedQuery: { foo: '94' } } },
+    'location'
+  );
+  expect(multiPushInUrlQuery).toBeCalledWith({ foo: '94' }, 'location');
 });
 
 it('replaceUrlQueryFromAction extracts correct args from action', () => {

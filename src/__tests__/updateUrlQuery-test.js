@@ -5,6 +5,8 @@ import {
   pushUrlQuery,
   replaceInUrlQuery,
   pushInUrlQuery,
+  multiReplaceInUrlQuery,
+  multiPushInUrlQuery,
   updateUrlQuerySingle,
   updateUrlQueryMulti,
 } from '../updateUrlQuery';
@@ -108,6 +110,19 @@ describe('pushUrlQuery', () => {
   });
 });
 
+describe('multiReplaceInUrlQuery', () => {
+  it('replaces the values for the specified params in the query and calls replace in history', () => {
+    const history = makeMockHistory();
+    configureUrlQuery({ history });
+
+    const location = { pathname: '/', search: '?foo=99&bar=baz&ack=blech' };
+    const newLocation = multiReplaceInUrlQuery({foo: '123', bar: null}, location);
+    expect(newLocation).toEqual({ pathname: '/', search: '?ack=blech&foo=123' });
+    expect(history.replace).toBeCalled();
+    expect(history.push).not.toBeCalled();
+  });
+});
+
 describe('replaceInUrlQuery', () => {
   it('replaces the value for the specified param in the query and calls replace in history', () => {
     const history = makeMockHistory();
@@ -163,6 +178,19 @@ describe('replaceInUrlQuery', () => {
   //   expect(history.replace).toBeCalled();
   //   expect(history.push).not.toBeCalled();
   // });
+});
+
+describe('multiPushInUrlQuery', () => {
+  it('replaces the values for the specified params in the query and calls push in history', () => {
+    const history = makeMockHistory();
+    configureUrlQuery({ history });
+
+    const location = { pathname: '/', search: '?foo=99&bar=baz&ack=blech' };
+    const newLocation = multiPushInUrlQuery({foo: '123', bar: null}, location);
+    expect(newLocation).toEqual({ pathname: '/', search: '?ack=blech&foo=123' });
+    expect(history.push).toBeCalled();
+    expect(history.replace).not.toBeCalled();
+  });
 });
 
 describe('pushInUrlQuery', () => {

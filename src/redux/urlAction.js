@@ -32,8 +32,23 @@ export default function urlAction(
  * Helper function for creating URL action creators
  *
  * For example in your actions.js file:
- * export const changeFoo = urlAction('CHANGE_FOO', 'replace');
  *
+ * export const changeFoo = urlUpdateAction(
+ *   'CHANGE_MANY',
+ *   (newQuery) => ({
+ *     fooInUrl: encode(UrlQueryParamTypes.number, newQuery.foo),
+ *     bar: 'par',
+ *     arr: encode(UrlQueryParamTypes.array, ['T', 'Y']),
+ *   }),
+ *   'replace');
+ *
+ * The second parameter should be an encoder function that takes a decodedQuery
+ * and returns an encodedQuery,
+ * encoding each value in the decodedQuery object.
+ * You need this because when using Redux Actions,
+ * urlPropsQueryConfig is only used for decoding;
+ * you have to implement the encoding here.
+ * Also see changeMany [in the examples](https://github.com/pbeshai/react-url-query/tree/master/examples/redux-with-actions/src/state/actions.js).
  */
 export function urlUpdateAction(
   actionType,
@@ -58,11 +73,19 @@ export function urlPushAction(actionType, encodeQuery) {
   return urlUpdateAction(actionType, encodeQuery, UrlUpdateTypes.push);
 }
 
+export function urlMultiReplaceInAction(actionType, encodeQuery) {
+  return urlUpdateAction(actionType, encodeQuery, UrlUpdateTypes.multiReplaceIn);
+}
+
+export function urlMultiPushInAction(actionType, encodeQuery) {
+  return urlUpdateAction(actionType, encodeQuery, UrlUpdateTypes.multiPushIn);
+}
+
 /**
  * Helper function for creating URL action creators
  *
  * For example in your actions.js file:
- * export const changeFoo = urlInAction('CHANGE_FOO', 'foo', 'number', 'replaceIn');
+ * export const changeFoo = urlUpdateInAction('CHANGE_FOO', 'foo', 'number', 'replaceIn');
  *
  */
 export function urlUpdateInAction(
