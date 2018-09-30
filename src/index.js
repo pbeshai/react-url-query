@@ -22,14 +22,18 @@ export RouterToUrlQuery from './react/RouterToUrlQuery';
 export {
   replaceInUrlQueryFromAction,
   replaceUrlQueryFromAction,
+  multiReplaceInUrlQueryFromAction,
   pushInUrlQueryFromAction,
   pushUrlQueryFromAction,
+  multiPushInUrlQueryFromAction,
 } from './redux/updateUrlQueryFromAction';
 export urlAction, {
   urlReplaceAction,
   urlPushAction,
   urlReplaceInAction,
   urlPushInAction,
+  urlMultiReplaceInAction,
+  urlMultiPushInAction,
 } from './redux/urlAction';
 export urlQueryMiddleware from './redux/urlQueryMiddleware';
 export urlQueryReducer from './redux/urlQueryReducer';

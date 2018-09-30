@@ -2,6 +2,8 @@ import urlAction, {
   urlUpdateAction,
   urlReplaceAction,
   urlPushAction,
+  urlMultiReplaceInAction,
+  urlMultiPushInAction,
   urlUpdateInAction,
   urlReplaceInAction,
   urlPushInAction,
@@ -120,6 +122,44 @@ it('urlPushAction creates the proper action creator -> action', () => {
     meta: {
       urlQuery: true,
       updateType: UrlUpdateTypes.push,
+    },
+    payload: {
+      encodedQuery: { foo: '137', bar: '1' },
+      decodedQuery: { foo: 137 },
+    },
+  });
+});
+
+it('urlMultiReplaceInAction creates the proper action creator -> action', () => {
+  const creator = urlMultiReplaceInAction('TEST_ACTION', query => ({
+    foo: String(query.foo),
+    bar: '1',
+  }));
+  const action = creator({ foo: 137 });
+  expect(action).toEqual({
+    type: 'TEST_ACTION',
+    meta: {
+      urlQuery: true,
+      updateType: UrlUpdateTypes.multiReplaceIn,
+    },
+    payload: {
+      encodedQuery: { foo: '137', bar: '1' },
+      decodedQuery: { foo: 137 },
+    },
+  });
+});
+
+it('urlMultiPushInAction creates the proper action creator -> action', () => {
+  const creator = urlMultiPushInAction('TEST_ACTION', query => ({
+    foo: String(query.foo),
+    bar: '1',
+  }));
+  const action = creator({ foo: 137 });
+  expect(action).toEqual({
+    type: 'TEST_ACTION',
+    meta: {
+      urlQuery: true,
+      updateType: UrlUpdateTypes.multiPushIn,
     },
     payload: {
       encodedQuery: { foo: '137', bar: '1' },

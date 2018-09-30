@@ -1,8 +1,10 @@
 import {
   replaceInUrlQueryFromAction,
   replaceUrlQueryFromAction,
+  multiReplaceInUrlQueryFromAction,
   pushInUrlQueryFromAction,
   pushUrlQueryFromAction,
+  multiPushInUrlQueryFromAction,
 } from './updateUrlQueryFromAction';
 import UrlUpdateTypes from '../UrlUpdateTypes';
 
@@ -21,10 +23,14 @@ export default function urlQueryReducer(action, location) {
       return replaceInUrlQueryFromAction(action, location);
     case UrlUpdateTypes.replace:
       return replaceUrlQueryFromAction(action, location);
+    case UrlUpdateTypes.multiReplaceIn:
+      return multiReplaceInUrlQueryFromAction(action, location);
     case UrlUpdateTypes.pushIn:
       return pushInUrlQueryFromAction(action, location);
     case UrlUpdateTypes.push:
       return pushUrlQueryFromAction(action, location);
+    case UrlUpdateTypes.multiPushIn:
+      return multiPushInUrlQueryFromAction(action, location);
     default:
       break;
   }

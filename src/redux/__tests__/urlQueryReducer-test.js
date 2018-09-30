@@ -4,8 +4,10 @@ import UrlUpdateTypes from '../../UrlUpdateTypes';
 import {
   replaceInUrlQueryFromAction,
   replaceUrlQueryFromAction,
+  multiReplaceInUrlQueryFromAction,
   pushInUrlQueryFromAction,
   pushUrlQueryFromAction,
+  multiPushInUrlQueryFromAction,
 } from '../updateUrlQueryFromAction';
 
 // mock this module so we can test if it as called with correct args
@@ -33,6 +35,18 @@ it('reduces push', () => {
   const action = { meta: { updateType: UrlUpdateTypes.push } };
   urlQueryReducer(action, 'location');
   expect(pushUrlQueryFromAction).toBeCalledWith(action, 'location');
+});
+
+it('reduces multiReplaceIn', () => {
+  const action = { meta: { updateType: UrlUpdateTypes.multiReplaceIn } };
+  urlQueryReducer(action, 'location');
+  expect(multiReplaceInUrlQueryFromAction).toBeCalledWith(action, 'location');
+});
+
+it('reduces multiPushIn', () => {
+  const action = { meta: { updateType: UrlUpdateTypes.multiPushIn } };
+  urlQueryReducer(action, 'location');
+  expect(multiPushInUrlQueryFromAction).toBeCalledWith(action, 'location');
 });
 
 it('does not fail with nully action', () => {
