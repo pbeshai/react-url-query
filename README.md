@@ -3,6 +3,12 @@
 [![npm version](https://badge.fury.io/js/react-url-query.svg)](https://badge.fury.io/js/react-url-query)
 [![Build Status](https://travis-ci.org/pbeshai/react-url-query.svg?branch=master)](https://travis-ci.org/pbeshai/react-url-query)
 
+<hr/>
+
+**Using React Hooks?** Check out [use-query-params](https://github.com/pbeshai/use-query-params) for managing URL query parameters via hooks.
+
+<hr/>
+
 A library for managing state through query parameters in the URL in [React](https://facebook.github.io/react/). It integrates well with [React Router](https://github.com/ReactTraining/react-router) and [Redux](https://github.com/reactjs/redux) and provides additional tools specifically targeted at serializing and deserializing state in URL query parameters.  With React URL Query, you can create components where there is no difference in handling state from an external store like Redux and state from the URL.
 
 * [API Reference](https://pbeshai.github.io/react-url-query/docs/api/)
