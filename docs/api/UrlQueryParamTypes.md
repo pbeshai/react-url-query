@@ -10,7 +10,7 @@ An enum listing all the query parameter types that have built-in [serializers](S
 * `date` - Used for Date values
 * `boolean` - Used for boolean values
 * `numericObject` - Used for objects where all values are numbers
-* `numericArray` - Used for arrays where all values are arrays
+* `numericArray` - Used for arrays where all values are numbers
 
 #### Examples
 
