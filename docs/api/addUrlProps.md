@@ -61,7 +61,8 @@ A React component class
 ##### Usage with `urlPropsQueryConfig`
 
 ```js
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { addUrlProps, UrlQueryParamTypes } from 'react-url-query';
 
 /**
