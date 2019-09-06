@@ -42,7 +42,8 @@ npm install --save react-url-query
 A [number of examples](https://pbeshai.github.io/react-url-query/docs/Examples.html) have been created demonstrating a variety of methods of using the library with different technologies. Here is the most basic form of using it in a component:
 
 ```js
-import React, { PureComponent, PropTypes } from 'react';
+import React, { PureComponent } from 'react';
+import PropTypes from 'prop-types';
 import { addUrlProps, UrlQueryParamTypes } from 'react-url-query';
 
 /**
