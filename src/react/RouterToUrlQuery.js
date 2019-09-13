@@ -7,16 +7,49 @@ import configureUrlQuery from '../configureUrlQuery';
  * to get an equivalent history object so we can push and replace the URL.
  */
 export default class RouterToUrlQuery extends Component {
-  static propTypes = {
-    children: PropTypes.node,
+  static propTyps = {
+    routerContext: PropTypes.object
+  };
+  static contextTypes = {
+    router: PropTypes.object
   };
 
-  static contextTypes = {
+  render() {
+    const { router: routerOldContext } = this.context;
+    const { routerContext: RouterContext } = this.props;
+
+    if (typeof RouterContext === "undefined") {
+      return (
+        <RouterToUrlQueryLogic
+          router={routerOldContext}
+        >
+          {React.Children.only(this.props.children)}
+        </RouterToUrlQueryLogic>
+      )
+    }
+
+    return (
+      <RouterContext.Consumer>
+        {routerNewContext => (
+          <RouterToUrlQueryLogic
+            router={routerNewContext}
+          >
+            {React.Children.only(this.props.children)}
+          </RouterToUrlQueryLogic>
+        )}
+      </RouterContext.Consumer>
+    );
+  }
+}
+
+class RouterToUrlQueryLogic extends Component {
+  static propTypes = {
+    children: PropTypes.node,
     router: PropTypes.object,
   };
 
   componentWillMount() {
-    const { router } = this.context;
+    const { router } = this.props;
 
     if (process.env.NODE_ENV === 'development' && !router) {
       // eslint-disable-next-line
