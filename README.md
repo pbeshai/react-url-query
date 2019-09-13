@@ -7,6 +7,8 @@
 
 **Using React Hooks?** Check out [use-query-params](https://github.com/pbeshai/use-query-params) for managing URL query parameters via hooks.
 
+**Update 2019-09-13** [use-query-params](https://github.com/pbeshai/use-query-params) has been updated to have a HOC and a render props solution. I recommend using that library for any modern query param problems as it is more likely to be updated.
+
 <hr/>
 
 A library for managing state through query parameters in the URL in [React](https://facebook.github.io/react/). It integrates well with [React Router](https://github.com/ReactTraining/react-router) and [Redux](https://github.com/reactjs/redux) and provides additional tools specifically targeted at serializing and deserializing state in URL query parameters.  With React URL Query, you can create components where there is no difference in handling state from an external store like Redux and state from the URL.
