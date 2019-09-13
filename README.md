@@ -139,6 +139,25 @@ ReactDOM.render(
 );
 ```
 
+**React Router v5**
+
+```js
+import { RouterToUrlQuery } from 'react-url-query';
+import { 
+  BrowserRouter as Router, 
+  __RouterContext as RouterContext 
+} from 'react-router-dom';
+
+ReactDOM.render(
+  <Router>
+    <RouterToUrlQuery routerContext={RouterContext}>
+      <App />
+    </RouterToUrlQuery>
+  </Router>,
+  document.getElementById('root')
+);
+```
+
 
 **Not using React Router.** If you're not using react-router, you'll need to instantiate the history yourself manually:
 
